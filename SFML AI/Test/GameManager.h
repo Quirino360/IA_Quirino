@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Player.h"
+
 namespace gl {
 class GameManager
 {
@@ -16,6 +17,9 @@ public:
 	void Destroy();
 
 private:
+	float initialPosX = 0;
+	float initialPosY = 0;
+
 	unsigned int IDplayerCount = 0;
 	std::vector<Player> players;
 
@@ -25,8 +29,9 @@ public:
 	void createPlayer(sf::Vector2f position);
 	void createPlayer(sf::Shape* shape, sf::Vector2f position);
 
-	float posX = 0;
-	float posY = 0;
+	gl::Player GetPlayerByID(int id);
+
+
 
 private:
 };

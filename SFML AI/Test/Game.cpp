@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Globals.h"
 
+
 void Game::run()
 {
 	init();
@@ -29,13 +30,7 @@ void Game::run()
 void Game::init()
 {
 
-	m_window = new sf::RenderWindow(sf::VideoMode(500, 500), "SFML Template");
-
-	int numOfPlayers = 10;
-	for (int i = 0; i < numOfPlayers; i++)
-	{
-		gameManager.createPlayer();
-	}
+	m_window = new sf::RenderWindow(sf::VideoMode(1080, 720), "SFML Template");	
 
 	gl::DeltaTime::AddTimer("test");
 	gl::DeltaTime::SetTimer("test", 2);
@@ -45,31 +40,16 @@ void Game::init()
 
 void Game::update()
 {
-	static bool uno = false;
-	if (gl::DeltaTime::TimerExist("test"))
-	{
-		cout << gl::DeltaTime::GetTimer("test") << "\t" << gl::DeltaTime::GetTimer("test2") << endl;
-		if (gl::DeltaTime::GetTimer("test") > 5)
-		{
-			if (!uno)
-			{
-				gl::DeltaTime::RestartTimer("test");
-				uno = true;
-				gl::DeltaTime::StopTimer("test");
-				gl::DeltaTime::StartTimer("test2");
-			}
-			else
-			{
-				gl::DeltaTime::DeleteTimer("test");
-			}
-		}
-		if (gl::DeltaTime::GetTimer("test2") > 3)
-		{
-			gl::DeltaTime::RestartTimer("test2");
-			gl::DeltaTime::StopTimer("test2");
-			gl::DeltaTime::StartTimer("test");
-		}
-	}
+	//std::cout << "Mouse,  posX = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).x << " PosY = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).y << std::endl; //print mouse position x & y 
+	//std::cout << "Player,  posX = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().x << " PosY = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().y << std::endl; //print mouse position x & y 
+	player.Update();
+	AI_Entity.Update();
+	//AI_Entity.SteeringBehaiviorSeek(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
+	//AI_Entity.SteeringBehaiviorFlee(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
+	//AI_Entity.SteeringBehaiviorArrival(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
+	//AI_Entity.SteeringBehaiviorWander();
+	AI_Entity.SteeringBehaiviorPersuit(player);
+	//AI_Entity.SteeringBehaiviorSeekEvade(player);
 }
 
 void Game::processEvents()
@@ -95,7 +75,8 @@ void Game::processEvents()
 void Game::render()
 {
 	m_window->clear();
-	gameManager.Render(m_window);
+	player.Render(m_window);
+	AI_Entity.Render(m_window);
 	m_window->display();
 }
 

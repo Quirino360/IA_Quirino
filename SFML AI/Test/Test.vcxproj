@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CFont.cpp" />
     <ClCompile Include="CTexture.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="UIShape.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CFont.h" />
     <ClInclude Include="CTexture.h" />

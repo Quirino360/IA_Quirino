@@ -34,9 +34,9 @@ void gl::GameManager::Destroy()
 
 void gl::GameManager::createPlayer()
 {
-	posX = rand() % 500 + 1;
-	posY = rand() % 500 + 1;
-	players.push_back(Player(sf::Vector2f(posX, posY)));
+	initialPosX = rand() % 500 + 1;
+	initialPosY = rand() % 500 + 1;
+	players.push_back(Player(sf::Vector2f(initialPosX, initialPosY)));
 }
 
 void gl::GameManager::createPlayer(sf::Shape* shape)
@@ -45,8 +45,18 @@ void gl::GameManager::createPlayer(sf::Shape* shape)
 
 void gl::GameManager::createPlayer(sf::Vector2f position)
 {
+	players.push_back(Player(position));
 }
 
 void gl::GameManager::createPlayer(sf::Shape* shape, sf::Vector2f position)
 {
 }
+
+gl::Player gl::GameManager::GetPlayerByID(int id)
+{
+	if (players.size() > id)
+		return players[id];
+
+	return Player();
+}
+
