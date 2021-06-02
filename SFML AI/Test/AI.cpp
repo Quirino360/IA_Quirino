@@ -35,7 +35,6 @@ gl::AI::AI(sf::Vector2f position)
 	playerCircleShape.setOrigin(playerCircleShape.getRadius() / 2, playerCircleShape.getRadius() / 2);
 
 	target = sf::Vector2f(rand() % 1060 + 1, rand() % 700 + 1);
-
 }
 
 gl::AI::AI(sf::Shape* shape, sf::Vector2f position)
@@ -135,6 +134,22 @@ void gl::AI::SteeringBehaiviorSeekEvade(gl::Player _target)
 	SteeringBehaiviorFlee(futurePosition); /**/
 }
 
+void gl::AI::SteeringBehaviorPathFollowing()
+{
+	if (nodes.size() <= 0)
+		CreateDefaultPath();
+	
+	pathPointTarget = nodes[nodeID];
+
+	if (DistanceBetweenVectors(playerPosition, pathPointTarget.position) <= pathPointTarget.radius)
+	{
+		GetNextPointID();
+	}
+
+
+	SteeringBehaiviorSeek(pathPointTarget.position);
+}
+
 sf::Vector2f gl::AI::NormalizeVector(sf::Vector2f A)
 {
 	float v = std::sqrt((A.x * A.x) + (A.y * A.y));
@@ -158,4 +173,43 @@ sf::Vector2f gl::AI::Wander()
 	return sf::Vector2f();
 }
 
+void gl::AI::CreateDefaultPath()
+{
+	float X = 0;
+	float Y = 100;
+	float radiusAux = 75;
+	bool aux = false;
+	PathPoint pp; 
 
+	for (int i = 0; i < 10; i++)
+	{
+		pp.position = sf::Vector2f(playerPosition.x + X, playerPosition.y + Y);
+		pp.radius = radiusAux;
+
+		nodes.push_back(pp);
+		if (aux)
+		{
+			Y += 100;
+			aux = false;
+		}
+		else
+		{
+			X += 100;
+			aux = true;
+		}
+	}
+}
+
+
+int gl::AI::GetNextPointID()
+{
+	if (nodeID >= nodes.size() - 1)
+	{
+		nodeID = 0;
+	}
+	else
+	{
+		nodeID++;
+	}
+	return nodeID;
+}

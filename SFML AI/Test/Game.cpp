@@ -23,23 +23,25 @@ void Game::run()
 		}
 		render();
 	}
-
 	destroy();
 }
 
 void Game::init()
 {
-
 	m_window = new sf::RenderWindow(sf::VideoMode(1080, 720), "SFML Template");	
 
 	gl::DeltaTime::AddTimer("test");
 	gl::DeltaTime::SetTimer("test", 2);
 	gl::DeltaTime::AddTimer("test2");
 	gl::DeltaTime::StopTimer("test2");
+
+	AI_Entity = gl::AI(sf::Vector2f(50.0f, 50.0f));
 }
 
 void Game::update()
 {
+
+	
 	//std::cout << "Mouse,  posX = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).x << " PosY = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).y << std::endl; //print mouse position x & y 
 	//std::cout << "Player,  posX = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().x << " PosY = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().y << std::endl; //print mouse position x & y 
 	player.Update();
@@ -48,8 +50,10 @@ void Game::update()
 	//AI_Entity.SteeringBehaiviorFlee(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
 	//AI_Entity.SteeringBehaiviorArrival(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
 	//AI_Entity.SteeringBehaiviorWander();
-	AI_Entity.SteeringBehaiviorPersuit(player);
+	//AI_Entity.SteeringBehaiviorPersuit(player);
 	//AI_Entity.SteeringBehaiviorSeekEvade(player);
+	AI_Entity.SteeringBehaviorPathFollowing();
+	/**/
 }
 
 void Game::processEvents()

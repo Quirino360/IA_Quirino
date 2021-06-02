@@ -153,9 +153,12 @@
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CaptureTheFlag.cpp" />
     <ClCompile Include="CFont.cpp" />
+    <ClCompile Include="CollitionDetection.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -168,9 +171,12 @@
   <ItemGroup>
     <ClInclude Include="AI.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CaptureTheFlag.h" />
     <ClInclude Include="CFont.h" />
+    <ClInclude Include="CollitionDetection.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="DeltaTime.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Globals.h" />

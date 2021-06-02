@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
 #include "GameManager.h"
 #include "Player.h"
 #include "AI.h"
+
 class Game
 {
 public:
@@ -22,7 +24,6 @@ private:
 
 private:
 
-
 	sf::RenderWindow* m_window;
 
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);;
@@ -30,6 +31,7 @@ private:
 	gl::GameManager gameManager;
 	gl::AI AI_Entity;
 	gl::Player player;
+
 
 };
 

@@ -42,7 +42,6 @@ void gl::Player::Init()
 
 void gl::Player::Update()
 {
-	//playerCircleShape.setPosition(playerPosition);
 	Move();
 }
 
@@ -58,8 +57,6 @@ void gl::Player::Destroy()
 void gl::Player::Move()
 {
 	float deltaTime = deltaClock.restart().asSeconds();
-	
-
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{

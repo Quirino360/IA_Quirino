@@ -32,11 +32,18 @@ void gl::GameManager::Destroy()
 {
 }
 
+void gl::GameManager::InitLevel()
+{
+	createPlayer();
+}
+
+void gl::GameManager::RenderManager()
+{
+}
+
 void gl::GameManager::createPlayer()
 {
-	initialPosX = rand() % 500 + 1;
-	initialPosY = rand() % 500 + 1;
-	players.push_back(Player(sf::Vector2f(initialPosX, initialPosY)));
+	players.push_back(Player());
 }
 
 void gl::GameManager::createPlayer(sf::Shape* shape)
@@ -52,6 +59,24 @@ void gl::GameManager::createPlayer(sf::Shape* shape, sf::Vector2f position)
 {
 }
 
+void gl::GameManager::createIA()
+{
+	AIs.push_back(AI());
+}
+
+void gl::GameManager::createIA(sf::Shape* shape)
+{
+}
+
+void gl::GameManager::createIA(sf::Vector2f position)
+{
+	AIs.push_back(AI(position));
+}
+
+void gl::GameManager::createIA(sf::Shape* shape, sf::Vector2f position)
+{
+}
+
 gl::Player gl::GameManager::GetPlayerByID(int id)
 {
 	if (players.size() > id)
@@ -59,4 +84,3 @@ gl::Player gl::GameManager::GetPlayerByID(int id)
 
 	return Player();
 }
-
