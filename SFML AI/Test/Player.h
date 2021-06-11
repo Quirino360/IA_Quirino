@@ -1,8 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-#include "Flag.h"
-
 namespace gl {
 	class Player
 	{
@@ -15,7 +13,7 @@ namespace gl {
 
 
 		sf::CircleShape playerCircleShape;
-		sf::Vector2f movement = sf::Vector2f(1.0f, 1.0f);
+		sf::Vector2f movement = sf::Vector2f(1.0f, 1.0f); //this is actualy the direction
 
 	private:
 		unsigned int ID = 0;

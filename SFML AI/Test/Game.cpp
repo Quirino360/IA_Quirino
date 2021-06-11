@@ -28,32 +28,88 @@ void Game::run()
 
 void Game::init()
 {
-	m_window = new sf::RenderWindow(sf::VideoMode(1080, 720), "SFML Template");	
+	m_window = new sf::RenderWindow(sf::VideoMode(1080, 720), "Artificial Inteligence");
 
-	gl::DeltaTime::AddTimer("test");
-	gl::DeltaTime::SetTimer("test", 2);
-	gl::DeltaTime::AddTimer("test2");
-	gl::DeltaTime::StopTimer("test2");
+	//center = 540, 360
+	sf::Vector2f teamOnePos = sf::Vector2f(440, 360);
+	sf::Vector2f teamTwoPos = sf::Vector2f(640, 360);
+	for (int i = 0; i < 3; i++)
+	{
+		if (i == 1)
+		{
+			teamOnePos = sf::Vector2f(340, 460);
+			teamTwoPos = sf::Vector2f(740, 460);
+		}
+		if (i == 2)
+		{
+			teamOnePos = sf::Vector2f(340, 260);
+			teamTwoPos = sf::Vector2f(740, 260);
+		}
+		gl::AI teamOneAux = gl::AI(teamOnePos);
+		teamOneAux.AI_CircleShape.setFillColor(sf::Color::Green);
+		gl::AI teamTwoAux = gl::AI(teamTwoPos);
+		teamTwoAux.AI_CircleShape.setFillColor(sf::Color::Red);
 
-	AI_Entity = gl::AI(sf::Vector2f(50.0f, 50.0f));
+		TeamOne.push_back(teamOneAux);
+		TeamTwo.push_back(teamTwoAux);
+	}
 }
 
 void Game::update()
 {
+	flag.Update();
 
-	
-	//std::cout << "Mouse,  posX = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).x << " PosY = " << static_cast<sf::Vector2f>(sf::Mouse::getPosition()).y << std::endl; //print mouse position x & y 
-	//std::cout << "Player,  posX = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().x << " PosY = " << gameManager.GetPlayerByID(0).playerCircleShape.getPosition().y << std::endl; //print mouse position x & y 
-	player.Update();
-	AI_Entity.Update();
-	//AI_Entity.SteeringBehaiviorSeek(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
-	//AI_Entity.SteeringBehaiviorFlee(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
-	//AI_Entity.SteeringBehaiviorArrival(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window)));
-	//AI_Entity.SteeringBehaiviorWander();
-	//AI_Entity.SteeringBehaiviorPersuit(player);
-	//AI_Entity.SteeringBehaiviorSeekEvade(player);
-	AI_Entity.SteeringBehaviorPathFollowing();
-	/**/
+	for (int i = 0; i < TeamTwo.size(); i++)
+	{
+		if (TeamOne[i].hasFlag == true)
+		{
+			teamOneHasTheFlag = true;
+		}
+
+		if (TeamTwo[i].hasFlag == true)
+		{
+			teamTwoHasTheFlag = true;
+		}
+
+		if (flag.DetectIfAITouch(TeamOne[i].AI_CircleShape, TeamOne[i].hasFlag) && flag.GetIsOnPlayer())
+		{
+			flag.ResetFlag();
+			TeamTwo[0].hasFlag = false;
+			TeamTwo[1].hasFlag = false;
+			TeamTwo[2].hasFlag = false;
+		}
+		if (flag.DetectIfAITouch(TeamOne[i].AI_CircleShape, TeamOne[i].hasFlag) && !flag.GetIsOnPlayer())
+		{
+			TeamOne[i].hasFlag = true;
+			flag.SetIsOnPlayer(true);
+		}
+
+		if (flag.DetectIfAITouch(TeamTwo[i].AI_CircleShape, TeamTwo[i].hasFlag) && flag.GetIsOnPlayer())
+		{
+			flag.ResetFlag();
+			TeamOne[0].hasFlag = false;
+			TeamOne[1].hasFlag = false;
+			TeamOne[2].hasFlag = false;
+		}
+		if (flag.DetectIfAITouch(TeamTwo[i].AI_CircleShape, TeamTwo[i].hasFlag) && !flag.GetIsOnPlayer())
+		{
+			TeamTwo[i].hasFlag = true;
+			flag.SetIsOnPlayer(true);
+		}
+	}
+
+
+	for (int i = 0; i < TeamOne.size(); i++)
+	{
+		TeamOne[i].Update();
+		TeamOne[i].CatureTheFlagUpdate(flag, TeamTwo, teamOneHasTheFlag);
+	}
+	for (int i = 0; i < TeamTwo.size(); i++)
+	{
+		TeamTwo[i].Update();
+		TeamTwo[i].CatureTheFlagUpdate(flag, TeamOne, teamTwoHasTheFlag);
+	}
+
 }
 
 void Game::processEvents()
@@ -79,8 +135,18 @@ void Game::processEvents()
 void Game::render()
 {
 	m_window->clear();
-	player.Render(m_window);
-	AI_Entity.Render(m_window);
+
+	flag.Render(m_window);
+
+	for (int i = 0; i < TeamOne.size(); i++)
+	{
+		TeamOne[i].Render(m_window);
+	}
+	for (int i = 0; i < TeamTwo.size(); i++)
+	{
+		TeamTwo[i].Render(m_window);
+	}
+
 	m_window->display();
 }
 

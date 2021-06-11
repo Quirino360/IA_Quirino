@@ -4,6 +4,9 @@
 #include "GameManager.h"
 #include "Player.h"
 #include "AI.h"
+#include "Flag.h"
+
+#include <vector>
 
 class Game
 {
@@ -29,9 +32,23 @@ private:
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);;
 
 	gl::GameManager gameManager;
-	gl::AI AI_Entity;
-	gl::Player player;
+	//gl::AI AI_Entity;
+	//gl::Player player;
+
+	gl::Flag flag;
 
 
+	//Capture the flag
+	std::vector<gl::AI> TeamOne;
+	std::vector<gl::AI> TeamTwo;
+
+	bool teamOneHasTheFlag = false;
+	bool teamTwoHasTheFlag = false;
+
+	float teamOneScore;
+	float teamTwoScore;
+
+	float gameTime;
+	float rounds; //this is optinal
 };
 

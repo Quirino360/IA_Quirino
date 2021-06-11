@@ -13,10 +13,11 @@ namespace gl {
 		sf::CircleShape CircleCollision;
 		sf::RectangleShape SquareCollision;
 
-		float radiusToDetect = 500.0f;
+		float radiusToDetectOthers = 500.0f;
 
 		bool hasCircle = false;
 		bool hasRectangle = false;
+		bool isTrigger = false; //true can enter & true'nt can't enter
 
 	public:
 		bool DetectCollision(sf::Shape* _other);
