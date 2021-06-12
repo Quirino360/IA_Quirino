@@ -63,12 +63,22 @@ void Game::update()
 	{
 		if (TeamOne[i].hasFlag == true)
 		{
+			teamOneScore++;
 			teamOneHasTheFlag = true;
+		}
+		else
+		{
+			teamOneHasTheFlag = false;
 		}
 
 		if (TeamTwo[i].hasFlag == true)
 		{
+			teamTwoScore++;
 			teamTwoHasTheFlag = true;
+		}
+		else
+		{
+			teamTwoHasTheFlag = false;
 		}
 
 		if (flag.DetectIfAITouch(TeamOne[i].AI_CircleShape, TeamOne[i].hasFlag) && flag.GetIsOnPlayer())
@@ -77,8 +87,10 @@ void Game::update()
 			TeamTwo[0].hasFlag = false;
 			TeamTwo[1].hasFlag = false;
 			TeamTwo[2].hasFlag = false;
+
+
 		}
-		if (flag.DetectIfAITouch(TeamOne[i].AI_CircleShape, TeamOne[i].hasFlag) && !flag.GetIsOnPlayer())
+		else if (flag.DetectIfAITouch(TeamOne[i].AI_CircleShape, TeamOne[i].hasFlag) && !flag.GetIsOnPlayer())
 		{
 			TeamOne[i].hasFlag = true;
 			flag.SetIsOnPlayer(true);
@@ -91,7 +103,7 @@ void Game::update()
 			TeamOne[1].hasFlag = false;
 			TeamOne[2].hasFlag = false;
 		}
-		if (flag.DetectIfAITouch(TeamTwo[i].AI_CircleShape, TeamTwo[i].hasFlag) && !flag.GetIsOnPlayer())
+		else if (flag.DetectIfAITouch(TeamTwo[i].AI_CircleShape, TeamTwo[i].hasFlag) && !flag.GetIsOnPlayer())
 		{
 			TeamTwo[i].hasFlag = true;
 			flag.SetIsOnPlayer(true);

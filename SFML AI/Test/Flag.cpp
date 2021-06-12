@@ -9,7 +9,7 @@ namespace gl
 	Flag::Flag()
 	{
 		srand(time(NULL));
-		flagShape.setFillColor(sf::Color::White);
+		flagShape.setFillColor(sf::Color::Yellow);
 		flagPosition = sf::Vector2f(rand() % 1060 + 1, rand() % 700 + 1);
 		flagShape.setPosition(flagPosition);
 		flagShape.setRadius(10);
@@ -18,7 +18,7 @@ namespace gl
 
 	Flag::Flag(sf::Vector2f position)
 	{
-		flagShape.setFillColor(sf::Color::Magenta);
+		flagShape.setFillColor(sf::Color::Yellow);
 		flagPosition = position;
 		flagShape.setPosition(flagPosition);
 		flagShape.setRadius(10);

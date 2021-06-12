@@ -36,7 +36,8 @@ private:
 	//gl::Player player;
 
 	gl::Flag flag;
-
+	float teamOneScore = 0;
+	float teamTwoScore = 0;
 
 	//Capture the flag
 	std::vector<gl::AI> TeamOne;
@@ -44,9 +45,6 @@ private:
 
 	bool teamOneHasTheFlag = false;
 	bool teamTwoHasTheFlag = false;
-
-	float teamOneScore;
-	float teamTwoScore;
 
 	float gameTime;
 	float rounds; //this is optinal

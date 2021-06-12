@@ -68,21 +68,20 @@ namespace gl
 
 	void AI::CatureTheFlagUpdate(Flag& _flag, std::vector<AI> enemyTeam, bool& allyHasFlag)
 	{
-		
-
 		if (false == hasFlag && false == allyHasFlag) //if doesnt has the flag, he will follow the flag at all cost
 		{
 			maxSpeed = 2.0f;
 			SteeringBehaviorAIAvoidancePersuitFlag(_flag, enemyTeam);
 		}
-		if (false == hasFlag && true == allyHasFlag ) //if his team has the flag he will try to protect him
+		else if (false == hasFlag && true == allyHasFlag ) //if his team has the flag he will try to protect him
 		{
 			maxSpeed = 2.0f;
 			//SteeringBehaviorAIAvoidancePersuitAI(NearestAI(enemyTeam), enemyTeam);
 			SteeringBehaiviorPersuit(NearestAI(enemyTeam));
 		}
-		if (true == hasFlag) // if it has the flag, he will run 
+		else if (true == hasFlag) // if it has the flag, he will run 
 		{
+			allyHasFlag = true;
 			maxSpeed = 1;
 			sf::Vector2f direction = NormalizeVector(velocity);
 			sf::Vector2f ahead = AI_CircleShape.getPosition() + NormalizeVector(direction) * 10.0f;
