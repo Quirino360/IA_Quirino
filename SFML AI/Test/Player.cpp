@@ -13,8 +13,8 @@ gl::Player::Player()
 	srand(time(NULL));
 
 	playerCircleShape.setFillColor(sf::Color::Magenta);
-	playerPosition = sf::Vector2f(540, 360);
-	playerCircleShape.setPosition(playerPosition);
+	position = sf::Vector2f(540, 360);
+	playerCircleShape.setPosition(position);
 	playerCircleShape.setRadius(10);
 	playerCircleShape.setOrigin(playerCircleShape.getRadius() / 2, playerCircleShape.getRadius() / 2);
 }
@@ -23,16 +23,16 @@ gl::Player::Player(sf::Shape* shape)
 {
 }
 
-gl::Player::Player(sf::Vector2f position)
+gl::Player::Player(sf::Vector2f _position)
 {
 	playerCircleShape.setFillColor(sf::Color::Magenta);
-	playerPosition = position;
-	playerCircleShape.setPosition(playerPosition);
+	position = _position;
+	playerCircleShape.setPosition(position);
 	playerCircleShape.setRadius(10);
 	playerCircleShape.setOrigin(playerCircleShape.getRadius() / 2, playerCircleShape.getRadius() / 2);
 }
 
-gl::Player::Player(sf::Shape* shape, sf::Vector2f position)
+gl::Player::Player(sf::Shape* shape, sf::Vector2f _position)
 {
 }
 
@@ -42,6 +42,7 @@ void gl::Player::Init()
 
 void gl::Player::Update()
 {
+	playerCircleShape.setPosition(position);
 	Move();
 }
 
@@ -61,25 +62,25 @@ void gl::Player::Move()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		movement = sf::Vector2f(0, -1);
-		playerCircleShape.move(movement * velocity * deltaTime);
+		position += movement * velocity * deltaTime;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		movement = sf::Vector2f(0, 1);
-		playerCircleShape.move(movement * velocity * deltaTime);
+		position += movement * velocity * deltaTime;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		movement = sf::Vector2f(-1, 0);
-		playerCircleShape.move(movement * velocity * deltaTime);
+		position += movement * velocity * deltaTime;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		movement = sf::Vector2f(1, 0);
-		playerCircleShape.move(movement * velocity * deltaTime);
+		position += movement * velocity * deltaTime;
 	}
 }
 

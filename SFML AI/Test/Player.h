@@ -7,31 +7,38 @@ namespace gl {
 	public:
 		Player();
 		Player(sf::Shape* shape);
-		Player(sf::Vector2f position);
-		Player(sf::Shape* shape, sf::Vector2f position);
+		Player(sf::Vector2f _position);
+		Player(sf::Shape* shape, sf::Vector2f _position);
 		~Player() = default;
-
-
-		sf::CircleShape playerCircleShape;
-		sf::Vector2f movement = sf::Vector2f(1.0f, 1.0f); //this is actualy the direction
-
-	private:
-		unsigned int ID = 0;
-		sf::Shape* playerShape = nullptr;
-		sf::Texture player_Texture;
-		sf::Vector2f playerPosition;
-
-		float MaxVelocity = 200;
-		float velocity = 200;
-
-		bool hasFlag = false;
-
-	public:
 
 		void Init();
 		void Update();
 		void Render(sf::RenderWindow* window);
 		void Destroy();
+
+
+	private:
+		sf::CircleShape playerCircleShape;
+
+		unsigned int ID = 0;
+		sf::Shape* playerShape = nullptr;
+		sf::Texture player_Texture;
+		sf::Vector2f movement = sf::Vector2f(1.0f, 1.0f); //this is actualy the direction
+		sf::Vector2f position;
+
+		float MaxVelocity = 200;
+		float velocity = 200;
+
+		bool hasFlag = false;
+		
+
+	public:
+
+		// ------------------------- Getters ------------------------- //
+		sf::Vector2f GetMovement() { return movement; };
+		sf::Vector2f GetPosition() { return position; };
+
+		// ------------------------- Setters ------------------------- //
 
 
 	private:

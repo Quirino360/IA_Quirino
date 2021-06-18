@@ -32,8 +32,8 @@ private:
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);;
 
 	gl::GameManager gameManager;
-	//gl::AI AI_Entity;
-	//gl::Player player;
+	gl::AI AI_Entity;
+	gl::Player player;
 
 	gl::Flag flag;
 	float teamOneScore = 0;

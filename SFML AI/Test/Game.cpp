@@ -53,11 +53,21 @@ void Game::init()
 		TeamOne.push_back(teamOneAux);
 		TeamTwo.push_back(teamTwoAux);
 	}
+
+	AI_Entity = gl::AI();
+	AI_Entity.Init();
+	AI_Entity.GetSteeringBehavior().SetBehavior(BEHAVIOR::PERSUIT);
+	player = gl::Player(sf::Vector2f(540, 360));
 }
 
 void Game::update()
 {
-	flag.Update();
+	AI_Entity.Update();
+
+	AI_Entity.UpdateSteeringBehavior(player.GetMovement(), player.GetPosition());
+	player.Update();
+
+	/*flag.Update();
 
 	for (int i = 0; i < TeamTwo.size(); i++)
 	{
@@ -120,8 +130,7 @@ void Game::update()
 	{
 		TeamTwo[i].Update();
 		TeamTwo[i].CatureTheFlagUpdate(flag, TeamOne, teamTwoHasTheFlag);
-	}
-
+	}/**/
 }
 
 void Game::processEvents()
@@ -148,7 +157,10 @@ void Game::render()
 {
 	m_window->clear();
 
-	flag.Render(m_window);
+	AI_Entity.Render(m_window);
+	player.Render(m_window);
+
+	/*flag.Render(m_window);
 
 	for (int i = 0; i < TeamOne.size(); i++)
 	{
@@ -157,7 +169,7 @@ void Game::render()
 	for (int i = 0; i < TeamTwo.size(); i++)
 	{
 		TeamTwo[i].Render(m_window);
-	}
+	}/**/
 
 	m_window->display();
 }

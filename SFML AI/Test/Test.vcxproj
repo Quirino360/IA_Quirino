@@ -165,6 +165,13 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateFlee.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StatePatrol.cpp" />
+    <ClCompile Include="StatePersuit.cpp" />
+    <ClCompile Include="StateSeek.cpp" />
+    <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIShape.cpp" />
   </ItemGroup>
@@ -183,6 +190,13 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateFlee.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StatePatrol.h" />
+    <ClInclude Include="StatePersuit.h" />
+    <ClInclude Include="StateSeek.h" />
+    <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIShape.h" />
   </ItemGroup>
