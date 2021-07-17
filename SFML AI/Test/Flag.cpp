@@ -1,27 +1,27 @@
 #include "Flag.h"
+#include "DeltaTime.h";
+
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include "DeltaTime.h";
+#include <iostream>
 
 namespace gl
 {
 	Flag::Flag()
 	{
 		srand(time(NULL));
-		flagShape.setFillColor(sf::Color::Yellow);
 		flagPosition = sf::Vector2f(rand() % 1060 + 1, rand() % 700 + 1);
 		flagShape.setPosition(flagPosition);
-		flagShape.setRadius(10);
+		flagShape.setRadius(50.0f);
 		flagShape.setOrigin(flagShape.getRadius() / 2, flagShape.getRadius() / 2);
 	}
 
 	Flag::Flag(sf::Vector2f position)
 	{
-		flagShape.setFillColor(sf::Color::Yellow);
 		flagPosition = position;
 		flagShape.setPosition(flagPosition);
-		flagShape.setRadius(10);
+		flagShape.setRadius(50.0f);
 		flagShape.setOrigin(flagShape.getRadius() / 2, flagShape.getRadius() / 2);
 	}
 
@@ -31,11 +31,16 @@ namespace gl
 
 	void Flag::Init()
 	{
+		if (texture.loadFromFile("Images/Flag.png"))
+			std::cout << "Flag Texture Loded" << std::endl;
+		flagShape.setTexture(&texture);
 	}
 
 	void Flag::Update()
 	{
 		flagShape.setPosition(flagPosition);
+		
+
 	}
 
 	void Flag::Render(sf::RenderWindow* window)
@@ -59,11 +64,6 @@ namespace gl
 		isOnPlayer = false;
 		flagPosition = sf::Vector2f(rand() % 1060 + 1, rand() % 700 + 1);
 		flagShape.setPosition(flagPosition);
-	}
-
-	void Flag::setFlagPosition(sf::Vector2f position)
-	{
-		flagPosition = position;
 	}
 
 	float Flag::DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B)

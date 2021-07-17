@@ -18,7 +18,7 @@ namespace gl {
 
 
 	private:
-		sf::CircleShape playerCircleShape;
+		sf::CircleShape* playerCircleShape;
 
 		unsigned int ID = 0;
 		sf::Shape* playerShape = nullptr;
@@ -37,6 +37,8 @@ namespace gl {
 		// ------------------------- Getters ------------------------- //
 		sf::Vector2f GetMovement() { return movement; };
 		sf::Vector2f GetPosition() { return position; };
+		sf::CircleShape* GetCircleShape() { return playerCircleShape; };
+		float GetRadius() { return playerCircleShape->getRadius(); };
 
 		// ------------------------- Setters ------------------------- //
 

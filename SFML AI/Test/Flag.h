@@ -21,18 +21,19 @@ namespace gl {
 		sf::CircleShape flagShape;
 		sf::Vector2f flagPosition;
 		bool isOnPlayer = false;
-
+		sf::Texture texture;
+		
 	public:
 
 		void ResetFlag();
 
 		// ------------------------- Getters ------------------------- //
 		sf::Vector2f GetPosition() { return flagPosition; };
-		sf::CircleShape GetShape() { return flagShape; };
+		sf::CircleShape* GetShape() { return &flagShape; };
 		bool GetIsOnPlayer() { return isOnPlayer; };
 
 		// ------------------------- Setters ------------------------- //
-		void setFlagPosition(sf::Vector2f position);
+		void setPosition(sf::Vector2f position) { flagPosition = position; };
 		void SetIsOnPlayer(bool TF) { isOnPlayer = TF; };
 
 	private:

@@ -5,18 +5,25 @@
 #include <time.h>       /* time */
 #include "DeltaTime.h";
 
+#include <iostream>
 #include <cmath>
+
 
 sf::Clock deltaClock;
 gl::Player::Player()
 {
 	srand(time(NULL));
+	playerCircleShape = new sf::CircleShape();
 
-	playerCircleShape.setFillColor(sf::Color::Magenta);
+	playerCircleShape->setFillColor(sf::Color::Magenta);
 	position = sf::Vector2f(540, 360);
-	playerCircleShape.setPosition(position);
-	playerCircleShape.setRadius(10);
-	playerCircleShape.setOrigin(playerCircleShape.getRadius() / 2, playerCircleShape.getRadius() / 2);
+	playerCircleShape->setPosition(position);
+	playerCircleShape->setRadius(10);
+	playerCircleShape->setOrigin(playerCircleShape->getRadius() / 2, playerCircleShape->getRadius() / 2);
+
+	if (player_Texture.loadFromFile("Images/MasterChief.png"))
+		std::cout << "Player Texture Loded" << std::endl;
+	playerCircleShape->setTexture(&player_Texture);
 }
 
 gl::Player::Player(sf::Shape* shape)
@@ -25,11 +32,17 @@ gl::Player::Player(sf::Shape* shape)
 
 gl::Player::Player(sf::Vector2f _position)
 {
-	playerCircleShape.setFillColor(sf::Color::Magenta);
+	playerCircleShape = new sf::CircleShape();
+
+	playerCircleShape->setFillColor(sf::Color::Magenta);
 	position = _position;
-	playerCircleShape.setPosition(position);
-	playerCircleShape.setRadius(10);
-	playerCircleShape.setOrigin(playerCircleShape.getRadius() / 2, playerCircleShape.getRadius() / 2);
+	playerCircleShape->setPosition(position);
+	playerCircleShape->setRadius(10);
+	playerCircleShape->setOrigin(playerCircleShape->getRadius() / 2, playerCircleShape->getRadius() / 2);
+
+	if (player_Texture.loadFromFile("Images/MasterChief.png"))
+		std::cout << "Player Texture Loded" << std::endl;
+	playerCircleShape->setTexture(&player_Texture);
 }
 
 gl::Player::Player(sf::Shape* shape, sf::Vector2f _position)
@@ -42,13 +55,13 @@ void gl::Player::Init()
 
 void gl::Player::Update()
 {
-	playerCircleShape.setPosition(position);
+	playerCircleShape->setPosition(position);
 	Move();
 }
 
 void gl::Player::Render(sf::RenderWindow* window)
 {
-	window->draw(playerCircleShape);
+	window->draw(*playerCircleShape);
 }
 
 void gl::Player::Destroy()

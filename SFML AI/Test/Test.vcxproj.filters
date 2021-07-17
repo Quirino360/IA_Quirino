@@ -13,7 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="States">
+    <Filter Include="Tools">
+      <UniqueIdentifier>{28725456-f61f-40dc-b505-f52fde75b9e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States_Animation">
+      <UniqueIdentifier>{d43fddf1-db00-440c-ad12-2761f3c11f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States_AI">
       <UniqueIdentifier>{ed69cc7e-bde8-479e-b1a1-bd7801f23be4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -21,31 +27,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="CFont.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="CTexture.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="DeltaTime.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuManager.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UIShape.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
@@ -63,60 +45,90 @@
     <ClCompile Include="Flag.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="CollitionDetection.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="SteeringBehavior.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="StateFlee.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="AI_StateCapture.cpp">
+      <Filter>States_AI</Filter>
     </ClCompile>
-    <ClCompile Include="StatePatrol.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="AI_StateSteal.cpp">
+      <Filter>States_AI</Filter>
     </ClCompile>
-    <ClCompile Include="StatePersuit.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="AI_StateCarryBase.cpp">
+      <Filter>States_AI</Filter>
     </ClCompile>
-    <ClCompile Include="StateSeek.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="AI_StateCover.cpp">
+      <Filter>States_AI</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="AI_State.cpp">
+      <Filter>States_AI</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
+    <ClCompile Include="ResourceManager.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShape.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="CFont.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="CollitionDetection.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateMachine.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateDefeat.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateRun.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkUp.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateIdle.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateMachine.cpp">
+      <Filter>States_AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_State.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkDown.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkLeft.cpp">
+      <Filter>States_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkRight.cpp">
+      <Filter>States_Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="CFont.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="CTexture.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="DeltaTime.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuManager.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UIShape.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
@@ -134,29 +146,89 @@
     <ClInclude Include="Flag.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="CollitionDetection.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="SteeringBehavior.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="StateSeek.h">
-      <Filter>States</Filter>
+    <ClInclude Include="AI_StateCover.h">
+      <Filter>States_AI</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>States</Filter>
+    <ClInclude Include="AI_State.h">
+      <Filter>States_AI</Filter>
     </ClInclude>
-    <ClInclude Include="StateFlee.h">
-      <Filter>States</Filter>
+    <ClInclude Include="AI_StateCapture.h">
+      <Filter>States_AI</Filter>
     </ClInclude>
-    <ClInclude Include="StatePatrol.h">
-      <Filter>States</Filter>
+    <ClInclude Include="AI_StateSteal.h">
+      <Filter>States_AI</Filter>
     </ClInclude>
-    <ClInclude Include="StatePersuit.h">
-      <Filter>States</Filter>
+    <ClInclude Include="AI_StateCarryBase.h">
+      <Filter>States_AI</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.h">
+    <ClInclude Include="ResourceManager.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateMachine.h">
+      <Filter>States_AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="CFont.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="CollitionDetection.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShape.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateDefeat.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateMachine.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateRun.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkUp.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateIdle.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkDown.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkLeft.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkRight.h">
+      <Filter>States_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_State.h">
+      <Filter>States_Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
