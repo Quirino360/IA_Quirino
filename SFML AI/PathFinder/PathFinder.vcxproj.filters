@@ -22,14 +22,14 @@
     <Filter Include="DevTools\Cpp">
       <UniqueIdentifier>{0acc3c61-2494-4622-bf07-d5180a5ef50e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PathFinder">
-      <UniqueIdentifier>{8b0245a9-654c-46e9-ba79-05e8f819a4e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{dfdbfd12-3e30-489f-9629-3db532ea697f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Actor">
       <UniqueIdentifier>{8560cced-d0fd-4e9f-bf2f-136b4c3c65d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{8b0245a9-654c-46e9-ba79-05e8f819a4e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +68,24 @@
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

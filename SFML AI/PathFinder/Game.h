@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "imgui.h"
+#include "imgui-SFML.h"
 
 class Game
 {
@@ -11,7 +13,6 @@ public:
 	void run();
 
 private:
-
 	void init();
 	void update();
 	void processEvents();
