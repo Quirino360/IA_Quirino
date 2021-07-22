@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DevTools">
+      <UniqueIdentifier>{b9f540b1-c515-4540-92df-1655e78a245a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DevTools\Header">
+      <UniqueIdentifier>{c4c029fd-1ac4-496a-b39b-74c009493f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DevTools\Cpp">
+      <UniqueIdentifier>{0acc3c61-2494-4622-bf07-d5180a5ef50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PathFinder">
+      <UniqueIdentifier>{8b0245a9-654c-46e9-ba79-05e8f819a4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{dfdbfd12-3e30-489f-9629-3db532ea697f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{8560cced-d0fd-4e9f-bf2f-136b4c3c65d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShape.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CFont.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>DevTools\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShape.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CFont.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>DevTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

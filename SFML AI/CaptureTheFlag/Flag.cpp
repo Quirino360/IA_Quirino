@@ -39,8 +39,6 @@ namespace gl
 	void Flag::Update()
 	{
 		flagShape.setPosition(flagPosition);
-		
-
 	}
 
 	void Flag::Render(sf::RenderWindow* window)
