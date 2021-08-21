@@ -7,6 +7,7 @@ namespace gl {
 	{
 	public:
 		static float Time() { return m_time; }
+		static float GetDeltaTime() { return deltaTime; }
 		static void AddTimer(std::string name);
 		static float GetTimer(std::string name);
 		static void SetTimer(std::string name, float time);
@@ -19,7 +20,11 @@ namespace gl {
 	private:
 		static void Update(float time);
 
+		static float deltaTime;
+
 	private:
+		static float previusTime;
+
 		struct Timer
 		{
 			std::string name;

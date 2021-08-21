@@ -22,14 +22,29 @@
     <Filter Include="DevTools\Cpp">
       <UniqueIdentifier>{0acc3c61-2494-4622-bf07-d5180a5ef50e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object">
-      <UniqueIdentifier>{dfdbfd12-3e30-489f-9629-3db532ea697f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Actor">
-      <UniqueIdentifier>{8560cced-d0fd-4e9f-bf2f-136b4c3c65d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Imgui">
       <UniqueIdentifier>{8b0245a9-654c-46e9-ba79-05e8f819a4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{4923cd48-1e77-49c6-8fa6-b3ffd3c05ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Anim">
+      <UniqueIdentifier>{71bddb7f-1c5b-408e-b899-bbbb991cf8da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Anim\Header">
+      <UniqueIdentifier>{b4d3bc11-fd4e-46bf-91c9-e2bf45f85058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Anim\Cpp">
+      <UniqueIdentifier>{96d970b1-b701-4faf-94ee-bc6614b99435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\AI_State">
+      <UniqueIdentifier>{3b6b1d39-7bc6-431b-bad9-b5fcc6e77c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\AI_State\Header">
+      <UniqueIdentifier>{d58913de-c38a-452d-b9a7-8b2510df7b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\AI_State\Cpp">
+      <UniqueIdentifier>{308349b7-dc83-4f64-a596-6716701b9719}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,12 +78,6 @@
     <ClCompile Include="UI.cpp">
       <Filter>DevTools\Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -86,6 +95,69 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_demo.cpp">
       <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavior.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_State.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateDefeat.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateIdle.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateMachine.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateRun.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkDown.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkLeft.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkRight.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkUp.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>AI\Anim\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCapture.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCarryBase.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCover.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateMachine.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateSteal.cpp">
+      <Filter>AI\AI_State\Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +191,68 @@
     <ClInclude Include="UI.h">
       <Filter>DevTools\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
+    <ClInclude Include="Map.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_State.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateDefeat.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateIdle.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateMachine.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateRun.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkDown.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkLeft.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkRight.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkUp.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>AI\Anim\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateSteal.h">
+      <Filter>AI\AI_State\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateMachine.h">
+      <Filter>AI\AI_State\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCover.h">
+      <Filter>AI\AI_State\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCarryBase.h">
+      <Filter>AI\AI_State\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCapture.h">
+      <Filter>AI\AI_State\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State.h">
+      <Filter>AI\AI_State\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

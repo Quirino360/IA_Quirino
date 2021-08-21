@@ -3,8 +3,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Player.h"
-#include "Flag.h"
 #include "SteeringBehavior.h"
 
 enum class AI_STATE_TYPE;
@@ -24,48 +22,16 @@ namespace gl
 	class AI
 	{
 	public:
-		/**
-		* @brief   Default constructor of AI
-		* @param   NA
-		* @bug     NA
-		* @return  NA		*/
-		AI();
 
-		/**
-		* @brief   Creates an AI with the given shape
-		* @param   #Shape shape that the AI will have
-		* @bug     NA
-		* @return  NA		*/
-		AI(sf::Shape* shape);
-
-		/**
-		* @brief   Creates an AI with the given position
-		* @param   #sf::Vector2f starting position of the AI
-		* @bug     NA
-		* @return  NA		*/
-		AI(sf::Vector2f _position);
-
-		/**
-		* @brief   Creates an AI with the given shape and position
-		* @param   #Shape shape that the AI will have
-		* @param   #sf::Vector2f starting position of the AI
-		* @bug     NA
-		* @return  NA		*/
-		AI(sf::Shape* shape, sf::Vector2f _position);
-
-		/**
-		* @brief   releases memory
-		* @param   NA
-		* @bug     NA
-		* @return  NA		*/
-		~AI();
+		AI() = default;
+		~AI() = default;
 
 		/**
 		* @brief   Initializes the AI variables
 		* @param   NA
 		* @bug     NA
 		* @return  #void		*/
-		void Init(std::vector<AI> &_allies, std::vector<AI> &_enemies, Flag& _flag, sf::CircleShape& _goal);
+		void Init(sf::Vector2f _position = {0, 0});
 
 		/**
 		* @brief   updates the AI position
@@ -73,12 +39,6 @@ namespace gl
 		* @bug     NA
 		* @return  #void		*/
 		void Update();
-
-		/**
-		* @brief   updates the AI behavior
-		* @param   NA
-		* @bug     NA
-		* @return  #void		*/
 		
 		/**
 		* @brief   renders the AI shape
@@ -98,9 +58,6 @@ namespace gl
 		AI_STATE_TYPE* AI_State;
 		ANIMATION_AI_STATE_TYPE* AI_AnimState;
 
-		bool enemyHasFlag = false;
-		bool alliesHasFlag = false;
-		bool hasFlag = false; // change to true if it has the flag 
 		bool restart = false;
 		unsigned int gameResult = 0; // NA = 0, Win = 1, Loose = 2;
 
@@ -121,13 +78,6 @@ namespace gl
 		sf::Vector2f position;
 		sf::Vector2f direction;
 
-		//Captre the flag
-		std::vector<AI>* allies;
-		std::vector<AI>* enemies;
-		sf::Vector2f target;
-		gl::Flag* flag;
-		sf::CircleShape* goal;
-
 		// Steering Behavior
 		SteeringBehavior sBehavior;
 		sf::Vector2f velocity;
@@ -139,7 +89,6 @@ namespace gl
 	public:
 
 		void Animate();
-		void UpdateFlag();
 
 
 		// Getters ------------------------- //
@@ -159,21 +108,6 @@ namespace gl
 
 		sf::Vector2f GetDirection() { return direction; };
 
-		std::vector<AI>* GetAllies() { return allies; };
-
-
-		std::vector<AI>* GetEnemies() { return enemies; };
-
-		Flag* GetFlag() { return flag; };
-
-		sf::CircleShape* GetGoal() { return goal; };
-		/**
-		* @brief   get Target Circle shape
-		* @param   NA
-		* @bug     NA
-		* @return  sf::CircleShape*		*/
-		sf::Vector2f GetTarget() { return target; };
-
 		/**
 		* @brief   get the current steering behavior
 		* @param   NA
@@ -192,12 +126,6 @@ namespace gl
 
 		void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
 
-		/**
-		* @brief   set new circle shape to the AI
-		* @param   sf::CircleShape* new circle shape pos
-		* @bug     NA
-		* @return  #void		*/
-		void SetTarget(sf::Vector2f _newTarget) { target = _newTarget; };
 
 		//void SetVelocity(sf::Vector2f _vel) { velocity = _vel; };
 
@@ -218,30 +146,8 @@ namespace gl
 
 		void SetCircleColor(sf::Color _newColor) { AI_CircleShape.setFillColor(_newColor); };
 
-		void SetEnemies(std::vector<AI>& _enemies) {
-			if (enemies != nullptr) {
-				delete enemies;
-				enemies = &_enemies;
-			}
-			else {
-				enemies = &_enemies;
-			}
-		};
-
-		void SetAllies(std::vector<AI>& _allies) {
-			if (allies != nullptr) {
-				delete allies;
-				allies = &_allies;
-			}
-			else {
-				allies = &_allies;
-			}
-		};
-
 
 	private:
-
-		bool TouchedFlag();
 
 
 		bool TouchedGoal();

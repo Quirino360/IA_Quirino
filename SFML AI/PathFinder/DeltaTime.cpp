@@ -1,7 +1,9 @@
 #include "DeltaTime.h"
 
 namespace gl {
-float DeltaTime::m_time = 0;
+	float DeltaTime::deltaTime = 0;
+	float DeltaTime::previusTime = 0;
+	float DeltaTime::m_time = 0;
 std::vector<DeltaTime::Timer> DeltaTime::m_timers;
 
 void DeltaTime::AddTimer(std::string name)
@@ -82,7 +84,9 @@ bool DeltaTime::TimerExist(std::string name)
 }
 void DeltaTime::Update(float time)
 {
+	previusTime = m_time;
 	m_time = time;
+	deltaTime = m_time - previusTime;
 	for (Timer& t : m_timers)
 	{
 		if (t.playing)

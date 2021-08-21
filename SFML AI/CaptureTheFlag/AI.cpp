@@ -90,14 +90,6 @@ namespace gl
 		direction = NormalizeVector(GetSteeringBehavior().GetVelocity());
 	}
 
-	void AI::UpdateSteeringBehavior(sf::Vector2f _targetMovement, sf::Vector2f _targetPosition)
-	{
-		/*if (IsOnSight())
-		{
-
-		}/**/
-
-	}
 
 	void AI::Render(sf::RenderWindow* window)
 	{
