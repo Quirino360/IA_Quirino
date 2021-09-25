@@ -54,7 +54,7 @@ public:
 	* @param   #gl::AI& agent to update
 	* @bug     NA
 	* @return  #void		*/
-	virtual AI_STATE_TYPE Update(gl::AI& _agent);
+	virtual AI_STATE_TYPE Update(AI& _agent);
 
 	/**
 	* @brief   what will do leaving this state
@@ -68,7 +68,7 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  sf::Vector2f behavior velocity		*/
-	sf::Vector2f GetVelocity() { return sBehavior.GetVelocity(); };
+	sf::Vector2f GetSteering() { return sBehavior.GetSteering(); };
 private:
 };
 

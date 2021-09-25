@@ -43,7 +43,7 @@ namespace gl
 		}
 	}
 
-	void AI_StateMachine::SetCurrentState(gl::AI& _agent, AI_STATE_TYPE _newState)
+	void AI_StateMachine::SetCurrentState(AI& _agent, AI_STATE_TYPE _newState)
 	{
 		if (nullptr == state)
 		{

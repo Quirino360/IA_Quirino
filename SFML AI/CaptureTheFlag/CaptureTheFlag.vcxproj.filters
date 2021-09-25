@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="CaptureTheFlag.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="AI_State.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCapture.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCarryBase.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateCover.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateMachine.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_StateSteal.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_State.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateDefeat.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateIdle.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateMachine.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateRun.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkDown.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkLeft.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkRight.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim_StateWalkUp.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="CFont.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShape.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Flag.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavior.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="CollitionDetection.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="ActorManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CaptureTheFlag.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="AI_State.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCapture.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCarryBase.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateCover.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateMachine.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_StateSteal.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_State.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateDefeat.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateIdle.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateMachine.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateRun.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkDown.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkLeft.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkRight.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim_StateWalkUp.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CFont.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShape.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="CollitionDetection.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h" />
+    <ClInclude Include="ActorManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{007194fd-9b07-4204-81dd-14a84a9fc7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine">
+      <UniqueIdentifier>{7f3c7c0a-18e0-4edb-98c1-8e7c8061ea3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{35f38e33-7d27-4039-b545-ea2063cf3d37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{a5ab4f97-529a-4725-aa3c-120223526a3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

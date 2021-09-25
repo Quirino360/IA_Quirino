@@ -90,9 +90,6 @@
     <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp">
-      <Filter>Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_demo.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -158,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="AI_StateSteal.cpp">
       <Filter>AI\AI_State\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp">
+      <Filter>Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ AI_StateSteal::AI_StateSteal()
 
 AI_StateSteal::AI_StateSteal(float _maxVelocity, float _maxSpeed, float _maxForce, float _mass)
 {
-	sBehavior = SteeringBehavior(_maxVelocity, _maxSpeed, _maxForce, _mass);
+	sBehavior = SteeringBehavior();
 }
 
 AI_StateSteal::~AI_StateSteal()
@@ -19,13 +19,12 @@ void AI_StateSteal::Enter()
 	sBehavior.SetBehavior(BEHAVIOR::PERSUIT);
 }
 
-AI_STATE_TYPE AI_StateSteal::Update(gl::AI& _agent)
+AI_STATE_TYPE AI_StateSteal::Update(AI& _agent)
 {
 	if (_agent.GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
 	_agent.GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());
 
-	_agent.GetSteeringBehavior().UpdateMovement(_agent.GetPosition(), _agent.GetVelocity(), _agent.GetFlag()->GetPosition());
-	_agent.SetPosition(_agent.GetPosition() + _agent.GetSteeringBehavior().GetVelocity());
+	_agent.Update();
 
 	if (_agent.hasFlag == true) //if agent has the flag-> he will carry the falg to base
 	{

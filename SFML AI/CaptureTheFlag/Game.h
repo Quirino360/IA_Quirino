@@ -1,113 +1,52 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-#include "GameManager.h"
+#include "imgui.h"
+#include "imgui-SFML.h"
+
+#include "Actor.h"
 #include "Player.h"
-#include "AI.h"
 #include "Flag.h"
+#include "AI.h"
 
-#include "AI_StateMachine.h"
-#include "Anim_StateMachine.h"
-
-#include <vector>
-
-
-/**
-* @brief   manages the Game loop
-* @bug     NA	*/
-class Game
+class Game : public Actor
 {
 public:
-	/**
-	* @brief   runs the game loop
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
-	void run();
-
-	/**
-	* @brief   gets the game window
-	* @param   NA
-	* @bug     NA
-	* @return  sf::RenderWindow* game window		*/
-	sf::RenderWindow* getWindow() { return m_window; }
-
-	/**
-	* @brief   default constructor
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
 	Game() = default;
-
-	/**
-	* @brief   releases memory
-	* @param   NA
-	* @bug     NA
-	* @return  NA		*/
 	~Game() = default;
+
+	void run();
+	sf::RenderWindow*& getWindow() { return *&m_window; }
+
+
 private:
-
-	/**
-	* @brief   Initialzes variables
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
+	//sfml
 	void init();
-
-	/**
-	* @brief   updates the game
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
 	void update();
-
-	/**
-	* @brief   manages user events
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
 	void processEvents();
-
-	/**
-	* @brief   renders instances in the game window
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
 	void render();
-
-	/**
-	* @brief   releases memory
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
 	void destroy();
 
-	void restart();
+	//imgui
+	void UpdateImgui();
 
 private:
-
+	//Esentials
 	sf::RenderWindow* m_window;
+	sf::View view;
+
+	//Time
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);;
-	gl::GameManager gameManager;
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate;
 
-	gl::AI_StateMachine stateMachine;
-	gl::Anim_StateMachine animStateMachine;
-	gl::AI AI_Entity;
-	gl::Player player;
+	//imgui 
+	sf::Color bgColor;
+	float color[3] = { 95.0f / 255.f, 35.0f / 255.f, 160.0f / 255.f };
+	char windowTitle[255] = "ImGui + SFML = <3";
 
-	//Capture the flag
-	gl::Flag flag;
-	float teamOneScore = 0;
-	float teamTwoScore = 0;
-
-	std::vector<gl::AI> TeamOne;
-	std::vector<gl::AI> TeamTwo;
-
-	sf::CircleShape TeamOnegoal;
-	sf::CircleShape TeamTwogoal;
-
-
-	float gameTime;
-	float rounds; //this is optinal
+	// Actors
+	Actor* player = new Player;
+	Actor* bot = new AI;
 };
 

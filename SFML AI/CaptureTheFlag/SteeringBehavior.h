@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
 /**
 * @brief   Father class for the Artificial Inteligence States
 * @bug     NA
@@ -29,6 +30,8 @@ struct PathPoint
 	float radius;
 };
 
+class Actor;
+
 /**
 * @brief   Manages the steering behavior to use
 * @bug     NA
@@ -44,16 +47,6 @@ public:
 	SteeringBehavior();
 
 	/**
-	* @brief   constructor
-	* @param   #float new max velocity
-	* @param   #float new max speed
-	* @param   #float new max force
-	* @param   #float new mass
-	* @bug     NA
-	* @return  #void		*/
-	SteeringBehavior(float _maxVelocity, float _maxSpeed, float _maxForce, float _mass);
-
-	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
@@ -67,18 +60,15 @@ public:
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #void		*/
-	void UpdateMovement(sf::Vector2f _thisPostion, sf::Vector2f _targetMovement, sf::Vector2f _targetPosition);
+	void UpdateMovement(Actor* _this, Actor* _target);
 
 private:
 
 	BEHAVIOR behavior = BEHAVIOR::IDDLE;
 
 	//steering beahviors
-	sf::Vector2f velocity, desiredVelocity, steering; //used in seek, flee
-	float maxVelocity = 2;  
-	float maxSpeed = 2;	
-	float maxForce = 2;
-	float mass = 1;
+	sf::Vector2f steering;
+
 
 	// Wander ------------------------- 
 	sf::Vector2f pathTarget;
@@ -89,15 +79,8 @@ private:
 	PathPoint pathPointTarget;
 
 public:
-	/**
-	* @brief   gets the ddistance of bwetteen 2 vectors
-	* @param   #sf::Vector2f A
-	* @param   #sf::Vector2f B
-	* @bug     NA
-	* @return  #float vectors distance		*/
-	static float DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B);
 
-	// ------------------------- Getters ------------------------- //
+	// ----- Getters 
 	/**
 	* @brief   gets current behavior
 	* @param   NA
@@ -110,9 +93,9 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #sf::Vector2f current velocity		*/
-	sf::Vector2f GetVelocity() { return velocity; };
+	sf::Vector2f GetSteering() { return steering; };
 
-	// ------------------------- Setters ------------------------- //
+	// ----- Setters 
 	/**
 	* @brief   sets current Behavior
 	* @param   #BEHAVIOR new current behavior
@@ -122,14 +105,14 @@ public:
 
 
 private:
-	// ------------------------- Steering Behaviors ------------------------- //
+	// ----- Steering Behaviors 
 	/**
 	* @brief   steering behavior seek
 	* @param   sf::Vector2f agent position
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorSeek(sf::Vector2f _thisPostion, sf::Vector2f _targetPosition);
+	void SteeringBehaiviorSeek(Actor* _this, Actor* _target);
 
 	/**
 	* @brief   steering behavior flee
@@ -137,7 +120,7 @@ private:
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorFlee(sf::Vector2f _thisPostion, sf::Vector2f _targetPosition);
+	void SteeringBehaiviorFlee(Actor* _this, Actor* _target);
 
 	/**
 	* @brief   steering behavior seek
@@ -145,14 +128,14 @@ private:
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorArrival(sf::Vector2f _thisPostion, sf::Vector2f _targetPosition);
+	void SteeringBehaiviorArrival(Actor* _this, Actor* _target);
 
 	/**
 	* @brief   steering behavior seek
 	* @param   sf::Vector2f agent position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorWander(sf::Vector2f _thisPostion); //Mejorar collition y la manera de hacerlo
+	void SteeringBehaiviorWander(Actor* _this); //Mejorar collition y la manera de hacerlo
 
 	/**
 	* @brief   steering behavior seek
@@ -161,7 +144,7 @@ private:
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorPersuit(sf::Vector2f _thisPostion, sf::Vector2f _targetPosition, sf::Vector2f _targetMovement); 
+	void SteeringBehaiviorPersuit(Actor* _this, Actor* _target);
 
 	/**
 	* @brief   steering behavior seek
@@ -170,39 +153,17 @@ private:
 	* @param   sf::Vector2f target position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaiviorEvade(sf::Vector2f _thisPostion, sf::Vector2f _targetPosition, sf::Vector2f _targetMovement);
+	void SteeringBehaiviorEvade(Actor* _this, Actor* _target);
 
 	/**
 	* @brief   steering behavior seek
 	* @param   sf::Vector2f agent position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	sf::Vector2f SteeringBehaviorPathFollowing(sf::Vector2f _thisPostion);
+	void SteeringBehaviorPathFollowing(Actor* _this);
 
 
-	// MathFunctions ------------------------- 
-	/**
-	* @brief   normalizes a 2 dimecional vector
-	* @param   sf::Vector2f vetor to normalize
-	* @bug     NA
-	* @return  #sf::Vector2f vector normalized		*/
-	sf::Vector2f NormalizeVector(sf::Vector2f A);
-
-	/**
-	* @brief   normalizes a 2 dimecional vector and multyplies it
-	* @param   sf::Vector2f vetor to normalize and multiply
-	* @bug     NA
-	* @return  #sf::Vector2f vector normalized and multiplied	*/
-	sf::Vector2f TruncateVector(sf::Vector2f A, float x);
-
-
-
-	/**
-	* @brief   lenght of a 2 dimencional vector
-	* @param   sf::Vector2f vector to get lenght
-	* @bug     NA
-	* @return  #float vector lenght		*/
-	float VectorLenght(sf::Vector2f A); //magnitude
+	
 	
 	// Path folowing ------------------------- 
 		/**
@@ -233,17 +194,3 @@ private:
 	* @return  #int path point ID		*/
 	int GetNextPointID();
 };
-
-/*
-	
-	//this has to be in the ai steering behavior
-	void SteeringBehaviorAIAvoidancePersuitPlayer(Player _target, std::vector<AI> _obstacles);
-	void SteeringBehaviorAIAvoidancePersuitFlag(Flag _target, std::vector<AI> _obstacles); // Capture the flag
-	void SteeringBehaviorAIAvoidanceFleeIA(AI _target, std::vector<AI> _obstacles); // Capture the flag
-	void SteeringBehaviorAIAvoidancePersuitAI(AI _target, std::vector<AI> _obstacles); // Capture the flag
-	bool IsOnSight(std::vector<Player> players);
-	void findMostThreateningObstacle(sf::Vector2f _ahead, sf::Vector2f _ahead2, std::vector<sf::CircleShape> _obstacles);
-	AI NearestAI(std::vector<AI> _obstacles);
-	bool lineIntersectsObstacle(sf::Vector2f _ahead, sf::Vector2f _ahead2, sf::CircleShape obstacle);
-
-*/

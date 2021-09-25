@@ -1,43 +1,34 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Actor.h"
 
-namespace gl {
 
-	class Flag
-	{
-	public:
-		Flag();
-		Flag(sf::Vector2f position);
-		~Flag();
+class Flag : public Actor
+{
+public:
+	Flag();
+	~Flag();
 
-		void Init();
-		void Update();
-		void Render(sf::RenderWindow* window);
-		void Destroy();
+	virtual void Init(sf::Vector2f _position = { 0,0 });
+	virtual void Update();
+	virtual void Render(sf::RenderWindow* window);
+	virtual void Destroy();
 
-		bool DetectIfAITouch(sf::CircleShape _detect, bool _ignore);
-	private:
-		sf::CircleShape flagShape;
-		sf::Vector2f flagPosition;
-		bool isOnPlayer = false;
-		sf::Texture texture;
-		
-	public:
+	bool DetectIfAITouch(sf::CircleShape _detect, bool _ignore);
+private:
+	bool isOnPlayer = false;
+	
+public:
 
-		void ResetFlag();
+	void ResetFlag();
 
-		// ------------------------- Getters ------------------------- //
-		sf::Vector2f GetPosition() { return flagPosition; };
-		sf::CircleShape* GetShape() { return &flagShape; };
-		bool GetIsOnPlayer() { return isOnPlayer; };
+	// ------------------------- Getters ------------------------- //
+	bool GetIsOnPlayer() { return isOnPlayer; };
 
-		// ------------------------- Setters ------------------------- //
-		void setPosition(sf::Vector2f position) { flagPosition = position; };
-		void SetIsOnPlayer(bool TF) { isOnPlayer = TF; };
+	// ------------------------- Setters ------------------------- //
+	void SetIsOnPlayer(bool TF) { isOnPlayer = TF; };
 
-	private:
-		float DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B);
-	};
-
-}
+private:
+	float DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B);
+};

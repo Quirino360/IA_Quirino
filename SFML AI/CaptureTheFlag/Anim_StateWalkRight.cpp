@@ -1,4 +1,5 @@
 #include "Anim_StateWalkRight.h"
+#include "Vec2.h"
 
 Anim_StateWalkRight::Anim_StateWalkRight()
 {
@@ -28,13 +29,13 @@ Anim_StateWalkRight::~Anim_StateWalkRight()
 {
 }
 
-void Anim_StateWalkRight::Enter(gl::AI& _agent)
+void Anim_StateWalkRight::Enter(AI& _agent)
 {
 	//set new texture 
-	_agent.animation = animation;
+	_agent.SetAnimation(animation);
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateWalkRight::Update(gl::AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateWalkRight::Update(AI& _agent)
 {
 	Anim_State::Update(_agent);
 
@@ -44,8 +45,8 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkRight::Update(gl::AI& _agent)
 	float lowestDistance = 100000;
 	DIRECTION lowestDir = DIRECTION::NONE;
 	for (int i = 0; i < directions.size(); i++) {
-		if (SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
-			lowestDistance = SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
+		if (Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
+			lowestDistance = Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
 			lowestDir = directions[i].direction;
 		}
 	}
@@ -84,6 +85,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkRight::Update(gl::AI& _agent)
 	return ANIMATION_AI_STATE_TYPE::IDLE;
 }
 
-void Anim_StateWalkRight::Exit(gl::AI& _agent)
+void Anim_StateWalkRight::Exit(AI& _agent)
 {
 }

@@ -24,12 +24,12 @@ Anim_StateDefeat::~Anim_StateDefeat()
 {
 }
 
-void Anim_StateDefeat::Enter(gl::AI& _agent)
+void Anim_StateDefeat::Enter(AI& _agent)
 {
-	_agent.animation = animation;
+	_agent.SetAnimation(animation);
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateDefeat::Update(gl::AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateDefeat::Update(AI& _agent)
 {
 	// NA = 0, Win = 1, Loose = 2;
 	if (_agent.gameResult == 0)
@@ -40,6 +40,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateDefeat::Update(gl::AI& _agent)
 	return ANIMATION_AI_STATE_TYPE::IDLE;
 }
 
-void Anim_StateDefeat::Exit(gl::AI& _agent)
+void Anim_StateDefeat::Exit(AI& _agent)
 {
 }

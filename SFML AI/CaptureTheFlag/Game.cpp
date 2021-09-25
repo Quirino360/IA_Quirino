@@ -1,134 +1,57 @@
 #include "Game.h"
 #include "Globals.h"
-
-#include <stdio.h>      /* printf, scanf, puts, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-
+#include "DeltaTime.h"
 
 void Game::run()
 {
 	init();
+	m_window->setFramerateLimit(120);
 
-	sf::Clock clock;
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-
+	timeSinceLastUpdate = sf::Time::Zero;
 	while (m_window->isOpen())
 	{
+		timeSinceLastUpdate += clock.restart();
 		processEvents();
 
-		timeSinceLastUpdate += clock.restart();
-		while (timeSinceLastUpdate >= timePerFrame)
-		{
-			timeSinceLastUpdate -= timePerFrame;
-			processEvents();
-			gl::DeltaTime::Update(timePerFrame.asSeconds());
-			update();
-			gl::Input::Update();
-		}
+		gl::DeltaTime::Update(timeSinceLastUpdate.asSeconds());
+		UpdateImgui();
+		update();
+		gl::Input::Update();
+
 		render();
 	}
+
 	destroy();
 }
 
 void Game::init()
 {
-	   // Resolution Centers
-	// 1080 * 720 -> 540, 360
-	// 2048 * 1080 -> 1024, 540
-	// 3840 * 2160 -> 1920, 960
-	m_window = new sf::RenderWindow(sf::VideoMode(2048, 1080), "Artificial Inteligence");
+	//window center = 960 , 540
+	m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Artificial Inteligence");
 
-	//Set teams 
-	/*
-	v1 = rand() % 100;         // v1 in the range 0 to 99
-	v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
-	v3 = rand() % 30 + 1985;   // v3 in the range 1985-2014 */
+	// Background Color
+	bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
+	bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
+	bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
 
-	sf::Vector2f leftSide = sf::Vector2f(162, 540);
-	sf::Vector2f rightSide = sf::Vector2f(1886, 540);
+	//View
+	view = sf::View(sf::Vector2f(960.0f, 540.0f), sf::Vector2f(1920, 1080));
+	m_window->setView(view);
 
-	for (int i = 0; i < 3; i++)
-	{
-		//left side
-		gl::AI teamOneAux = gl::AI(sf::Vector2f(rand() % 920 + 1.0f, rand() % 640 + 460));
-		teamOneAux.SetCircleColor(sf::Color::Green);
+	//imgui 
+	ImGui::SFML::Init(*m_window);
 
-		//right side
-		gl::AI teamTwoAux = gl::AI(sf::Vector2f(rand() % 920 + 1124, rand() % 640 + 460));
-		teamTwoAux.SetCircleColor(sf::Color::Red);
+	// Actors
+	player->Init();
+	bot->Init();
 
-		TeamOne.push_back(teamOneAux);
-		TeamTwo.push_back(teamTwoAux);
-	}
-
-	for (gl::AI &ai : TeamOne)
-	{
-		ai.Init(TeamOne, TeamTwo, flag, TeamOnegoal);
-		ai.SetTarget(flag.GetPosition());
-	}
-	for (gl::AI &ai : TeamTwo)
-	{
-		ai.Init(TeamTwo, TeamOne, flag, TeamTwogoal);
-		ai.SetTarget(flag.GetPosition());
-	}
-
-	//Goals
-	TeamOnegoal.setPosition(leftSide);
-	TeamOnegoal.setRadius(25);
-	TeamOnegoal.setOrigin(TeamOnegoal.getRadius() / 2, TeamOnegoal.getRadius() / 2);
-	TeamOnegoal.setFillColor(sf::Color::Green);
-
-	TeamTwogoal.setPosition(rightSide);
-	TeamTwogoal.setRadius(25);
-	TeamTwogoal.setOrigin(TeamTwogoal.getRadius() / 2, TeamTwogoal.getRadius() / 2);
-	TeamTwogoal.setFillColor(sf::Color::Red);
-
-	//StateMachine
-	stateMachine.Init();
-	animStateMachine.Init();
-
-	//Player
-	player = gl::Player(sf::Vector2f(0, 0));
-	player.Init();
-
-	//Flag
-	flag = gl::Flag(sf::Vector2f(1024, 540));
-	flag.Init();
-
-	//Just Testing 
-	// 2048 * 1080 -> 1024, 540
-	//AI_Entity = gl::AI(sf::Vector2f(rand() % 920 + 1.0f, rand() % 640 + 460)); //left
-	//AI_Entity = gl::AI(sf::Vector2f(rand() % 920 + 1124, rand() % 640 + 460)); // right
-	//AI_Entity = gl::AI(sf::Vector2f(1024, 0)); // up
-	//AI_Entity = gl::AI(sf::Vector2f(1024, 1080)); // up
-	//AI_Entity.Init(TeamTwo, TeamOne, flag, TeamTwogoal);
+	static_cast<AI*>(bot)->SetTarget(player);
 }
 
 void Game::update()
 {
-	flag.Update();
-
-	for (gl::AI& ai : TeamTwo)
-	{
-		stateMachine.Update(ai);
-		animStateMachine.Update(ai);
-		ai.Update();
-
-		if (ai.restart == true)
-			restart();
-	}
-	for (gl::AI& ai : TeamOne)
-	{
-		stateMachine.Update(ai);
-		animStateMachine.Update(ai);
-		ai.Update();
-		if (ai.restart == true)
-			restart();
-	}
-
-	player.Update();
-	
+	player->Update();
+	bot->Update();
 }
 
 void Game::processEvents()
@@ -136,6 +59,7 @@ void Game::processEvents()
 	sf::Event event;
 	while (m_window->pollEvent(event))
 	{
+		ImGui::SFML::ProcessEvent(event);
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -153,51 +77,64 @@ void Game::processEvents()
 
 void Game::render()
 {
-	m_window->clear();
+	m_window->clear(bgColor); // fill background with color
 
-	player.Render(m_window);
+	player->Render(m_window);
+	bot->Render(m_window);
 
-	flag.Render(m_window);
-
-	for (int i = 0; i < TeamOne.size(); i++)
-	{
-		TeamOne[i].Render(m_window);
-	}
-	for (int i = 0; i < TeamTwo.size(); i++)
-	{
-		TeamTwo[i].Render(m_window);
-	}
-
-	m_window->draw(TeamOnegoal);
-	m_window->draw(TeamTwogoal);
-
+	ImGui::SFML::Render(*m_window); //render imgui
 	m_window->display();
 }
 
 void Game::destroy()
 {
 	delete m_window;
+	ImGui::SFML::Shutdown();
 }
 
-void Game::restart()
+
+
+void Game::UpdateImgui()
 {
-	flag.setPosition(sf::Vector2f(1024, 540));
+	ImGui::SFML::Update(*m_window, clock.getElapsedTime());
 
-	flag.setPosition(sf::Vector2f(1024, 540));
-	for (int i = 0; i < 3; i++)
+	if (ImGui::Begin("Control Panel")) // begin window
 	{
-		TeamOne[i].SetPosition(sf::Vector2f(rand() % 920 + 1.0f, rand() % 640 + 460));
-		TeamOne[i].hasFlag = false;
-		TeamOne[i].alliesHasFlag = false;
-		TeamOne[i].enemyHasFlag = false;
-		TeamOne[i].restart = false;
+		if (ImGui::ColorEdit3("Background color", color)) {
+			// this code gets called if color value changes, so
+			// the background color is upgraded automatically!
+			bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
+			bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
+			bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
+		}
 
-		TeamTwo[i].SetPosition(sf::Vector2f(rand() % 920 + 1124, rand() % 640 + 460));
-		TeamTwo[i].hasFlag = false;
-		TeamTwo[i].alliesHasFlag = false;
-		TeamTwo[i].enemyHasFlag = false;
-		TeamTwo[i].restart = false;
+		if (ImGui::Button("IDDLE")) {
+			
+		}
+		if (ImGui::Button("SEEK")) {
+
+		}
+		if (ImGui::Button("FLEE")) {
+
+		}
+		if (ImGui::Button("ARRIVE")) {
+
+		}
+		if (ImGui::Button("PERSUIT")) {
+
+		}
+		if (ImGui::Button("EVADE")) {
+
+		}
+		if (ImGui::Button("WANDER")) {
+
+		}
+		if (ImGui::Button("PATH_FOLLOWING")) {
+
+		}
+		if (ImGui::Button("COLLITION_AVOIDANCE")) {
+
+		}
 	}
-
-
+	ImGui::End();
 }

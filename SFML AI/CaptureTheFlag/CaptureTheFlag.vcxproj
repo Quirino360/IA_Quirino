@@ -89,13 +89,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)sfml\include;$(DEVLIBS)imgui-1.8\;$(DEVLIBS)imgui-sfml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(DEVLIBS)sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,6 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_demo.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_draw.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_tables.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-1.8\imgui_widgets.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ActorManager.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Anim_State.cpp" />
@@ -171,7 +179,6 @@
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -186,8 +193,11 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIShape.cpp" />
+    <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorManager.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Anim_State.h" />
@@ -207,7 +217,6 @@
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MenuManager.h" />
@@ -222,6 +231,7 @@
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIShape.h" />
+    <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

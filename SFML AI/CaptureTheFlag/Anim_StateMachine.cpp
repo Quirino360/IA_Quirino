@@ -37,7 +37,8 @@ void gl::Anim_StateMachine::Init()
 void gl::Anim_StateMachine::Update(AI& _agent)
 {
 	// 2048 * 1080 -> 1024, 540
-	currentState = *_agent.AI_AnimState;
+	currentState = *_agent.GetAnimationStateType();
+	
 	state = stateMap.find(currentState)->second;
 
 	ANIMATION_AI_STATE_TYPE newState = state->Update(_agent);
@@ -58,7 +59,7 @@ void gl::Anim_StateMachine::SetCurrentState(AI& _agent, ANIMATION_AI_STATE_TYPE 
 	{
 		state->Exit(_agent);
 		state = stateMap.find(_newState)->second;
-		*_agent.AI_AnimState = _newState;
+		*_agent.GetAnimationStateType() = _newState;
 		state->Enter(_agent);
 	}
 
