@@ -22,3 +22,8 @@ float Vec2::VectorLenght(sf::Vector2f A)
 {
 	return std::sqrtf((A.x * A.x) + (A.y * A.y));
 }
+
+sf::Vector2f Vec2::MultiplyVector(sf::Vector2f A, sf::Vector2f B)
+{
+	return sf::Vector2f(A.x * B.x, A.y * B.x);
+}

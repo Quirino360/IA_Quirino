@@ -2,6 +2,9 @@
 #include <iostream>
 #include "Anim_State.h"
 #include "DeltaTime.h";
+#include "Game.h"
+
+#include "Vec2.h"
 
 Actor::Actor()
 {
@@ -13,11 +16,11 @@ Actor::~Actor()
 
 void Actor::Init(sf::Vector2f _position)
 {
-	// ----- Esentials
+	// ----- Essentials
 	position = _position;
 	cShape.setPosition(position);
 	cShape.setRadius(50.0f);
-	cShape.setOrigin(cShape.getRadius() / 2, cShape.getRadius() / 2);
+	cShape.setOrigin(cShape.getRadius(), cShape.getRadius());
 
 	// ----- Texture & Animation
 	// ----- Anim State
@@ -25,8 +28,8 @@ void Actor::Init(sf::Vector2f _position)
 	*AI_AnimState = ANIMATION_AI_STATE_TYPE::IDLE;
 
 	// ----- Set Texture
-	if (texture.loadFromFile("Images/Worm.png"))
-		std::cout << "AI Texture Loded" << std::endl;
+	if (texture.loadFromFile("")) //Images/Worm.png
+	{		/*std::cout << "AI Texture Loaded" << std::endl;*/	}
 	cShape.setTexture(&texture);
 
 	// ----- Set Animation //* Crear clase Animation *//
@@ -40,8 +43,23 @@ void Actor::Init(sf::Vector2f _position)
 
 void Actor::Update()
 {
+	auto& gameObj = GetGameObj();
 	cShape.setPosition(position);
 	Animate();
+
+	if (IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+	{
+		isSelected = true;
+		cShape.setFillColor(sf::Color::Red);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) && 
+		sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) &&
+		IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))))
+	{
+		isSelected = false;		
+		cShape.setFillColor(sf::Color::White);
+
+	}
 }
 
 void Actor::Render(sf::RenderWindow* window)
@@ -54,6 +72,29 @@ void Actor::Destroy()
 }
 
 
+bool Actor::IsInsidePosition(sf::Vector2f _position, float _radius)
+{
+	float _distance = Vec2::VectorLenght(_position - GetPosition()) - (_radius + GetRadius());
+	if (_distance < 0 )
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Actor::IsInsideActor(Actor* _actor)
+{
+	if (_actor == nullptr)
+		return false;
+
+	float _distance = Vec2::VectorLenght(_actor->GetPosition() - GetPosition()) - (_actor->GetRadius() + GetRadius());
+	if (_distance <= 0)
+	{
+		return true;
+	}
+	return false;
+}
+
 void Actor::Animate()
 {
 	fps += gl::DeltaTime::Time();
@@ -61,7 +102,7 @@ void Actor::Animate()
 	{
 		if (currentFrame >= animation.size())
 			currentFrame = 0;
-		cShape.setTextureRect(animation[currentFrame]); //animate
+		cShape.setTextureRect(animation[currentFrame]); // Animate
 		currentFrame++;
 		fps = 0;
 	}

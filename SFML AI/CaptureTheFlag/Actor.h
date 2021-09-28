@@ -17,15 +17,15 @@ class Actor
 public:
 	Actor();
 	~Actor();
-
+		
 	virtual void Init(sf::Vector2f _position = { 0,0 });
 	virtual void Update();
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy();
 
-private:
+
 protected:
-	// ----- Esentials
+	// ----- Essentials
 	sf::CircleShape cShape;
 	sf::Texture texture;
 	ACTOR_TYPE actorType;
@@ -44,9 +44,21 @@ protected:
 	unsigned int currentFrame = 0;
 	float fps = 0.0f;
 
+	// ----- Select Actor
+	bool isSelected = false;
+
+	// ----- Collision Detection
+	sf::RectangleShape boxCollition;
+private:
+
 public:
-	// ---------- Geters
-	// ----- Esentials
+	// ----- Tools
+	bool IsInsidePosition(sf::Vector2f _position, float radius = 0.0f);
+	bool IsInsideActor(Actor* _actor);
+
+	// ---------- Getters
+	// ----- Essentials
+	float GetRadius() { return cShape.getRadius(); };
 	sf::CircleShape GetShape() { return cShape; };
 	sf::Texture GetTexture() { return texture; };
 	ACTOR_TYPE GetActorType() { return actorType; };
@@ -60,9 +72,12 @@ public:
 	// ----- Animation
 	ANIMATION_AI_STATE_TYPE* GetAnimationStateType() { return AI_AnimState; };
 	std::vector<sf::IntRect> GetAnimation() { return animation; };
+	// ----- Collision detection
+	sf::RectangleShape GetBoxCollition() { return boxCollition; };
 
 	// ---------- Setters
-	// ----- Esentials
+	// ----- Essentials
+	void SetRadius(float _radius) { cShape.setRadius(_radius); cShape.setOrigin(cShape.getRadius(), cShape.getRadius()); };
 	void SetShape(sf::CircleShape _cShape) {  cShape = _cShape; };
 	void SetTexture(sf::Texture _texture) {  texture = _texture; };
 	void SetActorType(ACTOR_TYPE _actorType) { actorType = _actorType; };
@@ -76,11 +91,14 @@ public:
 	// ----- Animation
 	void SetAnimationStateType(ANIMATION_AI_STATE_TYPE* _AI_AnimState) { AI_AnimState = _AI_AnimState; };
 	void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
-
-private:
-	void Animate();
+	// ----- Collision detection
+	void SetBoxCollition(sf::RectangleShape _boxCollition) { boxCollition = boxCollition; boxCollition.setOrigin(boxCollition.getScale().x / 2, boxCollition.getScale().y / 2);	};
+	void SetBoxCollition(float _width, float _height) { boxCollition.setScale(_width, _height); boxCollition.setOrigin(_width / 2, _height / 2); };
 
 protected:
 
+
+private:
+	void Animate();
 };
 

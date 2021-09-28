@@ -11,7 +11,7 @@
 enum class AI_STATE_TYPE;
 
 /**
-* @brief   manages the Artificial Intelegence behaviors
+* @brief   manages the Artificial Intelligence behaviors
 * @bug     NA	*/
 class AI : public Actor
 {
@@ -28,7 +28,7 @@ public:
 	//
 	AI_STATE_TYPE* AI_State;
 
-	// ----- Captre the flag
+	// ----- Capture the flag
 	bool enemyHasFlag = false;
 	bool alliesHasFlag = false;
 	bool hasFlag = false; // change to true if it has the flag 
@@ -39,7 +39,7 @@ private:
 
 	bool hasTargetAI = false;
 
-	//Captre the flag
+	// Capture the flag
 	Actor* target = nullptr;
 	std::vector<AI>* allies;
 	std::vector<AI>* enemies;

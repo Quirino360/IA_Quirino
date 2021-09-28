@@ -3,8 +3,8 @@
 
 int main()
 {
-	Game g;
-	g.run();
+	auto& gameObj = GetGameObj();
+	gameObj.run();
 
 	return 0;
 }

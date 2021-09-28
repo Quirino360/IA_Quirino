@@ -1,94 +1,98 @@
 #include "DeltaTime.h"
 
 namespace gl {
-float DeltaTime::m_time = 0;
-std::vector<DeltaTime::Timer> DeltaTime::m_timers;
+	float DeltaTime::deltaTime = 0;
+	float DeltaTime::previusTime = 0;
+	float DeltaTime::m_time = 0;
+	std::vector<DeltaTime::Timer> DeltaTime::m_timers;
 
-void DeltaTime::AddTimer(std::string name)
-{
-	m_timers.push_back(Timer{name, 0, true});
-}
-float DeltaTime::GetTimer(std::string name)
-{
-	for (Timer& t : m_timers)
+	void DeltaTime::AddTimer(std::string name)
 	{
-		if (t.name == name)
+		m_timers.push_back(Timer{ name, 0, true });
+	}
+	float DeltaTime::GetTimer(std::string name)
+	{
+		for (Timer& t : m_timers)
 		{
-			return t.time;
+			if (t.name == name)
+			{
+				return t.time;
+			}
+		}
+		return 0;
+	}
+	void DeltaTime::SetTimer(std::string name, float time)
+	{
+		for (Timer& t : m_timers)
+		{
+			if (t.name == name)
+			{
+				t.time = time;
+			}
 		}
 	}
-	return 0;
-}
-void DeltaTime::SetTimer(std::string name, float time)
-{
-	for (Timer& t : m_timers)
+	void DeltaTime::StartTimer(std::string name)
 	{
-		if (t.name == name)
+		for (Timer& t : m_timers)
 		{
-			t.time = time;
+			if (t.name == name)
+			{
+				t.playing = true;
+			}
 		}
 	}
-}
-void DeltaTime::StartTimer(std::string name)
-{
-	for (Timer& t : m_timers)
+	void DeltaTime::StopTimer(std::string name)
 	{
-		if (t.name == name)
+		for (Timer& t : m_timers)
 		{
-			t.playing = true;
+			if (t.name == name)
+			{
+				t.playing = false;
+			}
 		}
 	}
-}
-void DeltaTime::StopTimer(std::string name)
-{
-	for (Timer& t : m_timers)
+	void DeltaTime::RestartTimer(std::string name)
 	{
-		if (t.name == name)
+		for (Timer& t : m_timers)
 		{
-			t.playing = false;
+			if (t.name == name)
+			{
+				t.time = 0;
+			}
 		}
 	}
-}
-void DeltaTime::RestartTimer(std::string name)
-{
-	for (Timer& t : m_timers)
+	void DeltaTime::DeleteTimer(std::string name)
 	{
-		if (t.name == name)
+		for (int i = 0; i < m_timers.size(); i++)
 		{
-			t.time = 0;
+			if (m_timers[i].name == name)
+			{
+				m_timers.erase(m_timers.begin() + i);
+			}
 		}
 	}
-}
-void DeltaTime::DeleteTimer(std::string name)
-{
-	for (int i = 0; i < m_timers.size(); i++)
+	bool DeltaTime::TimerExist(std::string name)
 	{
-		if (m_timers[i].name == name)
+		for (Timer& t : m_timers)
 		{
-			m_timers.erase(m_timers.begin() + i);
+			if (t.name == name)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	void DeltaTime::Update(float time)
+	{
+		previusTime = m_time;
+		m_time = time;
+		deltaTime = m_time - previusTime;
+		for (Timer& t : m_timers)
+		{
+			if (t.playing)
+			{
+				t.time += time;
+			}
 		}
 	}
-}
-bool DeltaTime::TimerExist(std::string name)
-{
-	for (Timer& t : m_timers)
-	{
-		if (t.name == name)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-void DeltaTime::Update(float time)
-{
-	m_time = time;
-	for (Timer& t : m_timers)
-	{
-		if (t.playing)
-		{
-			t.time += time;
-		}
-	}
-}
 }

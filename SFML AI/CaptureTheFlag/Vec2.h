@@ -12,6 +12,6 @@ public:
 	static sf::Vector2f TruncateVector(sf::Vector2f A, float x);
 	static float DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B);
 	static float VectorLenght(sf::Vector2f A); //magnitude
-	
+	sf::Vector2f MultiplyVector(sf::Vector2f A, sf::Vector2f B);
 };
 

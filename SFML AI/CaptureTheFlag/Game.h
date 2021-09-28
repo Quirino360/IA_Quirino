@@ -9,7 +9,9 @@
 #include "Flag.h"
 #include "AI.h"
 
-class Game : public Actor
+
+
+class Game 
 {
 public:
 	Game() = default;
@@ -36,9 +38,9 @@ private:
 	sf::View view;
 
 	//Time
-	sf::Time timePerFrame = sf::seconds(1.f / 60.f);;
+	sf::Time timeSinceLastUpdate = sf::seconds(1.f / 60.f);;
 	sf::Clock clock;
-	sf::Time timeSinceLastUpdate;
+	sf::Time deltaTime;
 
 	//imgui 
 	sf::Color bgColor;
@@ -50,3 +52,4 @@ private:
 	Actor* bot = new AI;
 };
 
+Game& GetGameObj();

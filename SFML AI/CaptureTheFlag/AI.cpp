@@ -27,13 +27,13 @@ void AI::Init(sf::Vector2f _position)
 	Actor::Init(_position);
 	srand(time(NULL));
 
-	//What To Know
+	//What To Know UwU
 
 	// Behavior State
 	AI_State = new AI_STATE_TYPE;
 	*AI_State = AI_STATE_TYPE::CAPTURE_FLAG;
 
-	//Sbehavior
+	// Sbehavior
 	sBehavior.SetBehavior(BEHAVIOR::SEEK);
 
 }
@@ -54,6 +54,7 @@ void AI::Update()
 void AI::Render(sf::RenderWindow* window)
 {
 	Actor::Render(window);
+	sBehavior.Render(window);
 }
 
 void AI::Destroy()
@@ -76,7 +77,7 @@ AI AI::findMostThreateningAI(sf::Vector2f _ahead, sf::Vector2f _ahead2)
 	AI thread;
 	for (int i = 0; i < enemies->size(); i++)
 	{
-		//is the AI has the flag, then it will collition
+		//is the AI has the flag, then it will collision
 		if (lineIntersectsAI(_ahead, _ahead2, (*enemies)[i]) && !hasTargetAI && !hasFlag)
 		{
 			thread = (*enemies)[i];

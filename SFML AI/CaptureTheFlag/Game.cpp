@@ -2,6 +2,8 @@
 #include "Globals.h"
 #include "DeltaTime.h"
 
+
+
 void Game::run()
 {
 	init();
@@ -27,7 +29,7 @@ void Game::run()
 void Game::init()
 {
 	//window center = 960 , 540
-	m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Artificial Inteligence");
+	m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Artificial Intelligence");
 
 	// Background Color
 	bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
@@ -109,32 +111,45 @@ void Game::UpdateImgui()
 		}
 
 		if (ImGui::Button("IDDLE")) {
-			
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::IDDLE);
 		}
 		if (ImGui::Button("SEEK")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::SEEK);
 		}
 		if (ImGui::Button("FLEE")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::FLEE);
 		}
 		if (ImGui::Button("ARRIVE")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::ARRIVE);
 		}
 		if (ImGui::Button("PERSUIT")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PERSUIT);
 		}
 		if (ImGui::Button("EVADE")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::EVADE);
 		}
 		if (ImGui::Button("WANDER")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::WANDER);
 		}
 		if (ImGui::Button("PATH_FOLLOWING")) {
-
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PATH_FOLLOWING);
+		}
+		if (ImGui::Button("PATROL")) {
+			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PATROL);
 		}
 		if (ImGui::Button("COLLITION_AVOIDANCE")) {
-
+			//
 		}
 	}
 	ImGui::End();
+}
+
+Game& GetGameObj()
+{
+	static Game* game = nullptr;
+	if (game == nullptr)
+	{
+		game = new Game();
+	}
+	return *game;
 }

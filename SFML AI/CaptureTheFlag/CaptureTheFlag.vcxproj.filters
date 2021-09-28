@@ -94,9 +94,6 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="CollitionDetection.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\Development\Externals\imgui-sfml\imgui-SFML.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -213,9 +210,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>State Machine</Filter>
-    </ClInclude>
-    <ClInclude Include="CollitionDetection.h">
-      <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="ActorManager.h" />

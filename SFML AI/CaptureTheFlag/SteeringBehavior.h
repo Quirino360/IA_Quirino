@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "Actor.h"
 
 /**
-* @brief   Father class for the Artificial Inteligence States
+* @brief   Father class for the Artificial Intelligence States
 * @bug     NA
 * @return  #void		*/
 enum class BEHAVIOR
@@ -16,12 +16,13 @@ enum class BEHAVIOR
 	EVADE,
 	WANDER,
 	PATH_FOLLOWING,
+	PATROL,
 	COLLITION_AVOIDANCE,
 	FLOCKING
 };
 
 /**
-* @brief   Path point, to use in patrol beahvior
+* @brief   Path point, to use in patrol behavior
 * @bug     NA
 * @return  #void		*/
 struct PathPoint
@@ -30,7 +31,7 @@ struct PathPoint
 	float radius;
 };
 
-class Actor;
+
 
 /**
 * @brief   Manages the steering behavior to use
@@ -62,21 +63,22 @@ public:
 	* @return  #void		*/
 	void UpdateMovement(Actor* _this, Actor* _target);
 
+	virtual void Render(sf::RenderWindow* window);
+
 private:
 
 	BEHAVIOR behavior = BEHAVIOR::IDDLE;
 
-	//steering beahviors
+	// Steering force
 	sf::Vector2f steering;
 
 
-	// Wander ------------------------- 
-	sf::Vector2f pathTarget;
+	// Wander  
+	Actor* wanderTarget = new Actor();
 
-	// Path folowing ------------------------- 
-	std::vector<PathPoint> nodes;
-	int nodeID = 0;
-	PathPoint pathPointTarget;
+	// ----- Path following  & Patrol
+	std::vector<Actor> pathPoints;
+	int pathID = 0;
 
 public:
 
@@ -105,6 +107,10 @@ public:
 
 
 private:
+
+
+	void CollisionDetection(Actor* _this); //This only works with other actors
+
 	// ----- Steering Behaviors 
 	/**
 	* @brief   steering behavior seek
@@ -135,7 +141,7 @@ private:
 	* @param   sf::Vector2f agent position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
-	void SteeringBehaiviorWander(Actor* _this); //Mejorar collition y la manera de hacerlo
+	void SteeringBehaiviorWander(Actor* _this); 
 
 	/**
 	* @brief   steering behavior seek
@@ -161,20 +167,20 @@ private:
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
 	void SteeringBehaviorPathFollowing(Actor* _this);
-
-
 	
 	
-	// Path folowing ------------------------- 
+	void SteeringBehaviorPatrol(Actor* _this);
+
+	// Path following ------------------------- 
 		/**
 	* @brief   adds a path point to the patrol route
 	* @param   #PathPoint new path point
 	* @bug     NA
 	* @return  #void		*/
-	void AddPathPoint(PathPoint _point) { nodes.push_back(_point); };
+	void AddPathPoint(Actor _point) { pathPoints.push_back(_point); };
 		
 	/**
-	* @brief   Creates a default patrol route if the user doesnt
+	* @brief   Creates a default patrol route if the user doesn't
 	* @param   sf::Vector2f agent position
 	* @bug     NA
 	* @return  #void		*/
@@ -192,5 +198,5 @@ private:
 	* @param   NA
 	* @bug     NA
 	* @return  #int path point ID		*/
-	int GetNextPointID();
+	int SetNextPointID(bool _isPatrol);
 };

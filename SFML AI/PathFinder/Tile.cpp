@@ -94,7 +94,7 @@ void Tile::ChangeObjectType(TILE_TYPE _tileType)
 
 bool Tile::IsMouseOver()
 {
-	//This checks if is over a tile & checks if the tile is not something allready
+	//This checks if is over a tile & checks if the tile is not something already
 	if (sf::Mouse::getPosition(*game->getWindow()).x > rShape.getPosition().x - rShape.getSize().x / 2 && sf::Mouse::getPosition(*game->getWindow()).x < rShape.getPosition().x + rShape.getSize().x / 2
 		&& sf::Mouse::getPosition(*game->getWindow()).y > rShape.getPosition().y - rShape.getSize().y / 2 && sf::Mouse::getPosition(*game->getWindow()).y < rShape.getPosition().y + rShape.getSize().y / 2)
 	{

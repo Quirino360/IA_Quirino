@@ -5,6 +5,7 @@
 #include <time.h>       /* time */
 #include "DeltaTime.h";
 
+#include "Game.h"
 #include "Actor.h"
 
 #include <iostream>
@@ -20,6 +21,9 @@ Player::Player()
 void Player::Init(sf::Vector2f _position)
 {
 	Actor::Init(_position);
+
+	SetForce(10);
+	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 }
 
 void Player::Update()
@@ -31,6 +35,7 @@ void Player::Update()
 void Player::Render(sf::RenderWindow* window)
 {
 	Actor::Render(window);
+	//target doesn't renders
 }
 
 void Player::Destroy()
@@ -41,35 +46,36 @@ void Player::Destroy()
 void Player::Move()
 {
 	float deltaTime = deltaClock.restart().asSeconds();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	auto& gameObj = GetGameObj();
+	
+	if (IsInsideActor(target) && isSelected == true)
 	{
-		velocity = sf::Vector2f(0, -1);
-		position += velocity * force / mass;
+
+		sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isSelected == true)
 	{
-		velocity = sf::Vector2f(0, 1);
-		position += velocity * force / mass;
+		if (target != nullptr)
+		{
+			target->Destroy();
+			delete target;
+			target = nullptr;
+		}
+		target = new Actor();
+		target->Init(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow())));
+		sBehavior.SetBehavior(BEHAVIOR::SEEK);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		velocity = sf::Vector2f(-1, 0);
-		position += velocity * force / mass;
-	}
+	if (target != nullptr)
+		target->Update();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		velocity = sf::Vector2f(1, 0);
-		position += velocity * force / mass;
-	}
+	sBehavior.UpdateMovement(this, target); // if target is nullptr then it does nothing
+	sf::Vector2f steering = sBehavior.GetSteering();
+	steering -= velocity;
+	velocity += steering;
+	position += velocity;
 }
 
-sf::Vector2f Player::MultiplyVector(sf::Vector2f A, sf::Vector2f B)
-{
-	return sf::Vector2f(A.x * B.x, A.y * B.x);
-}
 
 

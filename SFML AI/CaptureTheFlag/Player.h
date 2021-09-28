@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Actor.h"
-
+#include "SteeringBehavior.h"
 
 class Player : public Actor
 {
@@ -16,10 +16,13 @@ public:
 
 
 private:
+	Actor* target = nullptr;
 	bool hasFlag = false;
 	
+	// Steering Behavior
+	SteeringBehavior sBehavior;
 public:
 private:
 	void Move();
-	sf::Vector2f MultiplyVector(sf::Vector2f A, sf::Vector2f B);
+
 };
