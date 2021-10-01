@@ -44,16 +44,32 @@ void Game::init()
 	ImGui::SFML::Init(*m_window);
 
 	// Actors
-	player->Init();
-	bot->Init();
+	actorManager.CreateActor(ACTOR_TYPE::PLAYER, { 150, 100 });
+	actorManager.CreateActor(ACTOR_TYPE::AI, { 960, 540 });
 
-	static_cast<AI*>(bot)->SetTarget(player);
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 500, 100 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 150, 500 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1000, 750 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 750, 1000 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1500, 500 });
+
+
+
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+	{
+		static_cast<AI*>(_actor)->SetTarget(actorManager.GetActorByID(0));
+	}
+
+
 }
 
 void Game::update()
 {
-	player->Update();
-	bot->Update();
+	actorManager.Update();
+
+	std::cout << "Actor pos = " << actorManager.GetActorByID(0)->GetPosition().x << " , " << actorManager.GetActorByID(0)->GetPosition().y << std::endl;
+	
+
 }
 
 void Game::processEvents()
@@ -81,8 +97,7 @@ void Game::render()
 {
 	m_window->clear(bgColor); // fill background with color
 
-	player->Render(m_window);
-	bot->Render(m_window);
+	actorManager.Render(m_window);
 
 	ImGui::SFML::Render(*m_window); //render imgui
 	m_window->display();
@@ -111,34 +126,66 @@ void Game::UpdateImgui()
 		}
 
 		if (ImGui::Button("IDDLE")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::IDDLE);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::IDDLE);
+			}
+			
 		}
 		if (ImGui::Button("SEEK")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::SEEK);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::SEEK);
+			}
 		}
 		if (ImGui::Button("FLEE")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::FLEE);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::FLEE);
+			}
 		}
 		if (ImGui::Button("ARRIVE")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::ARRIVE);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::ARRIVE);
+			}
 		}
 		if (ImGui::Button("PERSUIT")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PERSUIT);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::PERSUIT);
+			}
 		}
 		if (ImGui::Button("EVADE")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::EVADE);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::EVADE);
+			}
 		}
 		if (ImGui::Button("WANDER")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::WANDER);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::WANDER);
+			}
 		}
 		if (ImGui::Button("PATH_FOLLOWING")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PATH_FOLLOWING);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::PATH_FOLLOWING);
+			}
 		}
 		if (ImGui::Button("PATROL")) {
-			static_cast<AI*>(bot)->SetSteeringBehavior(BEHAVIOR::PATROL);
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::PATROL);
+			}
 		}
-		if (ImGui::Button("COLLITION_AVOIDANCE")) {
-			//
+		if (ImGui::Button("Toggle Show Collision box")) {
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				bool show = !_actor->GetDrawCollisionBox();
+				_actor->SetDrawCollisionBox(show);
+			}
 		}
 	}
 	ImGui::End();

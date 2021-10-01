@@ -114,6 +114,7 @@
     </ClCompile>
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="ActorManager.cpp" />
+    <ClCompile Include="CollisionBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaptureTheFlag.h" />
@@ -213,6 +214,7 @@
     </ClInclude>
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="ActorManager.h" />
+    <ClInclude Include="CollisionBox.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">

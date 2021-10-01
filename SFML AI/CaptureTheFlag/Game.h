@@ -4,7 +4,8 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
-#include "Actor.h"
+#include "ActorManager.h"
+//#include "Actor.h"
 #include "Player.h"
 #include "Flag.h"
 #include "AI.h"
@@ -19,7 +20,7 @@ public:
 
 	void run();
 	sf::RenderWindow*& getWindow() { return *&m_window; }
-
+	ActorManager& GetActorManager() { return actorManager; };
 
 private:
 	//sfml
@@ -31,6 +32,10 @@ private:
 
 	//imgui
 	void UpdateImgui();
+
+public:
+
+
 
 private:
 	//Esentials
@@ -47,9 +52,8 @@ private:
 	float color[3] = { 95.0f / 255.f, 35.0f / 255.f, 160.0f / 255.f };
 	char windowTitle[255] = "ImGui + SFML = <3";
 
-	// Actors
-	Actor* player = new Player;
-	Actor* bot = new AI;
+	ActorManager actorManager;
+
 };
 
 Game& GetGameObj();

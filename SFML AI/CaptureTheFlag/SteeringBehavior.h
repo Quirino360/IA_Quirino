@@ -25,11 +25,6 @@ enum class BEHAVIOR
 * @brief   Path point, to use in patrol behavior
 * @bug     NA
 * @return  #void		*/
-struct PathPoint
-{
-	sf::Vector2f position;
-	float radius;
-};
 
 
 
@@ -186,12 +181,6 @@ private:
 	* @return  #void		*/
 	void CreateDefaultPath(sf::Vector2f _thisPostion);
 
-	/**
-	* @brief   sets new patrol route
-	* @param   #std::vector<PathPoint path pont to follow
-	* @bug     NA
-	* @return  #void		*/
-	void SetPath(std::vector<PathPoint> newPathPoints);
 
 	/**
 	* @brief   gets the next path point ID to follow

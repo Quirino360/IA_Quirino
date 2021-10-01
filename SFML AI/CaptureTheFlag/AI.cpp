@@ -3,7 +3,12 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+
+#include <iostream>
+
 #include "DeltaTime.h";
+
+#include "Game.h"
 
 #include "AI_State.h"
 
@@ -40,13 +45,21 @@ void AI::Init(sf::Vector2f _position)
 
 void AI::Update()
 {
+	auto& gameObj = GetGameObj();
+
 	Actor::Update();
+
+	
+
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
 	sf::Vector2f steering = sBehavior.GetSteering();
 	steering -= velocity;
 	velocity += steering;
+	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
 	position += velocity;
+
+	//std::cout << "box collision velocity " << boxCollition.GetVelocity().x << " , " << boxCollition.GetVelocity().y << std::endl;
 
 }
 

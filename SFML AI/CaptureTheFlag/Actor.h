@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "CollisionBox.h"
 
 enum class ANIMATION_AI_STATE_TYPE;
+
 
 enum class ACTOR_TYPE
 {
@@ -11,6 +13,7 @@ enum class ACTOR_TYPE
 	AI,
 	FLAG
 };
+
 
 class Actor
 {
@@ -48,7 +51,9 @@ protected:
 	bool isSelected = false;
 
 	// ----- Collision Detection
-	sf::RectangleShape boxCollition;
+	CollisionBox boxCollition;
+	bool collision = true;
+	bool showCollisonBox = false;
 private:
 
 public:
@@ -73,7 +78,8 @@ public:
 	ANIMATION_AI_STATE_TYPE* GetAnimationStateType() { return AI_AnimState; };
 	std::vector<sf::IntRect> GetAnimation() { return animation; };
 	// ----- Collision detection
-	sf::RectangleShape GetBoxCollition() { return boxCollition; };
+	bool GetDrawCollisionBox() { return boxCollition.GetDrawCollisionBox(); };
+
 
 	// ---------- Setters
 	// ----- Essentials
@@ -92,8 +98,8 @@ public:
 	void SetAnimationStateType(ANIMATION_AI_STATE_TYPE* _AI_AnimState) { AI_AnimState = _AI_AnimState; };
 	void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
 	// ----- Collision detection
-	void SetBoxCollition(sf::RectangleShape _boxCollition) { boxCollition = boxCollition; boxCollition.setOrigin(boxCollition.getScale().x / 2, boxCollition.getScale().y / 2);	};
-	void SetBoxCollition(float _width, float _height) { boxCollition.setScale(_width, _height); boxCollition.setOrigin(_width / 2, _height / 2); };
+	void SetDrawCollisionBox(bool _show) { boxCollition.SetDrawCollisionBox(_show); };
+
 
 protected:
 

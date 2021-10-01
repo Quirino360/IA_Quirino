@@ -10,14 +10,26 @@ void ActorManager::Init(sf::Vector2f _position)
 
 void ActorManager::Update()
 {
+	for (Actor* _actor : actors)
+	{
+		_actor->Update();
+	}
 }
 
 void ActorManager::Render(sf::RenderWindow* window)
 {
+	for (Actor* _actor : actors)
+	{
+		_actor->Render(window);
+	}
 }
 
 void ActorManager::Destroy()
 {
+	for (Actor* _actor : actors)
+	{
+		_actor->Destroy();
+	}
 }
 
 void ActorManager::CreateActor(ACTOR_TYPE _actorType, sf::Vector2f _position)
@@ -27,18 +39,30 @@ void ActorManager::CreateActor(ACTOR_TYPE _actorType, sf::Vector2f _position)
 	case ACTOR_TYPE::ACTOR:
 		actors.push_back(new Actor());
 		actors[actors.size() - 1]->Init(_position);
+		actors[actors.size() - 1]->SetID(ID_Count);
+		actors[actors.size() - 1]->SetActorType(_actorType);
+		ID_Count++;
 		break;
 	case ACTOR_TYPE::PLAYER:
 		actors.push_back(new Player());
 		actors[actors.size() - 1]->Init(_position);
+		actors[actors.size() - 1]->SetID(ID_Count);
+		actors[actors.size() - 1]->SetActorType(_actorType);
+		ID_Count++;
 		break;
 	case ACTOR_TYPE::AI:
 		actors.push_back(new AI());
 		actors[actors.size() - 1]->Init(_position);
+		actors[actors.size() - 1]->SetID(ID_Count);
+		actors[actors.size() - 1]->SetActorType(_actorType);
+		ID_Count++;
 		break;
 	case ACTOR_TYPE::FLAG:
 		actors.push_back(new Flag());
 		actors[actors.size() - 1]->Init(_position);
+		actors[actors.size() - 1]->SetID(ID_Count);
+		actors[actors.size() - 1]->SetActorType(_actorType);
+		ID_Count++;
 		break;
 	}
 }

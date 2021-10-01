@@ -162,7 +162,7 @@ void SteeringBehavior::SteeringBehaiviorEvade(Actor* _this, Actor* _target)
 
 void SteeringBehavior::SteeringBehaviorPathFollowing(Actor* _this)
 {
-	auto& gameObj = GetGameObj();
+	//auto& gameObj = GetGameObj();
 
 	if (pathPoints.size() == 0) {
 		CreateDefaultPath(_this->GetPosition());
@@ -231,9 +231,6 @@ void SteeringBehavior::CreateDefaultPath(sf::Vector2f _thisPostion)
 
 }
 
-void SteeringBehavior::SetPath(std::vector<PathPoint> newPathPoints)
-{
-}
 
 bool changeDir = false;
 int SteeringBehavior::SetNextPointID(bool _isPatrol)

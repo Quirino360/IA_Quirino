@@ -4,6 +4,8 @@
 #include "DeltaTime.h";
 #include "Game.h"
 
+#include <iostream>
+
 #include "Vec2.h"
 
 Actor::Actor()
@@ -39,6 +41,9 @@ void Actor::Init(sf::Vector2f _position)
 	int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
 	cShape.setTextureRect(animation[0]);
 
+	// Collision box
+	boxCollition.Init(_position, { GetRadius() * 2, GetRadius() * 2});
+
 }
 
 void Actor::Update()
@@ -60,15 +65,31 @@ void Actor::Update()
 		cShape.setFillColor(sf::Color::White);
 
 	}
+
+	// Collision box
+	boxCollition.Update(position);
+
+	if (collision = true)
+	{
+		//boxCollition.IsInsideActors(gameObj.);
+	}
+
+	
+
 }
 
 void Actor::Render(sf::RenderWindow* window)
 {
 	window->draw(cShape);
+
+	// Collision box
+	boxCollition.Render(window);
 }
 
 void Actor::Destroy()
 {
+	// Collision box
+	boxCollition.Destroy();
 }
 
 

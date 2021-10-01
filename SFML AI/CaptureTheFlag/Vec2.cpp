@@ -6,9 +6,20 @@ sf::Vector2f Vec2::NormalizeVector(sf::Vector2f A)
 	return sf::Vector2f(A.x / v, A.y / v);
 }
 
+sf::Vector2f Vec2::MultiplyVector(sf::Vector2f A, sf::Vector2f B)
+{
+	return sf::Vector2f(A.x * B.x, A.y * B.x);
+}
+
+
 sf::Vector2f Vec2::TruncateVector(sf::Vector2f A, float x)
 {
 	return NormalizeVector(A) * x;
+}
+
+float Vec2::DotProduct(sf::Vector2f A, sf::Vector2f B)
+{
+	return (A.x * B.x) + (A.y * B.y);
 }
 
 float Vec2::DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B)
@@ -23,7 +34,3 @@ float Vec2::VectorLenght(sf::Vector2f A)
 	return std::sqrtf((A.x * A.x) + (A.y * A.y));
 }
 
-sf::Vector2f Vec2::MultiplyVector(sf::Vector2f A, sf::Vector2f B)
-{
-	return sf::Vector2f(A.x * B.x, A.y * B.x);
-}
