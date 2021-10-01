@@ -196,7 +196,7 @@ void SteeringBehavior::SteeringBehaviorPatrol(Actor* _this)
 void SteeringBehavior::CreateDefaultPath(sf::Vector2f _thisPostion)
 {
 	float X = 0;
-	float Y = 100;
+	float Y = 150;
 	float radiusAux = 10; //75
 	bool aux = false;
 	Actor pp;
@@ -215,11 +215,11 @@ void SteeringBehavior::CreateDefaultPath(sf::Vector2f _thisPostion)
 		pathPoints.push_back(pp);
 
 		if (aux) {
-			Y += 100;
+			Y += 150;
 			aux = false;
 		}
 		else {
-			X += 100;
+			X += 200;
 			aux = true;
 		}
 	}

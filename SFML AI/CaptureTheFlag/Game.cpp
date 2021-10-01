@@ -43,8 +43,15 @@ void Game::init()
 	//imgui 
 	ImGui::SFML::Init(*m_window);
 
-	// Actors
+	// Background
+	_texture.loadFromFile("Images/BackGround.jpg");
+
+	backGround.setSize(static_cast<sf::Vector2f>(m_window->getSize()));
+	backGround.setTexture(&_texture);
+
+	// ---------- Actors
 	actorManager.CreateActor(ACTOR_TYPE::PLAYER, { 150, 100 });
+
 	actorManager.CreateActor(ACTOR_TYPE::AI, { 960, 540 });
 
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 500, 100 });
@@ -53,23 +60,31 @@ void Game::init()
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 750, 1000 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1500, 500 });
 
-
-
+	// Set AI Target
 	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
 	{
 		static_cast<AI*>(_actor)->SetTarget(actorManager.GetActorByID(0));
 	}
 
+	// ----- Set Textures
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::ACTOR))
+	{
+		_actor->SetTexture("Images/Rock.png");/**/
+	}
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+	{
+		_actor->SetTexture("Images/Orc.png");/**/
+	}
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::PLAYER))
+	{
+		_actor->SetTexture("Images/Link.png");/**/
+	}
 
 }
 
 void Game::update()
 {
 	actorManager.Update();
-
-	std::cout << "Actor pos = " << actorManager.GetActorByID(0)->GetPosition().x << " , " << actorManager.GetActorByID(0)->GetPosition().y << std::endl;
-	
-
 }
 
 void Game::processEvents()
@@ -96,6 +111,8 @@ void Game::processEvents()
 void Game::render()
 {
 	m_window->clear(bgColor); // fill background with color
+
+	m_window->draw(backGround);
 
 	actorManager.Render(m_window);
 

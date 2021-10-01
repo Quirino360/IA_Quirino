@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 #include "CollisionBox.h"
 
 enum class ANIMATION_AI_STATE_TYPE;
@@ -85,7 +86,7 @@ public:
 	// ----- Essentials
 	void SetRadius(float _radius) { cShape.setRadius(_radius); cShape.setOrigin(cShape.getRadius(), cShape.getRadius()); };
 	void SetShape(sf::CircleShape _cShape) {  cShape = _cShape; };
-	void SetTexture(sf::Texture _texture) {  texture = _texture; };
+	void SetTexture(std::string _path) { if (texture.loadFromFile(_path)) { std::cout << "Texture Loaded" << std::endl; }	cShape.setTexture(&texture); };
 	void SetActorType(ACTOR_TYPE _actorType) { actorType = _actorType; };
 	void SetID(unsigned int _ID) { ID = _ID; };
 	// ----- Movement

@@ -54,6 +54,9 @@ private:
 
 	ActorManager actorManager;
 
+	sf::Texture _texture;
+	sf::RectangleShape backGround;
+
 };
 
 Game& GetGameObj();

@@ -70,10 +70,15 @@ void Player::Move()
 	if (target != nullptr)
 		target->Update();
 
+	// ----- 
 	sBehavior.UpdateMovement(this, target); // if target is nullptr then it does nothing
 	sf::Vector2f steering = sBehavior.GetSteering();
 	steering -= velocity;
 	velocity += steering;
+	position += velocity;
+
+	// ----- 
+	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
 	position += velocity;
 }
 

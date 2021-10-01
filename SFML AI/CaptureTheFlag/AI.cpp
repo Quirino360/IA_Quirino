@@ -56,6 +56,8 @@ void AI::Update()
 	sf::Vector2f steering = sBehavior.GetSteering();
 	steering -= velocity;
 	velocity += steering;
+
+	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
 	position += velocity;
 

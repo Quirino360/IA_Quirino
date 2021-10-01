@@ -19,7 +19,7 @@ public:
 
 private:
 	std::vector<Actor*> actors;
-	unsigned int ID_Count;
+	unsigned int ID_Count = 0;
 
 public:
 	void CreateActor(ACTOR_TYPE _actorType = ACTOR_TYPE::AI, sf::Vector2f _position = {0, 0});

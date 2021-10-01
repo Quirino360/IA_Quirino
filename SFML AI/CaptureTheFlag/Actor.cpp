@@ -21,7 +21,7 @@ void Actor::Init(sf::Vector2f _position)
 	// ----- Essentials
 	position = _position;
 	cShape.setPosition(position);
-	cShape.setRadius(50.0f);
+	cShape.setRadius(45.0f);
 	cShape.setOrigin(cShape.getRadius(), cShape.getRadius());
 
 	// ----- Texture & Animation
@@ -30,16 +30,18 @@ void Actor::Init(sf::Vector2f _position)
 	*AI_AnimState = ANIMATION_AI_STATE_TYPE::IDLE;
 
 	// ----- Set Texture
-	if (texture.loadFromFile("")) //Images/Worm.png
-	{		/*std::cout << "AI Texture Loaded" << std::endl;*/	}
+	//
+	if (!texture.loadFromFile("Images/Worm.png")) 	{		
+		std::cout << "Texture not Loaded" << std::endl;	}
 	cShape.setTexture(&texture);
+	texture.getSize();
 
 	// ----- Set Animation //* Crear clase Animation *//
-	sf::Vector2u textureSize = texture.getSize();
+	/*sf::Vector2u textureSize = texture.getSize();
 	textureSize.x /= 12;
 	textureSize.y /= 12;
 	int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
-	cShape.setTextureRect(animation[0]);
+	cShape.setTextureRect(animation[0]);/**/
 
 	// Collision box
 	boxCollition.Init(_position, { GetRadius() * 2, GetRadius() * 2});

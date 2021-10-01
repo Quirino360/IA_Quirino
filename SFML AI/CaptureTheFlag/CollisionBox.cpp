@@ -36,10 +36,7 @@ void CollisionBox::Destroy()
 
 sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
 {
-	
-
-	// Optimzacion, obstaculo(s) mas cercano(s) o obstaculos a cierta distancia  
-
+	// Optimizations, obstacle(s) closer o obstacle st range
 	// Set corners Positions
 	sf::Vector2f topLeftCorner = { GetPosition().x - GetSize().x / 2, GetPosition().y - GetSize().y / 2 };
 	sf::Vector2f topRightCorner = { GetPosition().x + GetSize().x / 2, GetPosition().y - GetSize().y / 2 };
@@ -64,7 +61,6 @@ sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
 	sf::Vector2f downVectorProyection = downVector * Vec2::DotProduct(downVector, bottomRightToTarget);
 	sf::Vector2f leftVectorProyection = leftVector * Vec2::DotProduct(leftVector, bottomLeftToTarget);
 
-	// ---------- Detect Collision
 	
 	//std::cout << "Magnitud Up Projectionv Vec - actor pos = " << Vec2::VectorLenght(upVectorProyection - _actor->GetPosition()) << std::endl;
 	//std::cout << "Magnitud Up Projectionv Vec = " << Vec2::VectorLenght(upVectorProyection - topLeftToTarget) << std::endl;
@@ -72,6 +68,7 @@ sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
 	//std::cout << "Up Projectionv Vec" << upVectorProyection.x << " , " << upVectorProyection.y << std::endl;
 
 
+	// ---------- Detect Collision
 	sf::Vector2f _collisionVelocity = { 0,0 };
 	// ----- Projection collision
 	if (Vec2::VectorLenght(upVectorProyection - topLeftToTarget) <= _actor->GetRadius() &&
