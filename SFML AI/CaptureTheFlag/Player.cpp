@@ -5,6 +5,7 @@
 #include <time.h>       /* time */
 #include "DeltaTime.h";
 
+#include "Vec2.h"
 #include "Game.h"
 #include "Actor.h"
 
@@ -22,7 +23,8 @@ void Player::Init(sf::Vector2f _position)
 {
 	Actor::Init(_position);
 
-	SetForce(10);
+	force = 450;
+
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 }
 
@@ -50,7 +52,6 @@ void Player::Move()
 	
 	if (IsInsideActor(target) && isSelected == true)
 	{
-
 		sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 	}
 
@@ -70,16 +71,17 @@ void Player::Move()
 	if (target != nullptr)
 		target->Update();
 
-	// ----- 
-	sBehavior.UpdateMovement(this, target); // if target is nullptr then it does nothing
+	// ----- Steering 
+	sBehavior.UpdateMovement(this, target);
 	sf::Vector2f steering = sBehavior.GetSteering();
 	steering -= velocity;
 	velocity += steering;
-	position += velocity;
 
-	// ----- 
+	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
-	position += velocity;
+	velocity *= gl::DeltaTime::GetDeltaTime();
+
+	position += velocity;	
 }
 
 

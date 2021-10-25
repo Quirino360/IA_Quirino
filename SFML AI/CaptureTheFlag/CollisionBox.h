@@ -1,7 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
-
 #include <vector>
 
 class Actor;
@@ -27,7 +25,7 @@ private:
 	sf::Vector2f position;
 
 	sf::Vector2f collisionVelocity;
-	float force = 10;
+	float force = 7500;
 
 	bool drawCollition = false;
 

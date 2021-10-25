@@ -39,9 +39,10 @@ void AI::Init(sf::Vector2f _position)
 	*AI_State = AI_STATE_TYPE::CAPTURE_FLAG;
 
 	// Sbehavior
-	sBehavior.SetBehavior(BEHAVIOR::SEEK);
+	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 
 }
+
 
 void AI::Update()
 {
@@ -59,10 +60,10 @@ void AI::Update()
 
 	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
+	velocity *= gl::DeltaTime::GetDeltaTime();
 	position += velocity;
 
 	//std::cout << "box collision velocity " << boxCollition.GetVelocity().x << " , " << boxCollition.GetVelocity().y << std::endl;
-
 }
 
 

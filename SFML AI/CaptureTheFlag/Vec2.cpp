@@ -17,9 +17,29 @@ sf::Vector2f Vec2::TruncateVector(sf::Vector2f A, float x)
 	return NormalizeVector(A) * x;
 }
 
+float Vec2::GetAngleDeg(sf::Vector2f A)
+{
+	return std::atan2f(A.x, A.y) * (180 / 3.1416);
+}
+
+float Vec2::GetAngleRad(sf::Vector2f A)
+{
+	return std::atan2f(A.x, A.y);
+}
+
 float Vec2::DotProduct(sf::Vector2f A, sf::Vector2f B)
 {
 	return (A.x * B.x) + (A.y * B.y);
+}
+
+float Vec2::AngleBetweenVectorsDeg(sf::Vector2f A, sf::Vector2f B)
+{
+	return std::acosf(Vec2::DotProduct(Vec2::NormalizeVector(A), Vec2::NormalizeVector(B))) * (180 / 3.1416);
+}
+
+float Vec2::AngleBetweenVectorsRad(sf::Vector2f A, sf::Vector2f B)
+{
+	return std::acosf(Vec2::DotProduct(Vec2::NormalizeVector(A), Vec2::NormalizeVector(B)));	
 }
 
 float Vec2::DistanceBetweenVectors(sf::Vector2f A, sf::Vector2f B)

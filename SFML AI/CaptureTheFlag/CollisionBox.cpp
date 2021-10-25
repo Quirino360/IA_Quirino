@@ -15,6 +15,7 @@ void CollisionBox::Init(sf::Vector2f _position, sf::Vector2f _size)
 	collisionArea.setPosition(_position);
 }
 
+// Updates the position of the collision box
 void CollisionBox::Update(sf::Vector2f _position)
 {
 	collisionArea.setPosition(_position);
@@ -34,7 +35,7 @@ void CollisionBox::Destroy()
 }
 
 
-sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
+sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _target)
 {
 	// Optimizations, obstacle(s) closer o obstacle st range
 	// Set corners Positions
@@ -44,10 +45,10 @@ sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
 	sf::Vector2f bottomLeftCorner = { GetPosition().x - GetSize().x / 2, GetPosition().y + GetSize().y / 2 };
 
 	// Set Corners to Target Vectors
-	sf::Vector2f topLeftToTarget =  _actor->GetPosition() - topLeftCorner;
-	sf::Vector2f topRightToTarget = _actor->GetPosition() - topRightCorner;
-	sf::Vector2f bottomRightToTarget = _actor->GetPosition() - bottomRightCorner;
-	sf::Vector2f bottomLeftToTarget = _actor->GetPosition() - bottomLeftCorner;
+	sf::Vector2f topLeftToTarget = _target->GetPosition() - topLeftCorner;
+	sf::Vector2f topRightToTarget = _target->GetPosition() - topRightCorner;
+	sf::Vector2f bottomRightToTarget = _target->GetPosition() - bottomRightCorner;
+	sf::Vector2f bottomLeftToTarget = _target->GetPosition() - bottomLeftCorner;
 
 	// Set Vertex Vectors
 	upVector = Vec2::NormalizeVector(topRightCorner - topLeftCorner);
@@ -61,60 +62,53 @@ sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _actor)
 	sf::Vector2f downVectorProyection = downVector * Vec2::DotProduct(downVector, bottomRightToTarget);
 	sf::Vector2f leftVectorProyection = leftVector * Vec2::DotProduct(leftVector, bottomLeftToTarget);
 
-	
-	//std::cout << "Magnitud Up Projectionv Vec - actor pos = " << Vec2::VectorLenght(upVectorProyection - _actor->GetPosition()) << std::endl;
-	//std::cout << "Magnitud Up Projectionv Vec = " << Vec2::VectorLenght(upVectorProyection - topLeftToTarget) << std::endl;
-	//std::cout << "Magnitud Up Projectionv Vec = " << Vec2::VectorLenght(upVectorProyection) << std::endl;
-	//std::cout << "Up Projectionv Vec" << upVectorProyection.x << " , " << upVectorProyection.y << std::endl;
-
-
 	// ---------- Detect Collision
 	sf::Vector2f _collisionVelocity = { 0,0 };
 	// ----- Projection collision
-	if (Vec2::VectorLenght(upVectorProyection - topLeftToTarget) <= _actor->GetRadius() &&
+	if (Vec2::VectorLenght(upVectorProyection - topLeftToTarget) <= _target->GetRadius() &&
 		Vec2::VectorLenght(upVectorProyection) < Vec2::VectorLenght(topRightCorner - topLeftCorner) &&
 		Vec2::VectorLenght(upVectorProyection) > 0)
 	{
 		//_collisionVelocity += Vec2::NormalizeVector({ 0,1 }) * force;
 		collisionVelocity += Vec2::NormalizeVector(upVectorProyection - topLeftToTarget) * force;
 	}
-	if (Vec2::VectorLenght(rightVectorProyection - topRightToTarget) <= _actor->GetRadius() &&
+	else if (Vec2::VectorLenght(rightVectorProyection - topRightToTarget) <= _target->GetRadius() &&
 		Vec2::VectorLenght(rightVectorProyection) < Vec2::VectorLenght(bottomRightCorner - topRightCorner) &&
 		Vec2::VectorLenght(rightVectorProyection) > 0)
 	{
 		//_collisionVelocity += Vec2::NormalizeVector({ -1,0 }) * force;
 		collisionVelocity += Vec2::NormalizeVector(rightVectorProyection - topRightToTarget) * force;
 	}
-	if (Vec2::VectorLenght(downVectorProyection - bottomRightToTarget) <= _actor->GetRadius() &&
+	else if (Vec2::VectorLenght(downVectorProyection - bottomRightToTarget) <= _target->GetRadius() &&
 		Vec2::VectorLenght(downVectorProyection) < Vec2::VectorLenght(bottomLeftCorner - bottomRightCorner) &&
 		Vec2::VectorLenght(downVectorProyection) > 0)
 	{
 		//_collisionVelocity += Vec2::NormalizeVector({ 0,-1 }) * force;
 		collisionVelocity += Vec2::NormalizeVector(downVectorProyection - bottomRightToTarget) * force;
 	}
-	if (Vec2::VectorLenght(leftVectorProyection - bottomLeftToTarget) <= _actor->GetRadius() &&
+	else if (Vec2::VectorLenght(leftVectorProyection - bottomLeftToTarget) <= _target->GetRadius() &&
 		Vec2::VectorLenght(leftVectorProyection) < Vec2::VectorLenght(topLeftCorner - bottomLeftCorner) &&
 		Vec2::VectorLenght(leftVectorProyection) > 0)
 	{
 		//_collisionVelocity += Vec2::NormalizeVector({ 1,0 }) * force;
-		collisionVelocity += Vec2::NormalizeVector(leftVectorProyection - bottomLeftToTarget) * force;
+		collisionVelocity += Vec2::NormalizeVector(leftVectorProyection - bottomLeftToTarget) * _target->GetCollisonForce();
 	}
 	// ----- Corners collision
-	if (_actor->IsInsidePosition(topLeftCorner))
+	else if (_target->IsInsidePosition(topLeftCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(topLeftCorner - _actor->GetPosition()) * force;
+		_collisionVelocity += Vec2::NormalizeVector(topLeftCorner - _target->GetPosition()) * _target->GetCollisonForce();
 	}
-	if (_actor->IsInsidePosition(topRightCorner))
+	else if (_target->IsInsidePosition(topRightCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(topRightCorner - _actor->GetPosition()) * force;
+		_collisionVelocity += Vec2::NormalizeVector(topRightCorner - _target->GetPosition()) * _target->GetCollisonForce();
 	}
-	if (_actor->IsInsidePosition(bottomLeftCorner))
+	else if (_target->IsInsidePosition(bottomLeftCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(bottomLeftCorner - _actor->GetPosition()) * force;
+		_collisionVelocity += Vec2::NormalizeVector(bottomLeftCorner - _target->GetPosition()) * _target->GetCollisonForce();
 	}
-	if (_actor->IsInsidePosition(bottomRightCorner))
+	else if (_target->IsInsidePosition(bottomRightCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(bottomRightCorner - _actor->GetPosition()) * force;
+		_collisionVelocity += Vec2::NormalizeVector(bottomRightCorner - _target->GetPosition()) * _target->GetCollisonForce();
 	}
 
 	return _collisionVelocity;

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "Globals.h"
 #include "DeltaTime.h"
-
+#include "Vec2.h"
 
 
 void Game::run()
@@ -52,13 +52,13 @@ void Game::init()
 	// ---------- Actors
 	actorManager.CreateActor(ACTOR_TYPE::PLAYER, { 150, 100 });
 
-	actorManager.CreateActor(ACTOR_TYPE::AI, { 960, 540 });
+	/*actorManager.CreateActor(ACTOR_TYPE::AI, {960, 540});
 
-	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 500, 100 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, {500, 100});
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 150, 500 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1000, 750 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 750, 1000 });
-	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1500, 500 });
+	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1500, 500 });/**/
 
 	// Set AI Target
 	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
@@ -80,7 +80,36 @@ void Game::init()
 		_actor->SetTexture("Images/Link.png");/**/
 	}
 
+
+	/*// Delete this vectors
+	sf::Vector2f showCase01 = { 1, 0 };
+	sf::Vector2f showCase02 = { 0, -1 };
+
+	std::cout << "Angle = " << Vec2::AngleBetweenVectors(showCase01, showCase02) << std::endl;/**/
+
+	// Delete this vectors
+
+	
+
+
 }
+
+/*if (showCase01.x > 0)
+{
+	angle += 90;
+}
+else if (showCase01.x < 0)
+{
+	angle -= 90;
+}
+else if (showCase01.y < 0)
+{
+
+
+}
+/**/
+
+
 
 void Game::update()
 {
@@ -183,6 +212,12 @@ void Game::UpdateImgui()
 			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
 			{
 				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::WANDER);
+			}
+		}
+		if (ImGui::Button("PATH_FOLLOWING_LOOP")) {
+			for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+			{
+				static_cast<AI*>(_actor)->SetSteeringBehavior(BEHAVIOR::PATH_FOLLOWING_LOOP);
 			}
 		}
 		if (ImGui::Button("PATH_FOLLOWING")) {

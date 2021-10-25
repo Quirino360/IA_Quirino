@@ -46,6 +46,10 @@ void Actor::Init(sf::Vector2f _position)
 	// Collision box
 	boxCollition.Init(_position, { GetRadius() * 2, GetRadius() * 2});
 
+	// 
+	velocityShape.setFillColor(sf::Color::Magenta);
+
+	
 }
 
 void Actor::Update()
@@ -65,19 +69,35 @@ void Actor::Update()
 	{
 		isSelected = false;		
 		cShape.setFillColor(sf::Color::White);
-
 	}
 
 	// Collision box
 	boxCollition.Update(position);
 
-	if (collision = true)
+	// Update Vectors shape 
+
+	// Con mi vel lo normalizo, me da mi dir de mi agente
+	// le hago productyo cruz en dos d que es negar l y y ponerla como x, la x se va a la pos de la y (eso seria mi left), lo multyilplico *-1 para que apunte al otro lado
+	// Ya tengo mis 2 vectores 
+
+	sf::Vector2f velAux = Vec2::NormalizeVector(velocity);
+	velocityShape.setSize({ Vec2::VectorLenght(velAux) * 50, 10 });
+	velocityShape.setOrigin(0, velocityShape.getSize().y / 2);
+	velocityShape.setPosition(position);
+
+	float angle = Vec2::GetAngleDeg({ velAux.x , -velAux.y });
+
+	if (velAux.x < 0)
 	{
-		//boxCollition.IsInsideActors(gameObj.);
+		angle -= 180;
+		angle *= -1;
 	}
 
-	
+	velocityShape.setRotation(angle);
 
+	//std::cout << "Angle of Velocity = " << Vec2::GetAngleDeg(velocity) << std::endl;
+	//std::cout << "Vel Vector = " << velAux.x << " , " << velAux.y << std::endl;
+	//std::cout << "Forward Vector = " << forwardVec.x << " , " << forwardVec.y << std::endl;
 }
 
 void Actor::Render(sf::RenderWindow* window)
@@ -86,6 +106,9 @@ void Actor::Render(sf::RenderWindow* window)
 
 	// Collision box
 	boxCollition.Render(window);
+
+	// Vectors Shape
+	window->draw(velocityShape);
 }
 
 void Actor::Destroy()

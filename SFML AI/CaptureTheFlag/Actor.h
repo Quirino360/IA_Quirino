@@ -38,9 +38,10 @@ protected:
 	// ----- Movement
 	sf::Vector2f position;
 	sf::Vector2f direction;
-	sf::Vector2f velocity;
-	float force = 1.4f;
-	float mass = 1;
+	sf::Vector2f velocity = {1 * 2 , 0 * 2} ;
+	sf::Vector2f forwardVec;
+	float force = 350.0f;
+	float mass = 1.2;
 
 	// ----- Animation
 	ANIMATION_AI_STATE_TYPE* AI_AnimState;
@@ -55,7 +56,12 @@ protected:
 	CollisionBox boxCollition;
 	bool collision = true;
 	bool showCollisonBox = false;
+	float collisionForce = 100.0f;
+
 private:
+	// ----- Draw vectors
+	sf::RectangleShape directionShape;
+	sf::RectangleShape velocityShape;
 
 public:
 	// ----- Tools
@@ -69,17 +75,21 @@ public:
 	sf::Texture GetTexture() { return texture; };
 	ACTOR_TYPE GetActorType() { return actorType; };
 	unsigned int GetID() { return ID; };
+
 	// ----- Movement
 	sf::Vector2f GetPosition() { return position; };
 	sf::Vector2f GetDirection() { return direction; };
 	sf::Vector2f GetVelocity() { return velocity; };
 	float GetForce() { return force; };
 	float GetMass() { return mass; };
+
 	// ----- Animation
 	ANIMATION_AI_STATE_TYPE* GetAnimationStateType() { return AI_AnimState; };
 	std::vector<sf::IntRect> GetAnimation() { return animation; };
+
 	// ----- Collision detection
 	bool GetDrawCollisionBox() { return boxCollition.GetDrawCollisionBox(); };
+	float GetCollisonForce() { return collisionForce; };
 
 
 	// ---------- Setters
@@ -100,7 +110,7 @@ public:
 	void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
 	// ----- Collision detection
 	void SetDrawCollisionBox(bool _show) { boxCollition.SetDrawCollisionBox(_show); };
-
+	void SetCollisonForce(float _collisionForce) { collisionForce = _collisionForce; };
 
 protected:
 

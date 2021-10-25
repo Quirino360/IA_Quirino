@@ -12,7 +12,6 @@
 SteeringBehavior::SteeringBehavior()
 {
 	behavior = BEHAVIOR::IDDLE;
-	
 }
 
 SteeringBehavior::~SteeringBehavior()
@@ -25,8 +24,8 @@ void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target)
 	if (_this == nullptr || _target == nullptr)
 		return;
 
-	if (_this->GetPosition().x == _target->GetPosition().x && _this->GetPosition().y == _target->GetPosition().y)
-		_this->SetPosition(_this->GetPosition() + sf::Vector2f(0.01f, 0.01));
+	/*if (_this->GetPosition().x == _target->GetPosition().x && _this->GetPosition().y == _target->GetPosition().y)
+		_this->SetPosition(_this->GetPosition() + sf::Vector2f(0.01f, 0.01));*/
 
 	switch (behavior)
 	{
@@ -50,6 +49,9 @@ void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target)
 		break;
 	case BEHAVIOR::WANDER:
 		SteeringBehaiviorWander(_this);
+		break;
+	case BEHAVIOR::PATH_FOLLOWING_LOOP:
+		SteeringBehaviorPathFollowingLoop(_this);
 		break;
 	case BEHAVIOR::PATH_FOLLOWING:
 		SteeringBehaviorPathFollowing(_this);
@@ -107,7 +109,7 @@ void SteeringBehavior::SteeringBehaiviorFlee(Actor* _this, Actor* _target)
 
 void SteeringBehavior::SteeringBehaiviorArrival(Actor* _this, Actor* _target)
 {
-	float radius = 1000; //Target arrival radius
+	float radius = 500; //Target arrival radius
 	steering = Vec2::NormalizeVector(_target->GetPosition() - _this->GetPosition()) * _this->GetForce();
 	steering /= _this->GetMass();
 
@@ -160,7 +162,7 @@ void SteeringBehavior::SteeringBehaiviorEvade(Actor* _this, Actor* _target)
 	steering /= _this->GetMass();
 }
 
-void SteeringBehavior::SteeringBehaviorPathFollowing(Actor* _this)
+void SteeringBehavior::SteeringBehaviorPathFollowingLoop(Actor* _this)
 {
 	//auto& gameObj = GetGameObj();
 
@@ -169,6 +171,22 @@ void SteeringBehavior::SteeringBehaviorPathFollowing(Actor* _this)
 	}
 
 	if (_this->IsInsidePosition(pathPoints[pathID].GetPosition(), pathPoints[pathID].GetRadius())) {
+		SetNextPointID(false);
+	}
+
+	steering = Vec2::NormalizeVector(pathPoints[pathID].GetPosition() - _this->GetPosition()) * _this->GetForce();
+	steering /= _this->GetMass();
+}
+
+void SteeringBehavior::SteeringBehaviorPathFollowing(Actor* _this)
+{
+	//auto& gameObj = GetGameObj();
+
+	if (pathPoints.size() == 0) {
+		CreateDefaultPath(_this->GetPosition());
+	}
+
+	if (_this->IsInsidePosition(pathPoints[pathID].GetPosition(), pathPoints[pathID].GetRadius()) && pathID != pathPoints.size() - 1) {
 		SetNextPointID(false);
 	}
 

@@ -15,6 +15,7 @@ enum class BEHAVIOR
 	PERSUIT, 
 	EVADE,
 	WANDER,
+	PATH_FOLLOWING_LOOP,
 	PATH_FOLLOWING,
 	PATROL,
 	COLLITION_AVOIDANCE,
@@ -161,6 +162,9 @@ private:
 	* @param   sf::Vector2f agent position
 	* @bug     NA
 	* @return  #sf::Vector2f behavior new velocity		*/
+	void SteeringBehaviorPathFollowingLoop(Actor* _this);
+
+
 	void SteeringBehaviorPathFollowing(Actor* _this);
 	
 	
