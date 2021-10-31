@@ -25,12 +25,12 @@ Anim_StateWalkDown::~Anim_StateWalkDown()
 {
 }
 
-void Anim_StateWalkDown::Enter(AI& _agent)
+void Anim_StateWalkDown::Enter(AI* _agent)
 {
-	_agent.SetAnimation(animation);
+	_agent->SetAnimation(animation);
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateWalkDown::Update(AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateWalkDown::Update(AI* _agent)
 {
 	Anim_State::Update(_agent);
 
@@ -40,8 +40,8 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkDown::Update(AI& _agent)
 	float lowestDistance = 100000;
 	DIRECTION lowestDir = DIRECTION::NONE;
 	for (int i = 0; i < directions.size(); i++) {
-		if (Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
-			lowestDistance = Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
+		if (Vec2::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection()) < lowestDistance) {
+			lowestDistance = Vec2::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection());
 			lowestDir = directions[i].direction;
 		}
 	}
@@ -80,6 +80,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkDown::Update(AI& _agent)
 	return ANIMATION_AI_STATE_TYPE::IDLE;
 }
 
-void Anim_StateWalkDown::Exit(AI& _agent)
+void Anim_StateWalkDown::Exit(AI* _agent)
 {
 }

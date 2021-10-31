@@ -22,7 +22,7 @@ namespace gl
 		~Anim_StateMachine();
 
 		void Init();
-		void Update(AI& _agent);
+		void Update(AI* _agent);
 
 	private:
 
@@ -49,8 +49,8 @@ namespace gl
 		//1 = stateCapture	2 = stateCarry	3 = stateCover	4 = stateSteal			
 
 	public:
-		void SetCurrentState(AI& _agent, ANIMATION_AI_STATE_TYPE _newState);
-		std::shared_ptr<Anim_State> GetCurentState(AI& _agent);
+		void SetCurrentState(AI* _agent, ANIMATION_AI_STATE_TYPE _newState);
+		std::shared_ptr<Anim_State> GetCurentState(AI* _agent);
 
 	private:
 	};

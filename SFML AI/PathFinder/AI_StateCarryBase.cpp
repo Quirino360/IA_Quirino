@@ -20,14 +20,14 @@ void AI_StateCarryBase::Enter()
 }
 
 //go for the falg if someone has it
-AI_STATE_TYPE AI_StateCarryBase::Update(gl::AI& _agent)
+AI_STATE_TYPE AI_StateCarryBase::Update(gl::AI* _agent)
 {
-	if (_agent.GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
-	_agent.GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());
+	if (_agent->GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
+	_agent->GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());
 
 	return AI_STATE_TYPE::CARRY_FLAG_TO_BASE;
 
-	_agent.SetPosition(_agent.GetPosition() + (_agent.GetSteeringBehavior().GetVelocity()));
+	_agent->SetPosition(_agent->GetPosition() + (_agent->GetSteeringBehavior().GetVelocity()));
 
 }
 

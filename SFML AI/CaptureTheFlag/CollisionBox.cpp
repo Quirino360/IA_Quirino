@@ -91,24 +91,24 @@ sf::Vector2f CollisionBox::GetCollisionVelocity(Actor* _target)
 		Vec2::VectorLenght(leftVectorProyection) > 0)
 	{
 		//_collisionVelocity += Vec2::NormalizeVector({ 1,0 }) * force;
-		collisionVelocity += Vec2::NormalizeVector(leftVectorProyection - bottomLeftToTarget) * _target->GetCollisonForce();
+		collisionVelocity += Vec2::NormalizeVector(leftVectorProyection - bottomLeftToTarget) * force;
 	}
 	// ----- Corners collision
 	else if (_target->IsInsidePosition(topLeftCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(topLeftCorner - _target->GetPosition()) * _target->GetCollisonForce();
+		_collisionVelocity += Vec2::NormalizeVector(topLeftCorner - _target->GetPosition()) * force;
 	}
 	else if (_target->IsInsidePosition(topRightCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(topRightCorner - _target->GetPosition()) * _target->GetCollisonForce();
+		_collisionVelocity += Vec2::NormalizeVector(topRightCorner - _target->GetPosition()) * force;
 	}
 	else if (_target->IsInsidePosition(bottomLeftCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(bottomLeftCorner - _target->GetPosition()) * _target->GetCollisonForce();
+		_collisionVelocity += Vec2::NormalizeVector(bottomLeftCorner - _target->GetPosition()) * force;
 	}
 	else if (_target->IsInsidePosition(bottomRightCorner))
 	{
-		_collisionVelocity += Vec2::NormalizeVector(bottomRightCorner - _target->GetPosition()) * _target->GetCollisonForce();
+		_collisionVelocity += Vec2::NormalizeVector(bottomRightCorner - _target->GetPosition()) * force;
 	}
 
 	return _collisionVelocity;

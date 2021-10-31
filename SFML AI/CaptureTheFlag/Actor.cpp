@@ -95,6 +95,8 @@ void Actor::Update()
 
 	velocityShape.setRotation(angle);
 
+	
+
 	//std::cout << "Angle of Velocity = " << Vec2::GetAngleDeg(velocity) << std::endl;
 	//std::cout << "Vel Vector = " << velAux.x << " , " << velAux.y << std::endl;
 	//std::cout << "Forward Vector = " << forwardVec.x << " , " << forwardVec.y << std::endl;
@@ -144,7 +146,7 @@ bool Actor::IsInsideActor(Actor* _actor)
 void Actor::Animate()
 {
 	fps += gl::DeltaTime::Time();
-	if (fps > 0.5 && animation.size() != 0)
+	if (fps > 100 && animation.size() != 0)
 	{
 		if (currentFrame >= animation.size())
 			currentFrame = 0;

@@ -24,12 +24,12 @@ Anim_StateWalkUp::~Anim_StateWalkUp()
 {
 }
 
-void Anim_StateWalkUp::Enter(gl::AI& _agent)
+void Anim_StateWalkUp::Enter(gl::AI* _agent)
 {
-	_agent.animation = animation;
+	_agent->animation = animation;
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(gl::AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(gl::AI* _agent)
 {
 	Anim_State::Update(_agent);
 
@@ -39,18 +39,18 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(gl::AI& _agent)
 	float lowestDistance = 100000;
 	DIRECTION lowestDir = DIRECTION::NONE;
 	for (int i = 0; i < directions.size(); i++) {
-		if (SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
-			lowestDistance = SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
+		if (SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection()) < lowestDistance) {
+			lowestDistance = SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection());
 			lowestDir = directions[i].direction;
 		}
 	}
 
 	// NA = 0, Win = 1, Loose = 2;
-	if (_agent.gameResult == 1)
+	if (_agent->gameResult == 1)
 	{
 		return ANIMATION_AI_STATE_TYPE::DEFEAT;
 	}
-	else if (_agent.gameResult == 1)
+	else if (_agent->gameResult == 1)
 	{
 		return ANIMATION_AI_STATE_TYPE::IDLE; //por ahora iddle
 	}
@@ -80,6 +80,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(gl::AI& _agent)
 
 }
 
-void Anim_StateWalkUp::Exit(gl::AI& _agent)
+void Anim_StateWalkUp::Exit(gl::AI* _agent)
 {
 }

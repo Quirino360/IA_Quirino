@@ -40,7 +40,7 @@ protected:
 	sf::Vector2f direction;
 	sf::Vector2f velocity = {1 * 2 , 0 * 2} ;
 	sf::Vector2f forwardVec;
-	float force = 350.0f;
+	float force = 3.0f;
 	float mass = 1.2;
 
 	// ----- Animation
@@ -56,7 +56,7 @@ protected:
 	CollisionBox boxCollition;
 	bool collision = true;
 	bool showCollisonBox = false;
-	float collisionForce = 100.0f;
+	float collisionForce = 10.0f;
 
 private:
 	// ----- Draw vectors

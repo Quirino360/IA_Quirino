@@ -54,7 +54,7 @@ public:
 	* @param   #gl::AI& agent to update
 	* @bug     NA
 	* @return  #void		*/
-	virtual AI_STATE_TYPE Update(gl::AI& _agent);
+	virtual AI_STATE_TYPE Update(gl::AI* _agent);
 
 	/**
 	* @brief   what will do leaving this state

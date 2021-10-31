@@ -25,12 +25,12 @@ Anim_StateWalkUp::~Anim_StateWalkUp()
 {
 }
 
-void Anim_StateWalkUp::Enter(AI& _agent)
+void Anim_StateWalkUp::Enter(AI* _agent)
 {
-	_agent.SetAnimation(animation);
+	_agent->SetAnimation(animation);
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(AI* _agent)
 {
 	Anim_State::Update(_agent);
 
@@ -40,18 +40,18 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(AI& _agent)
 	float lowestDistance = 100000;
 	DIRECTION lowestDir = DIRECTION::NONE;
 	for (int i = 0; i < directions.size(); i++) {
-		if (Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
-			lowestDistance = Vec2::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
+		if (Vec2::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection()) < lowestDistance) {
+			lowestDistance = Vec2::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection());
 			lowestDir = directions[i].direction;
 		}
 	}
 
 	// NA = 0, Win = 1, Loose = 2;
-	if (_agent.gameResult == 1)
+	if (_agent->gameResult == 1)
 	{
 		return ANIMATION_AI_STATE_TYPE::DEFEAT;
 	}
-	else if (_agent.gameResult == 1)
+	else if (_agent->gameResult == 1)
 	{
 		return ANIMATION_AI_STATE_TYPE::IDLE; //por ahora iddle
 	}
@@ -81,6 +81,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateWalkUp::Update(AI& _agent)
 
 }
 
-void Anim_StateWalkUp::Exit(AI& _agent)
+void Anim_StateWalkUp::Exit(AI* _agent)
 {
 }

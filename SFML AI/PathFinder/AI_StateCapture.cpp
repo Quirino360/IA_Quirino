@@ -21,12 +21,12 @@ void AI_StateCapture::Enter()
 }
 
 //if there is someone near you flee
-AI_STATE_TYPE AI_StateCapture::Update(gl::AI& _agent)
+AI_STATE_TYPE AI_StateCapture::Update(gl::AI* _agent)
 {	
-	if (_agent.GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
-		_agent.GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());/**/
+	if (_agent->GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
+		_agent->GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());/**/
 
-	_agent.SetPosition(_agent.GetPosition() + _agent.GetSteeringBehavior().GetVelocity());
+	_agent->SetPosition(_agent->GetPosition() + _agent->GetSteeringBehavior().GetVelocity());
 
 	return AI_STATE_TYPE::CAPTURE_FLAG;
 

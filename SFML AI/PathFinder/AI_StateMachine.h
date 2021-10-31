@@ -44,7 +44,7 @@ namespace gl
 		* @param   AI& agent to modify
 		* @bug     NA
 		* @return  #void		*/
-		void Update(AI& _agent);
+		void Update(AI* _agent);
 
 	private:
 		
@@ -75,7 +75,7 @@ namespace gl
 		* @param   AI_STATE_TYPE  new state type
 		* @bug     NA
 		* @return  #void		*/
-		void SetCurrentState(AI& _agent, AI_STATE_TYPE _newState);
+		void SetCurrentState(AI* _agent, AI_STATE_TYPE _newState);
 
 		/**
 		* @brief   gets the Current State

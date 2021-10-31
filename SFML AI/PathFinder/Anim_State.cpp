@@ -22,15 +22,15 @@ Anim_State::~Anim_State()
 {
 }
 
-void Anim_State::Enter(gl::AI& _agent)
+void Anim_State::Enter(gl::AI* _agent)
 {
 }
 
-ANIMATION_AI_STATE_TYPE Anim_State::Update(gl::AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_State::Update(gl::AI* _agent)
 {
     return ANIMATION_AI_STATE_TYPE();
 }
 
-void Anim_State::Exit(gl::AI& _agent)
+void Anim_State::Exit(gl::AI* _agent)
 {
 }

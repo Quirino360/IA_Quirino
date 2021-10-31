@@ -17,12 +17,12 @@ Anim_StateIdle::~Anim_StateIdle()
 {
 }
 
-void Anim_StateIdle::Enter(gl::AI& _agent)
+void Anim_StateIdle::Enter(gl::AI* _agent)
 {
-	_agent.animation = animation;
+	_agent->animation = animation;
 }
 
-ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(gl::AI& _agent)
+ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(gl::AI* _agent)
 {
 	Anim_State::Update(_agent);
 
@@ -32,8 +32,8 @@ ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(gl::AI& _agent)
 	float lowestDistance = 100000;
 	DIRECTION lowestDir = DIRECTION::NONE;
 	for (int i = 0; i < directions.size(); i++) {
-		if (SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection()) < lowestDistance) {
-			lowestDistance = SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent.GetDirection());
+		if (SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection()) < lowestDistance) {
+			lowestDistance = SteeringBehavior::DistanceBetweenVectors(directions[i].cord, _agent->GetDirection());
 			lowestDir = directions[i].direction;
 		}
 	}
@@ -73,6 +73,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(gl::AI& _agent)
 	return ANIMATION_AI_STATE_TYPE::IDLE;
 }
 
-void Anim_StateIdle::Exit(gl::AI& _agent)
+void Anim_StateIdle::Exit(gl::AI* _agent)
 {
 }

@@ -30,10 +30,10 @@ namespace gl
 		state->Enter();
 	}
 
-	void AI_StateMachine::Update(AI& _agent)
+	void AI_StateMachine::Update(AI* _agent)
 	{
 		// 2048 * 1080 -> 1024, 540
-		currentState = *_agent.AI_State;
+		currentState = *_agent->AI_State;
 		state = stateMap.find(currentState)->second;
 
 		AI_STATE_TYPE newState = state->Update(_agent);
@@ -43,7 +43,7 @@ namespace gl
 		}
 	}
 
-	void AI_StateMachine::SetCurrentState(gl::AI& _agent, AI_STATE_TYPE _newState)
+	void AI_StateMachine::SetCurrentState(gl::AI* _agent, AI_STATE_TYPE _newState)
 	{
 		if (nullptr == state)
 		{
@@ -54,7 +54,7 @@ namespace gl
 		{
 			state->Exit();
 			state = stateMap.find(_newState)->second;
-			*_agent.AI_State = _newState;
+			*_agent->AI_State = _newState;
 			state->Enter();
 		}
 

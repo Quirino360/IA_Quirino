@@ -25,7 +25,7 @@ private:
 	sf::Vector2f position;
 
 	sf::Vector2f collisionVelocity;
-	float force = 7500;
+	float force = 60;
 
 	bool drawCollition = false;
 

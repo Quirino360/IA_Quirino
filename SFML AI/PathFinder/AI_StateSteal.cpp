@@ -19,10 +19,10 @@ void AI_StateSteal::Enter()
 	sBehavior.SetBehavior(BEHAVIOR::PERSUIT);
 }
 
-AI_STATE_TYPE AI_StateSteal::Update(gl::AI& _agent)
+AI_STATE_TYPE AI_StateSteal::Update(gl::AI* _agent)
 {
-	if (_agent.GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
-	_agent.GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());
+	if (_agent->GetSteeringBehavior().GetBehavior() != sBehavior.GetBehavior());
+	_agent->GetSteeringBehavior().SetBehavior(sBehavior.GetBehavior());
 
 	return AI_STATE_TYPE::STEAL_FLAG;
 

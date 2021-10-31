@@ -23,7 +23,7 @@ void Player::Init(sf::Vector2f _position)
 {
 	Actor::Init(_position);
 
-	force = 450;
+	//force = 450;
 
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 }
@@ -74,13 +74,13 @@ void Player::Move()
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
 	sf::Vector2f steering = sBehavior.GetSteering();
-	steering -= velocity;
+	//steering -= velocity * 0.2f;
+	steering = (steering - velocity) * 0.2f;
 	velocity += steering;
 
 	// ----- Collision
-	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
-	velocity *= gl::DeltaTime::GetDeltaTime();
-
+	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()) ;
+	//velocity *= gl::DeltaTime::GetDeltaTime();
 	position += velocity;	
 }
 

@@ -12,9 +12,9 @@ private:
 	sf::Texture texture;
 
 public:
-	virtual void Enter(AI& _agent);
-	virtual ANIMATION_AI_STATE_TYPE Update(AI& _agent);
-	virtual void Exit(AI& _agent);
+	virtual void Enter(AI* _agent);
+	virtual ANIMATION_AI_STATE_TYPE Update(AI* _agent);
+	virtual void Exit(AI* _agent);
 
 private:
 };

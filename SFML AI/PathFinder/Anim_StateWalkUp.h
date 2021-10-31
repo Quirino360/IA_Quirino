@@ -13,9 +13,9 @@ public:
 private:
 
 public:
-	virtual void Enter(gl::AI& _agent);
-	virtual ANIMATION_AI_STATE_TYPE Update(gl::AI& _agent);
-	virtual void Exit(gl::AI& _agent);
+	virtual void Enter(gl::AI* _agent);
+	virtual ANIMATION_AI_STATE_TYPE Update(gl::AI* _agent);
+	virtual void Exit(gl::AI* _agent);
 
 private:
 };

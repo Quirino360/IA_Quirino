@@ -1,15 +1,15 @@
 #include "Anim_StateMachine.h"
 
 
-gl::Anim_StateMachine::Anim_StateMachine()
+Anim_StateMachine::Anim_StateMachine()
 {
 }
 
-gl::Anim_StateMachine::~Anim_StateMachine()
+Anim_StateMachine::~Anim_StateMachine()
 {
 }
 
-void gl::Anim_StateMachine::Init()
+void Anim_StateMachine::Init()
 {
 	stateDefeat = std::make_shared<Anim_StateDefeat>();
 	stateIdle = std::make_shared<Anim_StateIdle>();
@@ -34,10 +34,10 @@ void gl::Anim_StateMachine::Init()
 	state = stateMap.find(ANIMATION_AI_STATE_TYPE::IDLE)->second;
 }
 
-void gl::Anim_StateMachine::Update(AI& _agent)
+void Anim_StateMachine::Update(AI* _agent)
 {
 	// 2048 * 1080 -> 1024, 540
-	currentState = *_agent.GetAnimationStateType();
+	currentState = *_agent->GetAnimationStateType();
 	
 	state = stateMap.find(currentState)->second;
 
@@ -48,7 +48,7 @@ void gl::Anim_StateMachine::Update(AI& _agent)
 	}
 }
 
-void gl::Anim_StateMachine::SetCurrentState(AI& _agent, ANIMATION_AI_STATE_TYPE _newState)
+void Anim_StateMachine::SetCurrentState(AI* _agent, ANIMATION_AI_STATE_TYPE _newState)
 {
 	if (nullptr == state)
 	{
@@ -59,14 +59,14 @@ void gl::Anim_StateMachine::SetCurrentState(AI& _agent, ANIMATION_AI_STATE_TYPE 
 	{
 		state->Exit(_agent);
 		state = stateMap.find(_newState)->second;
-		*_agent.GetAnimationStateType() = _newState;
+		*_agent->GetAnimationStateType() = _newState;
 		state->Enter(_agent);
 	}
 
 	currentState = _newState;
 }
 
-std::shared_ptr<Anim_State> gl::Anim_StateMachine::GetCurentState(AI& _agent)
+std::shared_ptr<Anim_State> Anim_StateMachine::GetCurentState(AI* _agent)
 {
 	if (nullptr == state)
 	{

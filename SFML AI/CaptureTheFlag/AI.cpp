@@ -41,6 +41,26 @@ void AI::Init(sf::Vector2f _position)
 	// Sbehavior
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 
+	// ----- Texture & Animation
+	// ----- Anim State
+	AI_AnimState = new ANIMATION_AI_STATE_TYPE;
+	*AI_AnimState = ANIMATION_AI_STATE_TYPE::IDLE;
+
+	// ----- Set Texture
+	//
+	if (!texture.loadFromFile("Images/Worm.png")) {
+		std::cout << "Texture not Loaded" << std::endl;
+	}
+	cShape.setTexture(&texture);
+	texture.getSize();
+
+	// ----- Set Animation //* Crear clase Animation *//
+	sf::Vector2u textureSize = texture.getSize();
+	textureSize.x /= 12;
+	textureSize.y /= 12;
+	int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
+	cShape.setTextureRect(animation[0]);/**/
+
 }
 
 
@@ -50,20 +70,22 @@ void AI::Update()
 
 	Actor::Update();
 
-	
-
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
 	sf::Vector2f steering = sBehavior.GetSteering();
-	steering -= velocity;
+	//steering -= velocity * 0.2f;
+	steering = (steering - velocity) * 0.2f;
 	velocity += steering;
 
 	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
-	velocity *= gl::DeltaTime::GetDeltaTime();
+	//velocity *= gl::DeltaTime::GetDeltaTime();
 	position += velocity;
 
-	//std::cout << "box collision velocity " << boxCollition.GetVelocity().x << " , " << boxCollition.GetVelocity().y << std::endl;
+	direction = Vec2::NormalizeVector(velocity);
+
+	//std::cout << "velocity = " << velocity.x << " , " << velocity.y << std::endl;
+	std::cout << "box collision velocity " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).x << " , " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).y << std::endl;
 }
 
 

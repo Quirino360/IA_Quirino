@@ -52,8 +52,12 @@ void Game::init()
 	// ---------- Actors
 	actorManager.CreateActor(ACTOR_TYPE::PLAYER, { 150, 100 });
 
-	/*actorManager.CreateActor(ACTOR_TYPE::AI, {960, 540});
+	actorManager.CreateActor(ACTOR_TYPE::AI, {960, 540});
+	/*actorManager.CreateActor(ACTOR_TYPE::AI, { 100, 540 });
+	actorManager.CreateActor(ACTOR_TYPE::AI, { 960, 100 });
+	actorManager.CreateActor(ACTOR_TYPE::AI, { 500, 250});/**/
 
+	
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, {500, 100});
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 150, 500 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1000, 750 });
@@ -71,27 +75,18 @@ void Game::init()
 	{
 		_actor->SetTexture("Images/Rock.png");/**/
 	}
-	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+	/*for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
 	{
-		_actor->SetTexture("Images/Orc.png");/**/
-	}
+		_actor->SetTexture("Images/Orc.png");
+	}/**/
 	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::PLAYER))
 	{
 		_actor->SetTexture("Images/Link.png");/**/
 	}
 
-
-	/*// Delete this vectors
-	sf::Vector2f showCase01 = { 1, 0 };
-	sf::Vector2f showCase02 = { 0, -1 };
-
-	std::cout << "Angle = " << Vec2::AngleBetweenVectors(showCase01, showCase02) << std::endl;/**/
-
-	// Delete this vectors
-
-	
-
-
+	// State Machines 
+	stateMachine.Init();
+	animStateMachine.Init();
 }
 
 /*if (showCase01.x > 0)
@@ -113,7 +108,15 @@ else if (showCase01.y < 0)
 
 void Game::update()
 {
+	
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
+	{
+		//stateMachine.Update(static_cast<AI*>(_actor));
+		animStateMachine.Update(static_cast<AI*>(_actor));
+	}
 	actorManager.Update();
+
+
 }
 
 void Game::processEvents()

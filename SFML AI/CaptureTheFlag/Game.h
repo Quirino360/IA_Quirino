@@ -10,6 +10,8 @@
 #include "Flag.h"
 #include "AI.h"
 
+#include "AI_StateMachine.h"
+#include "Anim_StateMachine.h"
 
 
 class Game 
@@ -56,6 +58,9 @@ private:
 
 	sf::Texture _texture;
 	sf::RectangleShape backGround;
+
+	AI_StateMachine stateMachine;
+	Anim_StateMachine animStateMachine;
 
 };
 
