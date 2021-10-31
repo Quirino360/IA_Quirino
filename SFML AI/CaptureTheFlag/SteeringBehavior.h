@@ -170,7 +170,10 @@ private:
 	
 	void SteeringBehaviorPatrol(Actor* _this);
 
-	// Path following ------------------------- 
+
+	void SteeringBehaviorFlocking(std::vector<Actor*> _this);
+
+	// ----- Path following  
 		/**
 	* @brief   adds a path point to the patrol route
 	* @param   #PathPoint new path point

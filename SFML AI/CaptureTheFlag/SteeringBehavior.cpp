@@ -210,6 +210,81 @@ void SteeringBehavior::SteeringBehaviorPatrol(Actor* _this)
 	steering /= _this->GetMass();
 }
 
+// send all the actors that you want inside, even if they aren't
+void SteeringBehavior::SteeringBehaviorFlocking(std::vector<Actor*> _this)
+{
+	// ----- Alignment
+	float radio = 200;
+	sf::Vector2f pos = { 0,0 };
+	float flockSpeed = 10; // Aqui dijo que con la velocidad promedio? o como era?
+
+	std::vector<Actor*> flockActors;
+
+	for (Actor* _actors : _this)
+	{
+		if (_actors->IsInsidePosition(pos, radio))
+		{
+			flockActors.push_back(_actors);
+		}
+	}
+
+	sf::Vector2f averageVelocity = { 0,0 };
+	for (Actor* _actors : flockActors)
+	{
+		averageVelocity += sf::Vector2f(_actors->GetVelocity().x / flockActors.size(), 
+										_actors->GetVelocity().y / flockActors.size());
+	}
+	
+	averageVelocity = Vec2::NormalizeVector(averageVelocity) * flockSpeed;
+
+	// sumar average velocity a todos
+	for (Actor* _actors : flockActors)
+	{
+		_actors->SetVelocity(_actors->GetVelocity() + averageVelocity);
+	}
+
+
+	// ----- Cohesion
+	sf::Vector2f avergePos = { 0,0 };
+	
+	// Aplly a force inside, to the positions average
+	for (Actor* _actors : flockActors)
+	{
+		avergePos += sf::Vector2f(	_actors->GetPosition().x / flockActors.size(), 
+									_actors->GetPosition().y / flockActors.size());
+	}
+
+	// Sumar cohecion velocity a todos
+	sf::Vector2f CohecionVelocity = { 0,0 };
+	for (Actor* _actors : flockActors)
+	{
+		CohecionVelocity = avergePos - _actors->GetPosition();
+		// lo normalizo y le agrego una fuerza o asi?
+		_actors->SetVelocity(_actors->GetVelocity() + CohecionVelocity);		
+	}
+	
+	
+	// ----- Separation 
+	sf::Vector2f separationVel = { 0,0 };	
+	float separationForce = 10.0f;
+	sf::Vector2f avgPosVec = { 0,0 };
+	for (unsigned int i = 0; i < flockActors.size(); i++)
+	{
+		avgPosVec = { 0,0 };
+		for (unsigned int j = 0; j < flockActors.size(); j++)
+		{
+			if (i != j)
+			{
+				avgPosVec += sf::Vector2f(flockActors[j]->GetPosition() - flockActors[i]->GetPosition());
+			}
+		}
+
+		separationVel = Vec2::NormalizeVector(avgPosVec) * -1.0f * separationForce;
+		flockActors[i]->SetVelocity(flockActors[i]->GetVelocity() + CohecionVelocity);
+	}
+
+}
+
 // ---------- Path following  
 void SteeringBehavior::CreateDefaultPath(sf::Vector2f _thisPostion)
 {
