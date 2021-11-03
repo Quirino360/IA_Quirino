@@ -85,8 +85,8 @@ void Game::init()
 	}
 
 	// State Machines 
-	stateMachine.Init();
 	animStateMachine.Init();
+	stateMachine.Init();
 }
 
 /*if (showCase01.x > 0)
@@ -111,7 +111,7 @@ void Game::update()
 	
 	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
 	{
-		//stateMachine.Update(static_cast<AI*>(_actor));
+		stateMachine.Update(static_cast<AI*>(_actor));
 		animStateMachine.Update(static_cast<AI*>(_actor));
 	}
 	actorManager.Update();

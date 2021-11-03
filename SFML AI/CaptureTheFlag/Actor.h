@@ -38,7 +38,7 @@ protected:
 	// ----- Movement
 	sf::Vector2f position;
 	sf::Vector2f direction;
-	sf::Vector2f velocity = {1 * 2 , 0 * 2} ;
+	sf::Vector2f velocity = {0 , 0} ;
 	sf::Vector2f forwardVec;
 	float force = 3.0f;
 	float mass = 1.2;
@@ -56,7 +56,6 @@ protected:
 	CollisionBox boxCollition;
 	bool collision = true;
 	bool showCollisonBox = false;
-	float collisionForce = 10.0f;
 
 private:
 	// ----- Draw vectors
@@ -89,7 +88,6 @@ public:
 
 	// ----- Collision detection
 	bool GetDrawCollisionBox() { return boxCollition.GetDrawCollisionBox(); };
-	float GetCollisonForce() { return collisionForce; };
 
 
 	// ---------- Setters
@@ -110,7 +108,6 @@ public:
 	void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
 	// ----- Collision detection
 	void SetDrawCollisionBox(bool _show) { boxCollition.SetDrawCollisionBox(_show); };
-	void SetCollisonForce(float _collisionForce) { collisionForce = _collisionForce; };
 
 protected:
 

@@ -12,19 +12,55 @@ AI_StateMachine::~AI_StateMachine()
 
 }
 
+/*
+	std::shared_ptr<AI_State> state;
+	std::shared_ptr<AI_StateArrive> stateArrive;
+	std::shared_ptr<AI_StateEvade> stateEvade;
+
+	std::shared_ptr<AI_StateFlee> stateFlee;
+	std::shared_ptr<AI_StateFlocking> stateFlocking;
+	std::shared_ptr<AI_StateIddle> stateIddle;
+
+	std::shared_ptr<AI_StatePathFollowing> statePathFollowing;
+	std::shared_ptr<AI_StatePathFollowingLoop> statePathFollowingLopp;
+	std::shared_ptr<AI_StatePatrol> stateStatePatrol;
+
+	std::shared_ptr<AI_StatePersuit> statePersuit;
+	std::shared_ptr<AI_StateSeek> stateSeek;
+*/
 void AI_StateMachine::Init()
 {
-	stateCapture = std::make_shared<AI_StateCapture>();
-	stateCarry = std::make_shared<AI_StateCarryBase>();
-	stateCover = std::make_shared<AI_StateCover>();
-	stateSteal = std::make_shared<AI_StateSteal>();
+	// ----- 
+	stateArrive = std::make_shared<AI_StateArrive>();
+	stateEvade = std::make_shared<AI_StateEvade>();
+	stateFlee = std::make_shared<AI_StateFlee>();
 
-	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::CAPTURE_FLAG, static_cast<std::shared_ptr<AI_State>>(stateCapture)));
-	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::CARRY_FLAG_TO_BASE, static_cast<std::shared_ptr<AI_State>>(stateCarry)));
-	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::COVER_FLAG_CARRIER, static_cast<std::shared_ptr<AI_State>>(stateCover)));
-	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::STEAL_FLAG, static_cast<std::shared_ptr<AI_State>>(stateSteal)));
+	stateFlocking = std::make_shared<AI_StateFlocking>();
+	stateIddle = std::make_shared<AI_StateIddle>();
+	statePathFollowing = std::make_shared<AI_StatePathFollowing>();
 
-	state = stateMap.find(AI_STATE_TYPE::CAPTURE_FLAG)->second;
+	statePathFollowingLopp = std::make_shared<AI_StatePathFollowingLoop>();
+	stateStatePatrol = std::make_shared<AI_StatePatrol>();
+	statePersuit = std::make_shared<AI_StatePersuit>();
+
+	stateSeek = std::make_shared<AI_StateSeek>();
+
+	// ----- 
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_ARRIVE, static_cast<std::shared_ptr<AI_State>>(stateArrive)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_EVADE, static_cast<std::shared_ptr<AI_State>>(stateEvade)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_FLEE, static_cast<std::shared_ptr<AI_State>>(stateFlee)));
+
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_FLOCKING, static_cast<std::shared_ptr<AI_State>>(stateFlocking)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_IDDLE, static_cast<std::shared_ptr<AI_State>>(stateIddle)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_PATH_FOLLOWING, static_cast<std::shared_ptr<AI_State>>(statePathFollowing)));
+
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_PATH_FOLLOWING_LOOP, static_cast<std::shared_ptr<AI_State>>(statePathFollowingLopp)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_PATROL, static_cast<std::shared_ptr<AI_State>>(stateStatePatrol)));
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_PERSUIT, static_cast<std::shared_ptr<AI_State>>(statePersuit)));
+
+	stateMap.insert(std::pair<AI_STATE_TYPE, std::shared_ptr<AI_State>>(AI_STATE_TYPE::AI_STATE_SEEK, static_cast<std::shared_ptr<AI_State>>(stateSeek)));
+
+	state = stateMap.find(AI_STATE_TYPE::AI_STATE_IDDLE)->second;
 	state->Enter();
 }
 
@@ -64,7 +100,7 @@ std::shared_ptr<AI_State> AI_StateMachine::GetCurentState()
 {
 	if (nullptr == state)
 	{
-		state = stateMap.find(AI_STATE_TYPE::CAPTURE_FLAG)->second;
+		state = stateMap.find(AI_STATE_TYPE::AI_STATE_IDDLE)->second;
 		state->Enter();
 	}
 	return state;

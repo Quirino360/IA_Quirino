@@ -1,6 +1,7 @@
 #pragma once
 #include "AI_State.h"
 
+
 /*
 	CAPTURE_FLAG = 0,
 	STEAL_FLAG,
@@ -9,9 +10,9 @@
 */
 
 /**
-* @brief   Artificial Inteligence State Flee
-* @bug     NA		*/
-class AI_StateCapture : public AI_State
+* @brief   Artificial Inteligence State Persuit
+* @bug     NA */
+class AI_StateIddle : public AI_State
 {
 public:
 	/**
@@ -19,24 +20,14 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	AI_StateCapture();
-
-	/**
-	* @brief   constructor
-	* @param   #float new max velocity
-	* @param   #float new max speed
-	* @param   #float new max force
-	* @param   #float new mass
-	* @bug     NA
-	* @return  #void		*/
-	AI_StateCapture(float _maxVelocity, float _maxSpeed, float _maxForce, float _mass);
+	AI_StateIddle();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StateCapture();
+	~AI_StateIddle();
 
 private:
 	SteeringBehavior sBehavior;
@@ -62,6 +53,7 @@ public:
 	* @bug     NA
 	* @return  #void		*/
 	virtual void Exit();
+
 
 	/**
 	* @brief   gets the behavior vector velocity

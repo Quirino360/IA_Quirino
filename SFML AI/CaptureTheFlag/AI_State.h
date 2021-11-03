@@ -8,10 +8,17 @@
 * @bug     NA	*/
 enum class AI_STATE_TYPE
 {
-	CAPTURE_FLAG = 0,
-	STEAL_FLAG,
-	CARRY_FLAG_TO_BASE,
-	COVER_FLAG_CARRIER
+	AI_STATE_IDDLE = 0,
+	AI_STATE_SEEK,
+	AI_STATE_FLEE,
+	AI_STATE_ARRIVE,
+	AI_STATE_PERSUIT,
+	AI_STATE_EVADE,
+	AI_STATE_WANDER,
+	AI_STATE_PATH_FOLLOWING_LOOP,
+	AI_STATE_PATH_FOLLOWING,
+	AI_STATE_PATROL,
+	AI_STATE_FLOCKING
 };
 
 
@@ -58,12 +65,6 @@ public:
 	* @bug     NA
 	* @return  #void		*/
 	virtual void Exit() = 0;
-	
-	/**
-	* @brief   gets the behavior vector velocity
-	* @param   NA
-	* @bug     NA
-	* @return  sf::Vector2f behavior velocity		*/
 
 private:
 };

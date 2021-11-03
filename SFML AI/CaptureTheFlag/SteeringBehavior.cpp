@@ -59,9 +59,6 @@ void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target)
 	case BEHAVIOR::PATROL:
 		SteeringBehaviorPatrol(_this);
 		break;
-	case BEHAVIOR::COLLITION_AVOIDANCE:
-		sf::Vector2f(0.0f, 0.0f);
-		break;
 	case BEHAVIOR::FLOCKING:
 		sf::Vector2f(0.0f, 0.0f);
 		break;
@@ -97,8 +94,14 @@ void SteeringBehavior::CollisionDetection(Actor* _this)
 
 void SteeringBehavior::SteeringBehaiviorSeek(Actor* _this, Actor* _target)
 {
+	
 	steering = Vec2::NormalizeVector(_target->GetPosition() - _this->GetPosition()) * _this->GetForce();
-	steering /= _this->GetMass();
+	steering /= _this->GetMass();/**/
+
+	/*
+	steering = Vec2::NormalizeVector(_target->GetPosition() - _this->GetPosition());
+	steering = Vec2::NormalizeVector(steering - _this->GetVelocity()) * _this->GetForce();
+	steering /= _this->GetMass();/**/
 }
 
 void SteeringBehavior::SteeringBehaiviorFlee(Actor* _this, Actor* _target)

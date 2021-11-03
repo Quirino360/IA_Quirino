@@ -1,9 +1,16 @@
 #pragma once
 #include "AI_State.h"
-#include "AI_StateCapture.h"
-#include "AI_StateCarryBase.h"
-#include "AI_StateCover.h"
-#include "AI_StateSteal.h"
+#include "AI_StateArrive.h"
+#include "AI_StateEvade.h"
+#include "AI_StateFlee.h"
+#include "AI_StateFlocking.h"
+#include "AI_StateIddle.h"
+#include "AI_StatePathFollowing.h"
+#include "AI_StatePathFollowingLoop.h"
+#include "AI_StatePatrol.h"
+#include "AI_StatePersuit.h"
+#include "AI_StateSeek.h"
+
 
 #include "AI.h"
 
@@ -46,25 +53,24 @@ public:
 
 private:
 	
-	AI_STATE_TYPE currentState = AI_STATE_TYPE::CAPTURE_FLAG;
+	AI_STATE_TYPE currentState = AI_STATE_TYPE::AI_STATE_IDDLE;
 
 	std::shared_ptr<AI_State> state;
+	std::shared_ptr<AI_StateArrive> stateArrive;
+	std::shared_ptr<AI_StateEvade> stateEvade;
 
-	/*
-	#include "AI_State.h"
-	#include "AI_StateCapture.h"
-	#include "AI_StateCarryBase.h"
-	#include "AI_StateCover.h"
-	#include "AI_StateSteal.h"
-	*/
+	std::shared_ptr<AI_StateFlee> stateFlee;
+	std::shared_ptr<AI_StateFlocking> stateFlocking;
+	std::shared_ptr<AI_StateIddle> stateIddle;
 
-	std::shared_ptr<AI_StateCapture> stateCapture;
-	std::shared_ptr<AI_StateCarryBase> stateCarry;
-	std::shared_ptr<AI_StateCover> stateCover;
-	std::shared_ptr<AI_StateSteal> stateSteal;
+	std::shared_ptr<AI_StatePathFollowing> statePathFollowing;
+	std::shared_ptr<AI_StatePathFollowingLoop> statePathFollowingLopp;
+	std::shared_ptr<AI_StatePatrol> stateStatePatrol;
 
-	std::map<AI_STATE_TYPE, std::shared_ptr<AI_State>> stateMap;
-	//1 = stateCapture	2 = stateCarry	3 = stateCover	4 = stateSteal			
+	std::shared_ptr<AI_StatePersuit> statePersuit;
+	std::shared_ptr<AI_StateSeek> stateSeek;
+
+	std::map<AI_STATE_TYPE, std::shared_ptr<AI_State>> stateMap;		
 
 public:
 	/**

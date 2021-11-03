@@ -36,7 +36,7 @@ void AI::Init(sf::Vector2f _position)
 
 	// Behavior State
 	AI_State = new AI_STATE_TYPE;
-	*AI_State = AI_STATE_TYPE::CAPTURE_FLAG;
+	*AI_State = AI_STATE_TYPE::AI_STATE_IDDLE;
 
 	// Sbehavior
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
@@ -73,19 +73,17 @@ void AI::Update()
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
 	sf::Vector2f steering = sBehavior.GetSteering();
-	//steering -= velocity * 0.2f;
-	steering = (steering - velocity) * 0.2f;
+	steering = (steering - velocity) * 0.1f;
 	velocity += steering;
 
 	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
-	//velocity *= gl::DeltaTime::GetDeltaTime();
 	position += velocity;
 
 	direction = Vec2::NormalizeVector(velocity);
 
 	//std::cout << "velocity = " << velocity.x << " , " << velocity.y << std::endl;
-	std::cout << "box collision velocity " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).x << " , " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).y << std::endl;
+	//std::cout << "box collision velocity " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).x << " , " << boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()).y << std::endl;
 }
 
 

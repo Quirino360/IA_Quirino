@@ -2,8 +2,6 @@
 
 AI_State::AI_State()
 {
-
-
 }
 
 AI_State::~AI_State()

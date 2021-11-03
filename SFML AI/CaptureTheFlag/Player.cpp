@@ -12,6 +12,9 @@
 #include <iostream>
 #include <cmath>
 
+/*
+
+*/
 
 sf::Clock deltaClock;
 
@@ -73,16 +76,12 @@ void Player::Move()
 
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
-	sf::Vector2f steering = sBehavior.GetSteering();
-	//steering -= velocity * 0.2f;
-	steering = (steering - velocity) * 0.2f;
+	sf::Vector2f steering = { 0,0 };
+	steering += sBehavior.GetSteering();
+	steering = (steering - velocity) * 0.1f;
 	velocity += steering;
 
 	// ----- Collision
 	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()) ;
-	//velocity *= gl::DeltaTime::GetDeltaTime();
 	position += velocity;	
 }
-
-
-

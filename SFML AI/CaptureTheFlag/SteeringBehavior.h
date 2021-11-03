@@ -18,14 +18,11 @@ enum class BEHAVIOR
 	PATH_FOLLOWING_LOOP,
 	PATH_FOLLOWING,
 	PATROL,
-	COLLITION_AVOIDANCE,
 	FLOCKING
 };
 
-/**
-* @brief   Path point, to use in patrol behavior
-* @bug     NA
-* @return  #void		*/
+class Actor;
+
 
 
 

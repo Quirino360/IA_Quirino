@@ -58,6 +58,7 @@ void Actor::Update()
 	cShape.setPosition(position);
 	Animate();
 
+	// ----- 
 	if (IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
 	{
 		isSelected = true;
@@ -74,32 +75,13 @@ void Actor::Update()
 	// Collision box
 	boxCollition.Update(position);
 
-	// Update Vectors shape 
-
-	// Con mi vel lo normalizo, me da mi dir de mi agente
-	// le hago productyo cruz en dos d que es negar l y y ponerla como x, la x se va a la pos de la y (eso seria mi left), lo multyilplico *-1 para que apunte al otro lado
-	// Ya tengo mis 2 vectores 
-
+	// ----- Update Vectors shape 
 	sf::Vector2f velAux = Vec2::NormalizeVector(velocity);
 	velocityShape.setSize({ Vec2::VectorLenght(velAux) * 50, 10 });
 	velocityShape.setOrigin(0, velocityShape.getSize().y / 2);
 	velocityShape.setPosition(position);
-
 	float angle = Vec2::GetAngleDeg({ velAux.x , -velAux.y });
-
-	if (velAux.x < 0)
-	{
-		angle -= 180;
-		angle *= -1;
-	}
-
 	velocityShape.setRotation(angle);
-
-	
-
-	//std::cout << "Angle of Velocity = " << Vec2::GetAngleDeg(velocity) << std::endl;
-	//std::cout << "Vel Vector = " << velAux.x << " , " << velAux.y << std::endl;
-	//std::cout << "Forward Vector = " << forwardVec.x << " , " << forwardVec.y << std::endl;
 }
 
 void Actor::Render(sf::RenderWindow* window)

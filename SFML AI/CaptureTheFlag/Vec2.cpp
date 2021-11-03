@@ -19,12 +19,12 @@ sf::Vector2f Vec2::TruncateVector(sf::Vector2f A, float x)
 
 float Vec2::GetAngleDeg(sf::Vector2f A)
 {
-	return std::atan2f(A.x, A.y) * (180 / 3.1416);
+	return std::atan2f(-A.y, A.x) * (180 / 3.1416);
 }
 
 float Vec2::GetAngleRad(sf::Vector2f A)
 {
-	return std::atan2f(A.x, A.y);
+	return std::atan2f(-A.y, A.x);
 }
 
 float Vec2::DotProduct(sf::Vector2f A, sf::Vector2f B)
