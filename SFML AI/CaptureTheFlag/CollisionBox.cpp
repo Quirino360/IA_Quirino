@@ -13,6 +13,9 @@ void CollisionBox::Init(sf::Vector2f _position, sf::Vector2f _size)
 	collisionArea.setSize(_size);
 	collisionArea.setOrigin(_size.x / 2, _size.y / 2);
 	collisionArea.setPosition(_position);
+	collisionArea.setFillColor(sf::Color::Transparent);
+	collisionArea.setOutlineThickness(1.5f);
+	collisionArea.setOutlineColor(sf::Color::Black);
 }
 
 // Updates the position of the collision box

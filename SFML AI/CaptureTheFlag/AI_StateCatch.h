@@ -1,18 +1,7 @@
 #pragma once
 #include "AI_State.h"
 
-
-/*
-	CAPTURE_FLAG = 0,
-	STEAL_FLAG,
-	CARRY_FLAG_TO_BASE,
-	COVER_FLAG_CARRIER
-*/
-
-/**
-* @brief   Artificial Inteligence State Persuit
-* @bug     NA */
-class AI_StateIddle : public AI_State
+class AI_StateCatch : public AI_State
 {
 public:
 	/**
@@ -20,17 +9,18 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	AI_StateIddle();
+	AI_StateCatch();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StateIddle();
+	~AI_StateCatch();
 
 private:
 	SteeringBehavior sBehavior;
+	SteeringBehavior sBehavior2;
 
 public:
 	/**
@@ -53,7 +43,6 @@ public:
 	* @bug     NA
 	* @return  #void		*/
 	virtual void Exit();
-
 
 	/**
 	* @brief   gets the behavior vector velocity

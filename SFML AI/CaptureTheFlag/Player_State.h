@@ -1,6 +1,22 @@
 #pragma once
-#include "AI_State.h"
-class AI_StateFlocking : public AI_State
+#include "SteeringBehavior.h"
+#include "AI.h"
+
+
+/**
+* @brief   states of the AI state machine
+* @bug     NA	*/
+enum class PLAYER_STATE_TYPE
+{
+	PLAYER_STATE_START = 0,
+	PLAYER_STATE_RUN
+};
+
+
+/**
+* @brief   Father class for the Artificial Inteligence States
+* @bug     NA		*/
+class Player_State
 {
 public:
 	/**
@@ -8,17 +24,16 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	AI_StateFlocking();
+	Player_State();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StateFlocking();
+	virtual ~Player_State();
 
 private:
-	SteeringBehavior sBehavior;
 
 public:
 	/**
@@ -26,28 +41,21 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	virtual void Enter();
+	virtual void Enter() = 0;
 
 	/**
 	* @brief   updates the AI  behavior
 	* @param   #gl::AI& agent to update
 	* @bug     NA
 	* @return  #void		*/
-	virtual AI_STATE_TYPE Update(AI* _agent);
+	virtual PLAYER_STATE_TYPE Update(Player* _agent) = 0;
 
 	/**
 	* @brief   what will do leaving this state
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	virtual void Exit();
+	virtual void Exit() = 0;
 
-	/**
-	* @brief   gets the behavior vector velocity
-	* @param   NA
-	* @bug     NA
-	* @return  sf::Vector2f behavior velocity		*/
-	sf::Vector2f GetSteering() { return sBehavior.GetSteering(); };
 private:
 };
-

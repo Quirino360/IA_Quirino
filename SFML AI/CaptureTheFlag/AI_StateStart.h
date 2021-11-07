@@ -1,6 +1,6 @@
 #pragma once
 #include "AI_State.h"
-class AI_StatePersuit : public AI_State
+class AI_StateStart : public AI_State
 {
 public:
 	/**
@@ -8,14 +8,14 @@ public:
 	* @param   NA
 	* @bug     NA
 	* @return  #void		*/
-	AI_StatePersuit();
+	AI_StateStart();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StatePersuit();
+	~AI_StateStart();
 
 private:
 	SteeringBehavior sBehavior;
@@ -50,4 +50,3 @@ public:
 	sf::Vector2f GetSteering() { return sBehavior.GetSteering(); };
 private:
 };
-

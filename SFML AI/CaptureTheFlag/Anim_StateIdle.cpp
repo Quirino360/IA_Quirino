@@ -39,16 +39,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(AI* _agent)
 		}
 	}
 
-	/*// NA = 0, Win = 1, Loose = 2;
-	if (_agent.gameResult == 1)
-	{
-		return ANIMATION_AI_STATE_TYPE::DEFEAT;
-	}
-	else if (_agent.gameResult == 1)
-	{
-		return ANIMATION_AI_STATE_TYPE::IDLE; //por ahora iddle
-	}/**/
-
 	if (lowestDir == DIRECTION::UP)
 	{
 		return ANIMATION_AI_STATE_TYPE::WALK_UP;
@@ -70,7 +60,6 @@ ANIMATION_AI_STATE_TYPE Anim_StateIdle::Update(AI* _agent)
 		return ANIMATION_AI_STATE_TYPE::IDLE;
 	}
 	
-
 	return ANIMATION_AI_STATE_TYPE::IDLE;
 }
 

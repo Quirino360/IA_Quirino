@@ -10,6 +10,7 @@
 #include "Flag.h"
 #include "AI.h"
 
+#include "Player_StateMachine.h"
 #include "AI_StateMachine.h"
 #include "Anim_StateMachine.h"
 
@@ -23,6 +24,7 @@ public:
 	void run();
 	sf::RenderWindow*& getWindow() { return *&m_window; }
 	ActorManager& GetActorManager() { return actorManager; };
+	Actor* GetFlockingActor() { return flock; };
 
 private:
 	//sfml
@@ -36,8 +38,6 @@ private:
 	void UpdateImgui();
 
 public:
-
-
 
 private:
 	//Esentials
@@ -59,7 +59,12 @@ private:
 	sf::Texture _texture;
 	sf::RectangleShape backGround;
 
+	Actor* flock;
+
+	// State Machines
+	Player_StateMachine playerStateMachine;
 	AI_StateMachine stateMachine;
+
 	Anim_StateMachine animStateMachine;
 
 };

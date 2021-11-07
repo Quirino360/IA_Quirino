@@ -20,7 +20,7 @@ public:
 	AI();
 	~AI();
 
-	virtual void Init(sf::Vector2f _position = { 0.0f, 0.0f });
+	virtual void Init(sf::Vector2f _position = { 0.0f, 0.0f }, bool setTexture = true);
 	virtual void Update();
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy();

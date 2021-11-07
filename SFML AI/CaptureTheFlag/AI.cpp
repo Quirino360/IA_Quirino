@@ -27,40 +27,40 @@ AI::~AI()
 {
 }
 
-void AI::Init(sf::Vector2f _position)
+void AI::Init(sf::Vector2f _position, bool setTexture)
 {
-	Actor::Init(_position);
+	Actor::Init(_position, setTexture);
 	srand(time(NULL));
 
 	//What To Know UwU
 
 	// Behavior State
 	AI_State = new AI_STATE_TYPE;
-	*AI_State = AI_STATE_TYPE::AI_STATE_IDDLE;
+	*AI_State = AI_STATE_TYPE::AI_STATE_START;
 
 	// Sbehavior
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 
 	// ----- Texture & Animation
 	// ----- Anim State
-	AI_AnimState = new ANIMATION_AI_STATE_TYPE;
+	AI_AnimState = new ANIMATION_AI_STATE_TYPE();
 	*AI_AnimState = ANIMATION_AI_STATE_TYPE::IDLE;
 
 	// ----- Set Texture
-	//
-	if (!texture.loadFromFile("Images/Worm.png")) {
-		std::cout << "Texture not Loaded" << std::endl;
+	if (true == setTexture)
+	{
+		if (!texture.loadFromFile("Images/Worm.png")) {
+			std::cout << "Texture not Loaded" << std::endl;
+		}
+		cShape.setTexture(&texture);
+
+		// ----- Set Animation //* Crear clase Animation *//
+		sf::Vector2u textureSize = texture.getSize();
+		textureSize.x /= 12;
+		textureSize.y /= 12;
+		int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
+		cShape.setTextureRect(animation[0]);/**/
 	}
-	cShape.setTexture(&texture);
-	texture.getSize();
-
-	// ----- Set Animation //* Crear clase Animation *//
-	sf::Vector2u textureSize = texture.getSize();
-	textureSize.x /= 12;
-	textureSize.y /= 12;
-	int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
-	cShape.setTextureRect(animation[0]);/**/
-
 }
 
 
@@ -71,13 +71,15 @@ void AI::Update()
 	Actor::Update();
 
 	// ----- Steering 
-	sBehavior.UpdateMovement(this, target);
+	sBehavior.UpdateMovement(this, target, gameObj.GetActorManager().GetActorsByType(ACTOR_TYPE::AI));
 	sf::Vector2f steering = sBehavior.GetSteering();
 	steering = (steering - velocity) * 0.1f;
 	velocity += steering;
 
 	// ----- Collision
-	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID());
+	if (collision == true)
+		velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetActorsByType(ACTOR_TYPE::ACTOR), GetID());
+
 	position += velocity;
 
 	direction = Vec2::NormalizeVector(velocity);

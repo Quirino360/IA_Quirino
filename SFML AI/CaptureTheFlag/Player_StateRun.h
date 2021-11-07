@@ -1,32 +1,22 @@
 #pragma once
-#include "AI_State.h"
+#include "Player_State.h"
 
-/*
-	CAPTURE_FLAG = 0,
-	STEAL_FLAG,
-	CARRY_FLAG_TO_BASE,
-	COVER_FLAG_CARRIER
-*/
-
-/**
-* @brief   Artificial Inteligence State Flee
-* @bug     NA		*/
-class AI_StateSeek : public AI_State
+class Player_StateRun :  public Player_State
 {
 public:
 	/**
-	* @brief   default constructor
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
-	AI_StateSeek();
+* @brief   default constructor
+* @param   NA
+* @bug     NA
+* @return  #void		*/
+	Player_StateRun();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StateSeek();
+	~Player_StateRun();
 
 private:
 	SteeringBehavior sBehavior;
@@ -44,7 +34,7 @@ public:
 	* @param   #gl::AI& agent to update
 	* @bug     NA
 	* @return  #void		*/
-	virtual AI_STATE_TYPE Update(AI* _agent);
+	virtual PLAYER_STATE_TYPE Update(Player* _agent);
 
 	/**
 	* @brief   what will do leaving this state
@@ -59,6 +49,5 @@ public:
 	* @bug     NA
 	* @return  sf::Vector2f behavior velocity		*/
 	sf::Vector2f GetSteering() { return sBehavior.GetSteering(); };
-private:
 };
 

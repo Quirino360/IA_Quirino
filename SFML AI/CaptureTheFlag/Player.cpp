@@ -22,11 +22,11 @@ Player::Player()
 {
 }
 
-void Player::Init(sf::Vector2f _position)
+void Player::Init(sf::Vector2f _position, bool setTexture)
 {
 	Actor::Init(_position);
 
-	//force = 450;
+	playerState = new PLAYER_STATE_TYPE();
 
 	sBehavior.SetBehavior(BEHAVIOR::IDDLE);
 }
@@ -34,6 +34,23 @@ void Player::Init(sf::Vector2f _position)
 void Player::Update()
 {
 	Actor::Update();
+
+	auto& gameObj = GetGameObj();
+
+	// ----- 
+	if (IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+	{
+		isSelected = true;
+		cShape.setFillColor(sf::Color::Red);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) &&
+		IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))))
+	{
+		isSelected = false;
+		cShape.setFillColor(sf::Color::White);
+	}
+
 	Move();
 }
 
@@ -72,7 +89,9 @@ void Player::Move()
 	}
 
 	if (target != nullptr)
+	{
 		target->Update();
+	}
 
 	// ----- Steering 
 	sBehavior.UpdateMovement(this, target);
@@ -82,6 +101,9 @@ void Player::Move()
 	velocity += steering;
 
 	// ----- Collision
-	velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetAllActors(), GetID()) ;
-	position += velocity;	
+	if (collision == true)
+		velocity += boxCollition.GetCollisionVelocity(gameObj.GetActorManager().GetActorsByType(ACTOR_TYPE::ACTOR), GetID());
+
+	position += velocity;
+
 }

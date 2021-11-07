@@ -18,12 +18,8 @@ SteeringBehavior::~SteeringBehavior()
 {
 }
 
-void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target)
+void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target, std::vector<Actor*> _other)
 {
-
-	if (_this == nullptr || _target == nullptr)
-		return;
-
 	/*if (_this->GetPosition().x == _target->GetPosition().x && _this->GetPosition().y == _target->GetPosition().y)
 		_this->SetPosition(_this->GetPosition() + sf::Vector2f(0.01f, 0.01));*/
 
@@ -60,16 +56,9 @@ void SteeringBehavior::UpdateMovement(Actor* _this, Actor* _target)
 		SteeringBehaviorPatrol(_this);
 		break;
 	case BEHAVIOR::FLOCKING:
-		sf::Vector2f(0.0f, 0.0f);
+		SteeringBehaviorFlocking(_this, _other);
 		break;
-	}
-
-	bool isColDet = true;
-	if (isColDet == true)
-	{
-		CollisionDetection(_this);
-	}
-	
+	}	
 }
 
 void SteeringBehavior::Render(sf::RenderWindow* window)
@@ -82,19 +71,8 @@ void SteeringBehavior::Render(sf::RenderWindow* window)
 	//Display next path point
 }
 
-void SteeringBehavior::CollisionDetection(Actor* _this)
-{
-	sf::Vector2f collisonVel;
-	if (_this)
-	{
-
-	}
-
-}
-
 void SteeringBehavior::SteeringBehaiviorSeek(Actor* _this, Actor* _target)
 {
-	
 	steering = Vec2::NormalizeVector(_target->GetPosition() - _this->GetPosition()) * _this->GetForce();
 	steering /= _this->GetMass();/**/
 
@@ -126,7 +104,7 @@ void SteeringBehavior::SteeringBehaiviorArrival(Actor* _this, Actor* _target)
 	}
 }
 
-float timer = 0;
+
 void SteeringBehavior::SteeringBehaiviorWander(Actor* _this)
 {
 	srand(time(NULL));
@@ -141,6 +119,7 @@ void SteeringBehavior::SteeringBehaiviorWander(Actor* _this)
 	if (timer >= 5)
 	{
 		wanderTarget->SetPosition(sf::Vector2f(rand() % _x + 1, rand() % _y + 1)); //rand in range of screen
+		timer = 0;
 	}
 
 	// ----- if is inside target change target position
@@ -213,17 +192,19 @@ void SteeringBehavior::SteeringBehaviorPatrol(Actor* _this)
 	steering /= _this->GetMass();
 }
 
+
 // send all the actors that you want inside, even if they aren't
-void SteeringBehavior::SteeringBehaviorFlocking(std::vector<Actor*> _this)
+void SteeringBehavior::SteeringBehaviorFlocking(Actor* _this, std::vector<Actor*> _other)
 {
-	// ----- Alignment
+	auto& gameObj = GetGameObj();
+
 	float radio = 200;
-	sf::Vector2f pos = { 0,0 };
-	float flockSpeed = 10; // Aqui dijo que con la velocidad promedio? o como era?
+	sf::Vector2f pos = _this->GetPosition();
 
 	std::vector<Actor*> flockActors;
 
-	for (Actor* _actors : _this)
+	// Know what actors are inside
+	for (Actor* _actors : _other)
 	{
 		if (_actors->IsInsidePosition(pos, radio))
 		{
@@ -231,61 +212,64 @@ void SteeringBehavior::SteeringBehaviorFlocking(std::vector<Actor*> _this)
 		}
 	}
 
+	// ----- check if this actor can flock
+	bool _continue = false;
+	for (Actor* _actors : flockActors)
+	{
+		if (_actors->GetID() == _this->GetID())
+		{
+			_continue = true;
+		}
+	}
+
+	if (flockActors.size() <= 1 || _continue == false)
+	{
+		steering = { 0,0 };
+		return;
+	}
+
+	// ----- Alignment
 	sf::Vector2f averageVelocity = { 0,0 };
 	for (Actor* _actors : flockActors)
 	{
 		averageVelocity += sf::Vector2f(_actors->GetVelocity().x / flockActors.size(), 
 										_actors->GetVelocity().y / flockActors.size());
 	}
-	
-	averageVelocity = Vec2::NormalizeVector(averageVelocity) * flockSpeed;
 
-	// sumar average velocity a todos
-	for (Actor* _actors : flockActors)
-	{
-		_actors->SetVelocity(_actors->GetVelocity() + averageVelocity);
-	}
-
+	averageVelocity = Vec2::NormalizeVector(averageVelocity);
+	steering = averageVelocity;
 
 	// ----- Cohesion
-	sf::Vector2f avergePos = { 0,0 };
-	
 	// Aplly a force inside, to the positions average
+	sf::Vector2f avergePos = { 0,0 };
 	for (Actor* _actors : flockActors)
 	{
-		avergePos += sf::Vector2f(	_actors->GetPosition().x / flockActors.size(), 
-									_actors->GetPosition().y / flockActors.size());
+		if (_this->GetID() != _actors->GetID()) //esto hacerlo en la lista de flock ators
+		{
+			avergePos += sf::Vector2f(_actors->GetPosition().x / flockActors.size(),
+				_actors->GetPosition().y / flockActors.size());
+		}
 	}
 
-	// Sumar cohecion velocity a todos
 	sf::Vector2f CohecionVelocity = { 0,0 };
-	for (Actor* _actors : flockActors)
-	{
-		CohecionVelocity = avergePos - _actors->GetPosition();
-		// lo normalizo y le agrego una fuerza o asi?
-		_actors->SetVelocity(_actors->GetVelocity() + CohecionVelocity);		
-	}
-	
+	CohecionVelocity = Vec2::NormalizeVector(avergePos - _this->GetPosition());
+	steering += CohecionVelocity * 0.2f;
 	
 	// ----- Separation 
-	sf::Vector2f separationVel = { 0,0 };	
-	float separationForce = 10.0f;
 	sf::Vector2f avgPosVec = { 0,0 };
-	for (unsigned int i = 0; i < flockActors.size(); i++)
+	for (unsigned int j = 0; j < flockActors.size(); j++)
 	{
-		avgPosVec = { 0,0 };
-		for (unsigned int j = 0; j < flockActors.size(); j++)
+		if (_this->GetID() != flockActors[j]->GetID()) //esto hacerlo en la lista de flock ators
 		{
-			if (i != j)
-			{
-				avgPosVec += sf::Vector2f(flockActors[j]->GetPosition() - flockActors[i]->GetPosition());
-			}
+			avgPosVec += sf::Vector2f(flockActors[j]->GetPosition() - _this->GetPosition());
 		}
-
-		separationVel = Vec2::NormalizeVector(avgPosVec) * -1.0f * separationForce;
-		flockActors[i]->SetVelocity(flockActors[i]->GetVelocity() + CohecionVelocity);
 	}
 
+	sf::Vector2f separationVel = { 0,0 };	
+	separationVel = Vec2::NormalizeVector(avgPosVec) * 2.5f;
+	separationVel *= -1.0f;
+
+	steering += separationVel;
 }
 
 // ---------- Path following  
@@ -358,4 +342,3 @@ int SteeringBehavior::SetNextPointID(bool _isPatrol)
 	}
 	return pathID;
 }
-

@@ -50,15 +50,17 @@ void Game::init()
 	backGround.setTexture(&_texture);
 
 	// ---------- Actors
+	// ----- Player
 	actorManager.CreateActor(ACTOR_TYPE::PLAYER, { 150, 100 });
 
+	// ----- AI
 	actorManager.CreateActor(ACTOR_TYPE::AI, {960, 540});
-	/*actorManager.CreateActor(ACTOR_TYPE::AI, { 100, 540 });
+	actorManager.CreateActor(ACTOR_TYPE::AI, { 100, 540 });
 	actorManager.CreateActor(ACTOR_TYPE::AI, { 960, 100 });
 	actorManager.CreateActor(ACTOR_TYPE::AI, { 500, 250});/**/
 
-	
-	actorManager.CreateActor(ACTOR_TYPE::ACTOR, {500, 100});
+	// ----- Actor
+	/*actorManager.CreateActor(ACTOR_TYPE::ACTOR, {500, 100});
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 150, 500 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 1000, 750 });
 	actorManager.CreateActor(ACTOR_TYPE::ACTOR, { 750, 1000 });
@@ -75,10 +77,6 @@ void Game::init()
 	{
 		_actor->SetTexture("Images/Rock.png");/**/
 	}
-	/*for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::AI))
-	{
-		_actor->SetTexture("Images/Orc.png");
-	}/**/
 	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::PLAYER))
 	{
 		_actor->SetTexture("Images/Link.png");/**/
@@ -87,24 +85,20 @@ void Game::init()
 	// State Machines 
 	animStateMachine.Init();
 	stateMachine.Init();
+	playerStateMachine.Init();
+
+	// flock Shape
+	flock = new Actor();
+	flock->Init({ 500,500 }, false);
+	flock->SetRadius(150);
+	flock->SetForce(0.75f);
+	flock->SetMass(1);
+	flock->SetCollision(false);
+	flock->GetShape().setFillColor(sf::Color::Transparent);
+	flock->GetShape().setOutlineThickness(1.5f);
+	flock->GetShape().setOutlineColor(sf::Color::Yellow);
+
 }
-
-/*if (showCase01.x > 0)
-{
-	angle += 90;
-}
-else if (showCase01.x < 0)
-{
-	angle -= 90;
-}
-else if (showCase01.y < 0)
-{
-
-
-}
-/**/
-
-
 
 void Game::update()
 {
@@ -114,8 +108,14 @@ void Game::update()
 		stateMachine.Update(static_cast<AI*>(_actor));
 		animStateMachine.Update(static_cast<AI*>(_actor));
 	}
+	for (Actor* _actor : actorManager.GetActorsByType(ACTOR_TYPE::PLAYER))
+	{
+		playerStateMachine.Update(static_cast<Player*>(_actor));
+		//animStateMachine.Update(static_cast<Player*>(_actor));
+	}
 	actorManager.Update();
 
+	flock->Update();
 
 }
 
@@ -147,6 +147,8 @@ void Game::render()
 	m_window->draw(backGround);
 
 	actorManager.Render(m_window);
+
+	flock->Render(m_window);
 
 	ImGui::SFML::Render(*m_window); //render imgui
 	m_window->display();

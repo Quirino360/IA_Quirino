@@ -16,32 +16,13 @@ Actor::~Actor()
 {
 }
 
-void Actor::Init(sf::Vector2f _position)
+void Actor::Init(sf::Vector2f _position, bool setTexture)
 {
 	// ----- Essentials
 	position = _position;
 	cShape.setPosition(position);
 	cShape.setRadius(45.0f);
 	cShape.setOrigin(cShape.getRadius(), cShape.getRadius());
-
-	// ----- Texture & Animation
-	// ----- Anim State
-	AI_AnimState = new ANIMATION_AI_STATE_TYPE;
-	*AI_AnimState = ANIMATION_AI_STATE_TYPE::IDLE;
-
-	// ----- Set Texture
-	//
-	if (!texture.loadFromFile("Images/Worm.png")) 	{		
-		std::cout << "Texture not Loaded" << std::endl;	}
-	cShape.setTexture(&texture);
-	texture.getSize();
-
-	// ----- Set Animation //* Crear clase Animation *//
-	/*sf::Vector2u textureSize = texture.getSize();
-	textureSize.x /= 12;
-	textureSize.y /= 12;
-	int x = 0;	int y = 0;	animation.push_back(sf::IntRect(textureSize.x * x, textureSize.y * y, textureSize.x, textureSize.y));
-	cShape.setTextureRect(animation[0]);/**/
 
 	// Collision box
 	boxCollition.Init(_position, { GetRadius() * 2, GetRadius() * 2});
@@ -58,22 +39,10 @@ void Actor::Update()
 	cShape.setPosition(position);
 	Animate();
 
-	// ----- 
-	if (IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-	{
-		isSelected = true;
-		cShape.setFillColor(sf::Color::Red);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) && 
-		sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) &&
-		IsInsidePosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*gameObj.getWindow()))))
-	{
-		isSelected = false;		
-		cShape.setFillColor(sf::Color::White);
-	}
-
 	// Collision box
-	boxCollition.Update(position);
+	if (collision == true)	
+		boxCollition.Update(position);
+
 
 	// ----- Update Vectors shape 
 	sf::Vector2f velAux = Vec2::NormalizeVector(velocity);
@@ -89,7 +58,8 @@ void Actor::Render(sf::RenderWindow* window)
 	window->draw(cShape);
 
 	// Collision box
-	boxCollition.Render(window);
+	if (showCollisonBox == true && collision == true)
+		boxCollition.Render(window);
 
 	// Vectors Shape
 	window->draw(velocityShape);

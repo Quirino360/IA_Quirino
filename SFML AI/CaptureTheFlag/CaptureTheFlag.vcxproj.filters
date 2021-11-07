@@ -68,70 +68,58 @@
     <ClCompile Include="ActorManager.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="AI_State.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_StateSeek.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_StateIddle.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_StateFlee.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+      <Filter>State Machine\AI_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="AI_StateMachine.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_StateArrive.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+      <Filter>State Machine\AI_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_State.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateDefeat.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateIdle.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateMachine.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateRun.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateWalkDown.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateWalkLeft.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateWalkRight.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Anim_StateWalkUp.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>State Machine\AnimStateMachine\cpp</Filter>
+      <Filter>State Machine\Anim_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StateEvade.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="AI_StateStart.cpp">
+      <Filter>State Machine\AI_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StateFlocking.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="Player_StateStart.cpp">
+      <Filter>State Machine\Player_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StatePathFollowing.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>State Machine\Player_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StatePathFollowingLoop.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="Player_StateMachine.cpp">
+      <Filter>State Machine\Player_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StatePatrol.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="AI_StateCatch.cpp">
+      <Filter>State Machine\AI_StateMachine\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="AI_StatePersuit.cpp">
-      <Filter>State Machine\BehaviorStateMachine\cpp</Filter>
+    <ClCompile Include="Player_StateRun.cpp">
+      <Filter>State Machine\Player_StateMachine\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,70 +174,58 @@
     <ClInclude Include="ActorManager.h" />
     <ClInclude Include="CollisionBox.h" />
     <ClInclude Include="AI_State.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_StateSeek.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_StateIddle.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_StateFlee.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+      <Filter>State Machine\AI_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="AI_StateMachine.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_StateArrive.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+      <Filter>State Machine\AI_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_State.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateDefeat.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateIdle.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateMachine.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateRun.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateWalkDown.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateWalkLeft.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateWalkRight.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Anim_StateWalkUp.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>State Machine\AnimStateMachine\header</Filter>
+      <Filter>State Machine\Anim_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StateEvade.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="AI_StateStart.h">
+      <Filter>State Machine\AI_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StateFlocking.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="Player_State.h">
+      <Filter>State Machine\Player_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StatePathFollowing.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="Player_StateMachine.h">
+      <Filter>State Machine\Player_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StatePathFollowingLoop.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="Player_StateStart.h">
+      <Filter>State Machine\Player_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StatePatrol.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="AI_StateCatch.h">
+      <Filter>State Machine\AI_StateMachine\header</Filter>
     </ClInclude>
-    <ClInclude Include="AI_StatePersuit.h">
-      <Filter>State Machine\BehaviorStateMachine\header</Filter>
+    <ClInclude Include="Player_StateRun.h">
+      <Filter>State Machine\Player_StateMachine\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,23 +241,32 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{a5ab4f97-529a-4725-aa3c-120223526a3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State Machine\AnimStateMachine">
-      <UniqueIdentifier>{21897720-89cd-4ed8-92ef-21baa1cd6712}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State Machine\BehaviorStateMachine">
+    <Filter Include="State Machine\AI_StateMachine">
       <UniqueIdentifier>{1b98f2a3-3250-485c-ae9a-b917dce71f0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State Machine\AnimStateMachine\header">
-      <UniqueIdentifier>{62437a83-2b6a-4acb-b0ea-e7b92c9b41f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State Machine\AnimStateMachine\cpp">
-      <UniqueIdentifier>{8f7784d9-0127-4cfc-a473-debff0715de2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State Machine\BehaviorStateMachine\header">
+    <Filter Include="State Machine\AI_StateMachine\header">
       <UniqueIdentifier>{e935a123-8b37-492f-a1fc-8ff89c955be9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State Machine\BehaviorStateMachine\cpp">
+    <Filter Include="State Machine\AI_StateMachine\cpp">
       <UniqueIdentifier>{b52c21f3-6624-4b2c-965f-d13c493ab507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Anim_StateMachine">
+      <UniqueIdentifier>{21897720-89cd-4ed8-92ef-21baa1cd6712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Anim_StateMachine\header">
+      <UniqueIdentifier>{62437a83-2b6a-4acb-b0ea-e7b92c9b41f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Anim_StateMachine\cpp">
+      <UniqueIdentifier>{8f7784d9-0127-4cfc-a473-debff0715de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Player_StateMachine">
+      <UniqueIdentifier>{3d30dd8e-2619-435d-90ab-3cea4d133c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Player_StateMachine\header">
+      <UniqueIdentifier>{16b6a7ae-5abf-4ade-bd6a-b56d5ac6a598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Machine\Player_StateMachine\cpp">
+      <UniqueIdentifier>{476d9c88-f71d-4a65-bd7d-7621e6fd33ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

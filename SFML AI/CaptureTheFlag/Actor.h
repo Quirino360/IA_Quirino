@@ -22,7 +22,7 @@ public:
 	Actor();
 	~Actor();
 		
-	virtual void Init(sf::Vector2f _position = { 0,0 });
+	virtual void Init(sf::Vector2f _position = { 0,0 }, bool setTexture = true);
 	virtual void Update();
 	virtual void Render(sf::RenderWindow* window);
 	virtual void Destroy();
@@ -55,7 +55,7 @@ protected:
 	// ----- Collision Detection
 	CollisionBox boxCollition;
 	bool collision = true;
-	bool showCollisonBox = false;
+	bool showCollisonBox = true;
 
 private:
 	// ----- Draw vectors
@@ -70,7 +70,7 @@ public:
 	// ---------- Getters
 	// ----- Essentials
 	float GetRadius() { return cShape.getRadius(); };
-	sf::CircleShape GetShape() { return cShape; };
+	sf::CircleShape& GetShape() { return cShape; };
 	sf::Texture GetTexture() { return texture; };
 	ACTOR_TYPE GetActorType() { return actorType; };
 	unsigned int GetID() { return ID; };
@@ -108,6 +108,7 @@ public:
 	void SetAnimation(std::vector<sf::IntRect> _newAnim) { animation = _newAnim; };
 	// ----- Collision detection
 	void SetDrawCollisionBox(bool _show) { boxCollition.SetDrawCollisionBox(_show); };
+	void SetCollision(bool _collision) { collision = _collision; }
 
 protected:
 

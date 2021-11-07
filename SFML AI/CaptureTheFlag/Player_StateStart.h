@@ -1,21 +1,22 @@
 #pragma once
-#include "AI_State.h"
-class AI_StatePathFollowingLoop : public AI_State
+#include "Player_State.h"
+
+class Player_StateStart : public Player_State
 {
 public:
 	/**
-	* @brief   default constructor
-	* @param   NA
-	* @bug     NA
-	* @return  #void		*/
-	AI_StatePathFollowingLoop();
+* @brief   default constructor
+* @param   NA
+* @bug     NA
+* @return  #void		*/
+	Player_StateStart();
 
 	/**
 	* @brief   releases memory
 	* @param   NA
 	* @bug     NA
 	* @return  NA		*/
-	~AI_StatePathFollowingLoop();
+	~Player_StateStart();
 
 private:
 	SteeringBehavior sBehavior;
@@ -33,7 +34,7 @@ public:
 	* @param   #gl::AI& agent to update
 	* @bug     NA
 	* @return  #void		*/
-	virtual AI_STATE_TYPE Update(AI* _agent);
+	virtual PLAYER_STATE_TYPE Update(Player* _agent);
 
 	/**
 	* @brief   what will do leaving this state
@@ -48,6 +49,5 @@ public:
 	* @bug     NA
 	* @return  sf::Vector2f behavior velocity		*/
 	sf::Vector2f GetSteering() { return sBehavior.GetSteering(); };
-private:
 };
 
